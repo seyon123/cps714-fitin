@@ -11,7 +11,7 @@ function LandingPage() {
     <Container fluid className="landing-page">
         <Row>
             <Col sm={6}>
-                <img class="landing-image" alt="FitIn cover image" src={"./landing-page.png"}/>
+                <img class="landing-image" alt="FitIn cover" src={"./landing-page.png"}/>
             </Col>
             <Col sm={6}>
                 <Stack gap={2} className='landing-right'>
