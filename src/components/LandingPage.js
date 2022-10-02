@@ -11,10 +11,10 @@ function LandingPage() {
     <Container fluid className="landing-page">
         <Row>
             <Col sm={6}>
-                <img class="landing-image" src={"./landing-page.png"}/>
+                <img class="landing-image" alt="FitIn cover image" src={"./landing-page.png"}/>
             </Col>
             <Col sm={6}>
-                <Stack gap={2}>
+                <Stack gap={2} className='landing-right'>
                     <h1 className='landing-header'>Welcome to <span style={{ color: '#3483EB' }}>FitIn</span></h1>
                     
                     <Button variant="light" size="lg" className='col-md-4 rounded-pill' style={{ marginTop: '7.5%' }}><b>Sign in with Google</b></Button>{' '}
