@@ -1,0 +1,28 @@
+.landing-page {
+    background: black;
+}
+
+.landing-image {
+    width:100%;
+    height: 100vh;
+    object-fit: cover;
+    overflow: hidden;
+}
+
+.landing-header {
+    text-align: left;
+    margin-top: 20%;
+    font-size: 5rem;
+    color: white;
+}
+
+.sign-up-text {
+    text-align: left;
+    margin-top: 8%;
+    font-size: 1.75rem;
+    color: white;
+}
+
+.landing-right {
+    padding-left: 5%;
+}
