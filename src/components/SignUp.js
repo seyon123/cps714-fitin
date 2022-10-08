@@ -1,10 +1,9 @@
 import React, { useState, useEffect } from "react";
 import GoogleButton from "react-google-button";
 import { useAuth } from "../contexts/AuthContext";
-import { Link, useNavigate } from "react-router-dom";
+import { Link } from "react-router-dom";
 
 function SignUp() {
-	let navigate = useNavigate();
 	const { signUp, signInGoogle } = useAuth();
 	const [name, setName] = useState("");
 	const [email, setEmail] = useState("");
@@ -16,14 +15,12 @@ function SignUp() {
 
 	async function handleSubmit(e) {
 		e.preventDefault();
-		await signUp(email, password, name);
-		navigate("/");
+		await signUp(email, password, name).catch((err) => console.log(JSON.stringify(err)));
 	}
 
 	async function handleGoogle(e) {
 		e.preventDefault();
-		await signInGoogle();
-		navigate("/");
+		await signInGoogle().catch((err) => console.log(JSON.stringify(err)));
 	}
 
 	return (
@@ -33,19 +30,28 @@ function SignUp() {
 					<label className="formFieldLabel" htmlFor="name">
 						Full Name
 					</label>
-					<input type="text" id="name" className="formFieldInput" placeholder="Enter your full name" name="name" value={name} onChange={(e) => setName(e.target.value)} />
+					<input required type="text" id="name" className="formFieldInput" placeholder="Enter your full name" name="name" value={name} onChange={(e) => setName(e.target.value)} />
 				</div>
 				<div className="formField">
 					<label className="formFieldLabel" htmlFor="email">
 						E-Mail Address
 					</label>
-					<input type="email" id="email" className="formFieldInput" placeholder="Enter your email" name="email" value={email} onChange={(e) => setEmail(e.target.value)} />
+					<input required type="email" id="email" className="formFieldInput" placeholder="Enter your email" name="email" value={email} onChange={(e) => setEmail(e.target.value)} />
 				</div>
 				<div className="formField">
 					<label className="formFieldLabel" htmlFor="password">
 						Password
 					</label>
-					<input type="password" id="password" className="formFieldInput" placeholder="Enter your password" name="password" value={password} onChange={(e) => setPassword(e.target.value)} />
+					<input
+						required
+						type="password"
+						id="password"
+						className="formFieldInput"
+						placeholder="Enter your password"
+						name="password"
+						value={password}
+						onChange={(e) => setPassword(e.target.value)}
+					/>
 				</div>
 
 				<div className="formField">
