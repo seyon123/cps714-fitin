@@ -13,23 +13,47 @@ export function AuthProvider({ children }) {
 	const [loading, setLoading] = useState(true);
 
 	function login(email, password) {
-		return signInWithEmailAndPassword(auth, email, password);
+		return signInWithEmailAndPassword(auth, email, password).catch((error) => {
+			// Handle Errors
+			const errorCode = error.code;
+			const errorMessage = error.message;
+			console.error(error);
+
+			if (errorCode === "auth/user-not-found") {
+				alert("The email address is not registered.");
+			} else if (errorCode === "auth/wrong-password") {
+				alert("The password is invalid.");
+			} else if (errorCode === "auth/unauthorized-domain") {
+				alert("This domain is not authorized for OAuth operations for your Firebase project. Edit the list of authorized domains from the Firebase console.");
+			} else {
+				alert(errorMessage);
+			}
+
+			// ...
+		});
 	}
 
 	async function signInGoogle() {
-		return signInWithPopup(auth, provider)
-			.then(() => {})
-			.catch((error) => {
-				// Handle Errors
-				const errorCode = error.code;
-				const errorMessage = error.message;
-				// The email of the user's account used.
-				const email = error.customData.email;
-				// The AuthCredential type that was used.
-				const credential = GoogleAuthProvider.credentialFromError(error);
-				console.error(errorCode, errorMessage, email, credential);
-				// ...
-			});
+		return signInWithPopup(auth, provider).catch((error) => {
+			// Handle Errors
+			const errorCode = error.code;
+			const errorMessage = error.message;
+			// The email of the user's account used.
+			const email = error.customData.email;
+			// The AuthCredential type that was used.
+			const credential = GoogleAuthProvider.credentialFromError(error);
+			console.error(errorCode, errorMessage, email, credential);
+
+			if (errorCode === "auth/popup-closed-by-user") {
+				alert("The sign in window was closed before completing the sign in.");
+			} else if (errorCode === "auth/unauthorized-domain") {
+				alert("This domain is not authorized for OAuth operations for your Firebase project. Edit the list of authorized domains from the Firebase console.");
+			} else {
+				alert(errorMessage);
+			}
+
+			// ...
+		});
 	}
 
 	async function logOut() {
@@ -54,9 +78,13 @@ export function AuthProvider({ children }) {
 
 				if (errorCode === "auth/weak-password") {
 					alert("The password is too weak.");
+				} else if (errorCode === "auth/invalid-email") {
+					alert("The email address is invalid.");
+				} else if (errorCode === "auth/unauthorized-domain") {
+					alert("This domain is not authorized for OAuth operations for your Firebase project. Edit the list of authorized domains from the Firebase console.");
 				} else {
-					alert(error);
 					console.error(error);
+					alert(errorCode);
 				}
 			});
 	}
