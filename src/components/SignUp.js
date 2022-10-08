@@ -1,8 +1,11 @@
 import React, { useState, useEffect } from "react";
-import { GoogleLoginButton } from "react-social-login-buttons";
-import { Link } from "react-router-dom";
+import GoogleButton from "react-google-button";
+import { useAuth } from "../contexts/AuthContext";
+import { Link, useNavigate } from "react-router-dom";
 
 function SignUp() {
+	let navigate = useNavigate();
+	const { signUp, signInGoogle } = useAuth();
 	const [name, setName] = useState("");
 	const [email, setEmail] = useState("");
 	const [password, setPassword] = useState("");
@@ -11,9 +14,21 @@ function SignUp() {
 		document.title = `Sign Up | FitIn`;
 	}, []);
 
+	async function handleSubmit(e) {
+		e.preventDefault();
+		await signUp(email, password, name);
+		navigate("/");
+	}
+
+	async function handleGoogle(e) {
+		e.preventDefault();
+		await signInGoogle();
+		navigate("/");
+	}
+
 	return (
 		<div className="formCenter">
-			<form onSubmit={""} className="formFields">
+			<form onSubmit={handleSubmit} className="formFields">
 				<div className="formField">
 					<label className="formFieldLabel" htmlFor="name">
 						Full Name
@@ -52,7 +67,7 @@ function SignUp() {
 
 				<div className="socialMediaButtons">
 					<div className="googleButton">
-						<GoogleLoginButton onClick={() => alert("Hello")} />
+						<GoogleButton className="googleBtn" type="light" label="Sign up with Google" onClick={handleGoogle} />
 					</div>
 				</div>
 			</form>

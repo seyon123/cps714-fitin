@@ -1,5 +1,6 @@
 import { createContext, useContext, useEffect, useState } from "react";
-import { auth } from "../firebase";
+import { createUserWithEmailAndPassword, signInWithEmailAndPassword, onAuthStateChanged, GoogleAuthProvider, signInWithPopup, updateProfile, signOut } from "firebase/auth";
+import { auth, provider } from "../firebase";
 
 const AuthContext = createContext();
 
@@ -12,35 +13,60 @@ export function AuthProvider({ children }) {
 	const [loading, setLoading] = useState(true);
 
 	function login(email, password) {
-		return auth.signInWithEmailAndPassword(email, password);
+		return signInWithEmailAndPassword(auth, email, password);
 	}
 
-	function signOut() {
-		return auth.signOut();
+	async function signInGoogle() {
+		return signInWithPopup(auth, provider)
+			.then(() => {})
+			.catch((error) => {
+				// Handle Errors
+				const errorCode = error.code;
+				const errorMessage = error.message;
+				// The email of the user's account used.
+				const email = error.customData.email;
+				// The AuthCredential type that was used.
+				const credential = GoogleAuthProvider.credentialFromError(error);
+				console.error(errorCode, errorMessage, email, credential);
+				// ...
+			});
 	}
 
-	function signUp(email, password) {
-		return auth.createUserWithEmailAndPassword(email, password);
+	async function logOut() {
+		return signOut(auth)
+			.then(() => {
+				alert("Signed Out Successfully");
+			})
+			.catch((error) => {
+				console.error(error);
+			});
+	}
+
+	async function signUp(email, password, name) {
+		return createUserWithEmailAndPassword(auth, email, password)
+			.then(() =>
+				updateProfile(auth.currentUser, {
+					displayName: name,
+				})
+			)
+			.catch((error) => {
+				var errorCode = error.code;
+
+				if (errorCode === "auth/weak-password") {
+					alert("The password is too weak.");
+				} else {
+					alert(error);
+					console.error(error);
+				}
+			});
 	}
 
 	function getUser() {
-		return auth.currentUser;
+		return currentUser;
 	}
-
-	function isAdmin() {
-		return auth.currentUser.getIdTokenResult().then((idTokenResult) => {
-			if (!!idTokenResult.claims.admin) {
-				return true;
-			} else {
-				return false;
-			}
-		});
-	}
-
-	function isEditor() {}
 
 	useEffect(() => {
-		const unsubscribe = auth.onAuthStateChanged((user) => {
+		const unsubscribe = onAuthStateChanged(auth, (user) => {
 			setCurrentUser(user);
 			setLoading(false);
 		});
@@ -50,9 +76,10 @@ export function AuthProvider({ children }) {
 
 	const value = {
 		currentUser,
+		signInGoogle,
 		getUser,
 		login,
-		signOut,
+		logOut,
 		signUp,
 	};
 

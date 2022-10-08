@@ -1,11 +1,11 @@
 .landingPage {
-    height: 100vh;
+    max-height: 100%;
     color: white;
-    background: black;
+    background: #12130f;
 }
 
 .landingImageContainer {
-    padding: 0;
+    padding: 0 !important;
 }
 
 .landingImage{
@@ -17,8 +17,8 @@
 
 .landingHeader {
     text-align: center;
-    margin: 20% 0 10% 0;
-    font-size: 5rem;
+    margin: 5% 0;
+    font-size: 4em;
     color: white;
 }
 

@@ -17,7 +17,7 @@ function LandingPage({ authComponent }) {
 						<NavLink to="/login" className={({ isActive }) => (isActive ? "pageSwitcherItem pageSwitcherItem-active" : "pageSwitcherItem")}>
 							Sign In
 						</NavLink>
-						<NavLink exact to="/signup" className={({ isActive }) => (isActive ? "pageSwitcherItem pageSwitcherItem-active" : "pageSwitcherItem")}>
+						<NavLink to="/signup" className={({ isActive }) => (isActive ? "pageSwitcherItem pageSwitcherItem-active" : "pageSwitcherItem")}>
 							Sign Up
 						</NavLink>
 					</div>
