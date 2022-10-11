@@ -1,0 +1,72 @@
+.landingPage {
+    min-height: 100vh;
+    color: white;
+    background: #12130f;
+}
+
+.landingImageContainer {
+    padding: 0 !important;
+}
+
+.landingImage{
+    width:100%;
+    height: 100vh;
+    object-fit: cover;
+    overflow: hidden;
+}
+
+.landingHeader {
+    text-align: center;
+    margin: 5% 0;
+    font-size: 4em;
+    color: white;
+}
+
+.appForm {
+    background-color: #12130f;
+    padding: 20px 40px !important;
+    overflow: auto;
+}
+
+.pageSwitcher {
+    display: flex;
+    justify-content: flex-end;
+    margin-bottom: 10%;
+}
+
+.pageSwitcherItem {
+    background-color: #40434e;
+    color: #9da6b1;
+    padding: 10px 25px;
+    cursor: pointer;
+    font-size: 1em;
+    border: none;
+    outline: none;
+    display: inline-block;
+    text-decoration: none;
+}
+
+.pageSwitcherItem:hover {
+    color: white;
+}
+
+.pageSwitcherItem-active {
+    background-color: #0b5ed7;
+    color: white;
+}
+
+.pageSwitcherItem:first-child {
+    border-top-left-radius: 25px;
+    border-bottom-left-radius: 25px;
+}
+
+.pageSwitcherItem:last-child {
+    border-top-right-radius: 25px;
+    border-bottom-right-radius: 25px;
+}
+
+@media screen and (max-width: 767px) {
+	.landingImage{
+        display: none;
+    }
+}
