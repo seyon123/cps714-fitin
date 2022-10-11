@@ -56,26 +56,21 @@ function SignUp() {
 
 				<div className="formField">
 					<button className="formFieldButton">Sign Up</button>
-					<br />
-					<label className="formFieldCheckboxLabel">
-						By signing up, you agree to the
-						<a href="null" className="formFieldTermsLink">
-							Terms of Service
-						</a>
-					</label>
-					<div className="formAuthText">
-						Already have an account?{" "}
-						<Link to="/login" className="formFieldLink">
-							Sign In
-						</Link>
-					</div>
-				</div>
-
-				<div className="socialMediaButtons">
 					<div className="googleButton">
 						<GoogleButton className="googleBtn" type="light" label="Sign up with Google" onClick={handleGoogle} />
 					</div>
+					<label className="formFieldCheckboxLabel">
+						By signing up, you agree to the
+						<Link to="/login" className="formFieldTermsLink">
+							Terms of Service
+						</Link>
+					</label>
 				</div>
+
+				<div className="formAuthText">Already have an account?</div>
+				<Link to="/login" style={{ textDecoration: "none" }}>
+					<button className="formFieldButton2">Sign In</button>
+				</Link>
 			</form>
 		</div>
 	);

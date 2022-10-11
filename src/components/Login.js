@@ -49,19 +49,19 @@ function Login() {
 
 				<div className="formField">
 					<button className="formFieldButton">Sign In</button>
-					<div className="formAuthText">
-						Dont have an Account?{" "}
-						<Link to="/signup" className="formFieldLink">
-							Create an account
-						</Link>
-					</div>
-				</div>
-
-				<div className="socialMediaButtons">
 					<div className="googleButton">
 						<GoogleButton className="googleBtn" type="light" label="Login with Google" onClick={handleGoogle} />
 					</div>
+					<label className="formFieldCheckboxLabel">
+						<Link to="/signup" className="formFieldLink">
+							Forgot password?
+						</Link>
+					</label>
 				</div>
+				<div className="formAuthText">Don't have an account?</div>
+				<Link to="/signup" style={{ textDecoration: "none" }}>
+					<button className="formFieldButton2">Join Now</button>
+				</Link>
 			</form>
 		</div>
 	);
