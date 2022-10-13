@@ -1,0 +1,23 @@
+.logo {
+    height: 3rem;
+    width: 3rem;
+    border-radius: 50%;
+}
+
+.nav-bar{
+    width: auto;
+}
+
+.nav-link{
+    font-family: 'Roboto', sans-serif;
+    font-size: 1.5rem !important;
+    color: #FFFFFF !important;
+}
+
+.link-col{
+    padding-left: 0;
+}
+
+.profile-name {
+    padding: var(--bs-dropdown-item-padding-y) var(--bs-dropdown-item-padding-x);
+}

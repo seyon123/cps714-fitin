@@ -4,8 +4,10 @@ import Row from "react-bootstrap/Row";
 import Col from "react-bootstrap/Col";
 import { useAuth } from "../contexts/AuthContext";
 import { Image } from "react-bootstrap";
+import "./WorkoutPage.css";
+import NavBar from "../components/NavBar";
 
-function MainPage() {
+function WorkoutPage() {
 	const { getUser, logOut } = useAuth();
 	const user = getUser();
 
@@ -17,15 +19,17 @@ function MainPage() {
 	}
 
 	useEffect(() => {
-		document.title = `Main Page | FitIn`;
+		document.title = `Workout Page | FitIn`;
 	}, []);
 
 	return (
-		<Container fluid>
+		<Container fluid className={"mainPage p-0"}>
+			<NavBar></NavBar>
+            <h1>workout page</h1>
 			<Col>
-				<Row>Name: {user.displayName}</Row>
-				<Row>Email: {user.email}</Row>
-				<Row>ID: {user.uid}</Row>
+				<Row className="noMargin">Name: {user.displayName}</Row>
+				<Row className="noMargin">Email: {user.email}</Row>
+				<Row className="noMargin">ID: {user.uid}</Row>
 				<Image roundedCircle src={user.photoURL} />
 				<button onClick={handleSignOut}>Sign Out</button>
 			</Col>
@@ -33,4 +37,4 @@ function MainPage() {
 	);
 }
 
-export default MainPage;
+export default WorkoutPage;
