@@ -17,6 +17,9 @@ env:
 jobs:
     build_and_deploy:
         runs-on: ubuntu-latest
+        environment: 
+            name: FitIn
+            url: https://fitin.web.app/
         steps:
             - uses: actions/checkout@v2
             - run: npm ci && npm run build
