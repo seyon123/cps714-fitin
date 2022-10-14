@@ -53,7 +53,7 @@ function Login() {
 						<GoogleButton className="googleBtn" type="light" label="Login with Google" onClick={handleGoogle} />
 					</div>
 					<label className="formFieldCheckboxLabel">
-						<Link to="/signup" className="formFieldLink">
+						<Link to="/forgot-password" className="formFieldLink">
 							Forgot password?
 						</Link>
 					</label>
