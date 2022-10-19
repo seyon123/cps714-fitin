@@ -57,6 +57,10 @@ function WorkoutPage() {
 		alert("Create New Routine")
 	}
 
+	function changeCompleted(){
+		alert("changeCompleted")
+	}
+
 
 	return (
 		<Container fluid className={"mainPage p-0"}>
@@ -95,7 +99,19 @@ function WorkoutPage() {
 								<Card style={{height: "15%", width: "100%", marginTop: "2%", backgroundColor: "#363d47"}}>
 									<Card.Body>
 										<img style ={{float: "left", height: "50%", width: "10%", paddingRight: "5px" }}src = {workouts.image}></img>
-										<Card.Title style={{color: "White"}}>{workouts.name}</Card.Title>
+										<Card.Title style={{color: "White"}}>
+											{workouts.name}		
+											{workouts.completed == 1
+												? <span style={{float: "right", cursor:"pointer"}}  onClick={changeCompleted}><h5 style={{float: "left"}}>Completed</h5>
+												<br></br>
+													<input style={{float: "right"}} class="form-check-input" type="checkbox" value="" id="flexCheckDefault" checked></input>
+												  </span>
+												: <span style={{float: "right", cursor:"pointer"}}  onClick={changeCompleted}>
+													<input class="form-check-input" type="checkbox" value="" id="flexCheckDefault"></input>
+												  </span>
+											}							
+											
+										</Card.Title>
 										<Card.Subtitle style={{color: "White"}} className="mb-2 text-light">{workouts.sets} sets | {workouts.reps} reps</Card.Subtitle>
 									</Card.Body>
 								</Card>
