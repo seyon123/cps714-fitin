@@ -1,22 +1,29 @@
 import React from "react";
 import Card from "react-bootstrap/Card";
-import { MdEdit } from "react-icons/md";
+import { MdDelete } from "react-icons/md";
 import "./RoutineItem.css";
+import { doc, deleteDoc } from "firebase/firestore";
+import { useAuth } from "../contexts/AuthContext";
+import { db } from "../firebase";
 
 function RoutineItem({ id, name, exercises }) {
+	const { currentUser } = useAuth();
 	function editRoutine() {
-		alert("Edit Routine");
+		const deleteRoutine = window.confirm("Are you sure you want to delete the routine called: " + name + "?");
+		if (deleteRoutine === true) {
+			deleteDoc(doc(db, `users/${currentUser.uid}/routines`, id));
+		}
 	}
 
 	return (
-		<Card className="routineItemCard" role="button" onClick={editRoutine}>
+		<Card className="routineItemCard">
 			<Card.Body className="d-flex align-items-center justify-content-between">
 				<div>
 					<Card.Title className="text-light">{name}</Card.Title>
 					<Card.Subtitle className="text-light">{exercises} exercises</Card.Subtitle>
 				</div>
 				<span role="button">
-					<MdEdit size="2em" />
+					<MdDelete color="#ae0000" size="2em" onClick={editRoutine} />
 				</span>
 			</Card.Body>
 		</Card>

@@ -99,6 +99,7 @@ export function AuthProvider({ children }) {
 			.then(() => {
 				updateProfile(auth.currentUser, {
 					displayName: name,
+					photoURL: `https://avatars.dicebear.com/api/initials/${name?.trim()}.svg`,
 				});
 
 				//set user in user db
@@ -106,7 +107,7 @@ export function AuthProvider({ children }) {
 				setDoc(docRef, {
 					name: name,
 					email: auth.currentUser.email,
-					photoURL: auth.currentUser.photoURL,
+					photoURL: `https://avatars.dicebear.com/api/initials/${name?.trim()}.svg`,
 					uid: auth.currentUser.uid,
 				});
 			})

@@ -12,14 +12,14 @@ import { MdAddCircle, MdAddCircleOutline } from "react-icons/md";
 import "./WorkoutPage.css";
 import { DayPicker } from "react-day-picker";
 import "react-day-picker/dist/style.css";
+import { addDoc, collection, onSnapshot } from "firebase/firestore";
+import { useAuth } from "../contexts/AuthContext";
+import { db } from "../firebase";
 
 function WorkoutPage() {
 	const [date, setDate] = useState(new Date());
-
-	const dummyRoutines = [
-		{ id: 1, name: "Push Day", exercises: "4" },
-		{ id: 2, name: "Pull Day", exercises: "5" },
-	];
+	const [routines, setRoutines] = useState([]);
+	const { currentUser } = useAuth();
 
 	const dummyWorkouts = [
 		{ id: 1, name: "Deadlift", reps: "12", sets: "4", image: "dead-lift.png", completed: false },
@@ -34,12 +34,27 @@ function WorkoutPage() {
 		document.title = `Workout Page | FitIn`;
 	}, []);
 
+	useEffect(
+		() =>
+			onSnapshot(collection(db, `users/${currentUser.uid}/routines`), (snapshot) => {
+				setRoutines(snapshot.docs.map((doc) => ({ ...doc.data(), id: doc.id })));
+			}),
+		[currentUser.uid]
+	);
+
 	function changeRoutine() {
 		alert("Change Routine");
 	}
 
-	function newRoutine() {
-		alert("Create New Routine");
+	async function newRoutine() {
+		const routineName = prompt("Enter a name for a routine");
+		const totalWorkouts = prompt("Enter the # of workouts");
+		if (routineName && totalWorkouts) {
+			await addDoc(collection(db, `users/${currentUser.uid}/routines`), {
+				name: routineName,
+				exercises: totalWorkouts,
+			});
+		}
 	}
 
 	return (
@@ -76,11 +91,8 @@ function WorkoutPage() {
 				<div className="col-md-3">
 					<Card bg="dark" className="h-100">
 						<Card.Header className="myRoutines">My Routines</Card.Header>
-						<Card.Body style={{ overflowY: "auto" }}>
-							{dummyRoutines.map(({ id, name, exercises }) => (
-								<RoutineItem key={id} id={id} name={name} exercises={exercises} />
-							))}
-
+						<Card.Body style={{ overflowY: "auto", maxHeight: "50vh" }}>
+							{routines?.length > 0 && routines.map(({ id, name, exercises }) => <RoutineItem key={id} id={id} name={name} exercises={exercises} />)}
 							{/* Add New Routine */}
 							<Card className="newRoutine" bg="dark" border="white" role="button" onClick={newRoutine}>
 								<Card.Body className="d-flex align-items-center justify-content-between">
