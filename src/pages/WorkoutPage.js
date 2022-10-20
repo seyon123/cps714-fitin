@@ -22,11 +22,11 @@ function WorkoutPage() {
 	];
 
 	const dummyWorkouts = [
-		{ id: 1, name: "Deadlift", reps: "12", sets: "4", image: "deadlift.png", completed: false },
+		{ id: 1, name: "Deadlift", reps: "12", sets: "4", image: "dead-lift.png", completed: false },
 		{ id: 2, name: "Bentover Row", reps: "12", sets: "4", image: "bentoverrow.png", completed: false },
-		{ id: 3, name: "Deadlift", reps: "12", sets: "4", image: "deadlift.png", completed: true },
+		{ id: 3, name: "Deadlift", reps: "12", sets: "4", image: "dead-lift.png", completed: true },
 		{ id: 4, name: "Bentover Row", reps: "12", sets: "4", image: "bentoverrow.png", completed: true },
-		{ id: 5, name: "Deadlift", reps: "12", sets: "4", image: "deadlift.png", completed: false },
+		{ id: 5, name: "Deadlift", reps: "12", sets: "4", image: "dead-lift.png", completed: false },
 		{ id: 6, name: "Bentover Row", reps: "12", sets: "4", image: "bentoverrow.png", completed: false },
 	];
 
