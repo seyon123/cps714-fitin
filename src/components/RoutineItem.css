@@ -1,4 +1,9 @@
 .routineItemCard {
     margin-bottom: 15px;
     background-color: #363d47 !important;
+    transition: 0.3s;
+}
+
+.routineItemCard:hover {
+    background-color: #535d6d !important;
 }

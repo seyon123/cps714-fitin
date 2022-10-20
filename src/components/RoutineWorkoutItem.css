@@ -1,6 +1,11 @@
 .workoutItemCard {
     margin-bottom: 15px;
     background-color: #363d47 !important;
+    transition: 0.3s;
+}
+
+.workoutItemCard:hover {
+    background-color: #535d6d !important;
 }
 
 .workoutItemImg {

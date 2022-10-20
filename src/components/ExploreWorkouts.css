@@ -1,23 +1,17 @@
-body {
-    overflow-x: hidden;
-}
-
-.titleLine {
-    border-width: 3px;
-    width: 28%;
-}
-
-.categoryTitleLine {
-    border-width: 3px;
-    width: 60%;
-}
-
-.exploreWorkoutsContainer {
+.categoriesContainer, .workoutsContainer {
     overflow-y: auto;
     overflow-x: hidden;
-    height: 80vh;
-    background-color: #141414;
+    height: 60vh;
 }
+
+.workoutCard {
+    transition: 0.3s;
+}
+
+.workoutCard:hover {
+    background-color: #363d47 !important;
+}
+
 .workoutCardImg {
     max-height: 130px; 
     width: 100%; 

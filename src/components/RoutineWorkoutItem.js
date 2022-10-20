@@ -16,7 +16,7 @@ function RoutineWorkoutItem({ id, name, completed, image, sets, reps }) {
 	}
 
 	return (
-		<Card className="workoutItemCard" onClick={() => handleWorkoutCompleted(!document.getElementById(`checkbox-${id}`).checked)}>
+		<Card className="workoutItemCard hover-overlay shadow-1-strong" onClick={() => handleWorkoutCompleted(!document.getElementById(`checkbox-${id}`).checked)}>
 			<Card.Body role="button">
 				<img className="workoutItemImg float-start" src={image} alt={name}></img>
 				<Card.Title className="text-light">

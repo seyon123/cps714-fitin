@@ -8,9 +8,10 @@ import RoutineWorkoutItem from "../components/RoutineWorkoutItem";
 import ExploreWorkouts from "../components/ExploreWorkouts";
 
 import { MdAddCircle, MdAddCircleOutline } from "react-icons/md";
-import Calendar from "react-calendar";
-import "react-calendar/dist/Calendar.css";
+
 import "./WorkoutPage.css";
+import { DayPicker } from "react-day-picker";
+import "react-day-picker/dist/style.css";
 
 function WorkoutPage() {
 	const [date, setDate] = useState(new Date());
@@ -49,7 +50,7 @@ function WorkoutPage() {
 			<div className="row">
 				<div className="col-md-3">
 					<div className="calendarStyle">
-						<Calendar onChange={setDate} value={date} />
+						<DayPicker numberOfMonths={1} pagedNavigation mode="single" onSelect={setDate} selected={date} />
 					</div>
 				</div>
 				<div className="col-md-6" style={{ height: "80%" }}>
@@ -64,7 +65,7 @@ function WorkoutPage() {
 								</span>
 							</p>
 						</Card.Title>
-						<Card.Body style={{ overflowY: "auto" , maxHeight:"50vh"}}>
+						<Card.Body style={{ overflowY: "auto", maxHeight: "50vh" }}>
 							{dummyWorkouts.map(({ id, name, completed, image, sets, reps }) => (
 								<RoutineWorkoutItem key={id} id={id} name={name} completed={completed} image={image} sets={sets} reps={reps} />
 							))}

@@ -36,22 +36,21 @@ function ExploreWorkouts() {
 	];
 
 	return (
-		<div className="d-flex" style={{ paddingTop: "30px" }}>
+		<div className="exploreWorkoutsContainer d-flex" style={{ paddingTop: "30px" }}>
 			<Col xs={2} md={2}>
 				<Row>
 					<h3>Categories</h3>
 				</Row>
-				<hr className="categoryTitleLine"></hr>
-				<div className="exploreWorkoutsContainer" style={{ width: "%" }}>
+				<div className="categoriesContainer">
 					<Row style={{ width: "95%", margin: "10px 0px" }}>
 						<button type="button" className="btn btn-dark">
-							<h4>All Categories</h4>
+							<h5>All Categories</h5>
 						</button>
 					</Row>
 					{workoutTypes.map(({ id, type }) => (
 						<Row key={id} style={{ width: "95%", margin: "10px 0px" }}>
 							<button type="button" className="btn btn-dark">
-								<h4>{type}</h4>
+								<h5>{type}</h5>
 							</button>
 						</Row>
 					))}
@@ -61,12 +60,11 @@ function ExploreWorkouts() {
 				<Row>
 					<h3>FitIn Workouts</h3>
 				</Row>
-				<hr className="titleLine"></hr>
-				<div className="exploreWorkoutsContainer">
+				<div className="workoutsContainer">
 					<Row xs={4} md={2} className="g-4">
 						{workouts.map(({ id, name, image }) => (
 							<Col className="colWorkout" key={id}>
-								<Card bg="dark">
+								<Card className="workoutCard" bg="dark" role="button">
 									<Card.Img className="workoutCardImg" variant="top" src={image} />
 									<Card.Body style={{ minHeight: "70px" }}>
 										<Card.Title>{name}</Card.Title>

@@ -9,13 +9,13 @@ function RoutineItem({ id, name, exercises }) {
 	}
 
 	return (
-		<Card className="routineItemCard">
+		<Card className="routineItemCard" role="button" onClick={editRoutine}>
 			<Card.Body className="d-flex align-items-center justify-content-between">
 				<div>
 					<Card.Title className="text-light">{name}</Card.Title>
 					<Card.Subtitle className="text-light">{exercises} exercises</Card.Subtitle>
 				</div>
-				<span role="button" onClick={editRoutine}>
+				<span role="button">
 					<MdEdit size="2em" />
 				</span>
 			</Card.Body>

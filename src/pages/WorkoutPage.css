@@ -70,6 +70,23 @@ body {
     font-size: 31px;
 
 }
+
+/* Styling for calendar */
+.rdp {
+    --rdp-background-color: #535d6d !important;
+    --rdp-accent-color: #347aeb !important;
+    --rdp-outline-selected: 2px solid rgba(0, 0, 0, 0.75);
+}
+.rdp-head_cell { 
+    color: var(--rdp-accent-color) !important 
+}
+.rdp-day_outside {
+    color: #828282 !important;
+}
+.rdp-day_today{ 
+    font-weight: bold;
+    font-style: 120% !important;
+}
 @media screen and (max-width: 767px) {
     .exploreWorkoutsContainer {
         height: 60vh;
