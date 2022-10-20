@@ -6,6 +6,11 @@ import SocialPage from "./pages/SocialPage";
 import Login from "./components/Login";
 import SignUp from "./components/SignUp";
 import NavBar from "./components/NavBar";
+import { useAuth } from "./contexts/AuthContext";
+import WorkoutPage from "./pages/WorkoutPage";
+import { Navigate } from "react-router-dom";
+import SocialPage from "./pages/SocialPage";
+import ResetPassword from "./components/ResetPassword";
 
 function App() {
 	const { getUser } = useAuth();
@@ -42,6 +47,9 @@ function App() {
 						)
 					}
 				/>
+				<Route path="/forgot-password" element={!user ? <LandingPage authComponent={<ResetPassword />} /> : <Navigate to="/signup" replace />} />
+				<Route path="/" element={user ? <WorkoutPage /> : <Navigate to="/signup" replace />} />
+				<Route path="/social" element={user ? <SocialPage /> : <Navigate to="/signup" replace />} />
 				<Route path="*" element={<Navigate to="/" replace />} />
 			</Routes>
 		</BrowserRouter>
