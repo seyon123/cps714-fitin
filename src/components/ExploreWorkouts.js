@@ -36,7 +36,7 @@ function ExploreWorkouts() {
 	];
 
 	return (
-		<div className="exploreWorkoutsContainer d-flex" style={{ paddingTop: "30px" }}>
+		<div className="exploreWorkoutsContainer d-flex">
 			<Col xs={2} md={2}>
 				<Row>
 					<h3>Categories</h3>

@@ -12,7 +12,7 @@ body {
     min-height: 100vh;
     color: white;
     background: #12130f;
-    max-width: inherit;
+    max-width: 1700px;
     margin-left: 5px;
     margin-right: 5px;
 }
@@ -22,34 +22,6 @@ body {
     margin-right: 0 !important;
 }
 
-.titleFont {
-    font-family: 'Inter';
-    font-style: normal;
-    font-weight: 700;
-    font-size: 25px;
-    color: #FFFFFF;
-    line-height: 150%;
-    /* or 60px */
-    letter-spacing: -0.01em;
-}
-
-.titleLine {
-    border-width: 3px;
-    width: 28%;
-}
-
-.categoryTitleLine {
-    border-width: 3px;
-    width: 60%;
-}
-
-.exploreWorkoutsContainer {
-    overflow-y: scroll;
-    overflow-x:hidden;
-    width: 100%;
-    height: 80vh;
-    background-color: #141414;
-}
 .calendarStyle {
     align-items: center; 
     justify-content: center; 

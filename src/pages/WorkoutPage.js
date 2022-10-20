@@ -44,18 +44,18 @@ function WorkoutPage() {
 
 	return (
 		<Container fluid className="mainPage px-4">
-			<h1>My Workouts</h1>
+			<h1 className="pt-4">My Workouts</h1>
 			<hr></hr>
 
 			<div className="row">
 				<div className="col-md-3">
 					<div className="calendarStyle">
-						<DayPicker numberOfMonths={1} pagedNavigation mode="single" onSelect={setDate} selected={date} />
+						<DayPicker required numberOfMonths={1} pagedNavigation mode="single" onSelect={setDate} selected={date} />
 					</div>
 				</div>
-				<div className="col-md-6" style={{ height: "80%" }}>
+				<div className="col-md-6">
 					<Card className="currentRoutine" bg="dark">
-						<Card.Header className="currentRoutineHead">{date.toDateString()}</Card.Header>
+						<Card.Header className="currentRoutineHead">{date?.toDateString()}</Card.Header>
 						<Card.Title>
 							<p className="m-3">
 								<span>Routine: </span> <span>"My Pull Day"</span>
@@ -95,7 +95,7 @@ function WorkoutPage() {
 				</div>
 			</div>
 
-			<h1>Explore Workouts</h1>
+			<h1 className="pt-4">Explore Workouts</h1>
 			<hr></hr>
 
 			<ExploreWorkouts />

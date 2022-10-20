@@ -5,7 +5,6 @@ import Col from "react-bootstrap/Col";
 import { useAuth } from "../contexts/AuthContext";
 import { Image } from "react-bootstrap";
 import "./SocialPage.css";
-import NavBar from "../components/NavBar";
 
 function SocialPage() {
 	const { getUser, logOut } = useAuth();
@@ -24,7 +23,6 @@ function SocialPage() {
 
 	return (
 		<Container fluid className="mainPage p-0">
-			<NavBar />
 			<h1>Social Page</h1>
 			<Col>
 				<Row className="noMargin">Name: {user.displayName}</Row>
