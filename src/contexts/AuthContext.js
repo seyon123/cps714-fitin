@@ -1,6 +1,7 @@
 import { createContext, useContext, useEffect, useState } from "react";
 import { createUserWithEmailAndPassword, sendPasswordResetEmail, signInWithEmailAndPassword, onAuthStateChanged, GoogleAuthProvider, signInWithPopup, updateProfile, signOut } from "firebase/auth";
-import { auth, provider } from "../firebase";
+import { auth, provider, db } from "../firebase";
+import { doc, getDoc, setDoc } from "firebase/firestore";
 
 const AuthContext = createContext();
 
@@ -45,26 +46,42 @@ export function AuthProvider({ children }) {
 	}
 
 	async function signInGoogle() {
-		return signInWithPopup(auth, provider).catch((error) => {
-			// Handle Errors
-			const errorCode = error.code;
-			const errorMessage = error.message;
-			// The email of the user's account used.
-			const email = error.customData.email;
-			// The AuthCredential type that was used.
-			const credential = GoogleAuthProvider.credentialFromError(error);
-			console.error(errorCode, errorMessage, email, credential);
+		return signInWithPopup(auth, provider)
+			.then(async () => {
+				//set user
+				const docRef = doc(db, "users", auth.currentUser.uid);
+				const docSnap = await getDoc(docRef);
+				//if user does not exist in db add to db
 
-			if (errorCode === "auth/popup-closed-by-user") {
-				alert("The sign in window was closed before completing the sign in.");
-			} else if (errorCode === "auth/unauthorized-domain") {
-				alert("This domain is not authorized for OAuth operations for your Firebase project. Edit the list of authorized domains from the Firebase console.");
-			} else {
-				alert(errorMessage);
-			}
+				if (!docSnap.exists()) {
+					setDoc(docRef, {
+						name: auth.currentUser.displayName,
+						email: auth.currentUser.email,
+						photoURL: auth.currentUser.photoURL,
+						uid: auth.currentUser.uid,
+					});
+				}
+			})
+			.catch((error) => {
+				// Handle Errors
+				const errorCode = error.code;
+				const errorMessage = error.message;
+				// The email of the user's account used.
+				const email = error.customData.email;
+				// The AuthCredential type that was used.
+				const credential = GoogleAuthProvider.credentialFromError(error);
+				console.error(errorCode, errorMessage, email, credential);
 
-			// ...
-		});
+				if (errorCode === "auth/popup-closed-by-user") {
+					alert("The sign in window was closed before completing the sign in.");
+				} else if (errorCode === "auth/unauthorized-domain") {
+					alert("This domain is not authorized for OAuth operations for your Firebase project. Edit the list of authorized domains from the Firebase console.");
+				} else {
+					alert(errorMessage);
+				}
+
+				// ...
+			});
 	}
 
 	async function logOut() {
@@ -79,11 +96,20 @@ export function AuthProvider({ children }) {
 
 	async function signUp(email, password, name) {
 		return createUserWithEmailAndPassword(auth, email, password)
-			.then(() =>
+			.then(() => {
 				updateProfile(auth.currentUser, {
 					displayName: name,
-				})
-			)
+				});
+
+				//set user in user db
+				const docRef = doc(db, "users", auth.currentUser.uid);
+				setDoc(docRef, {
+					name: name,
+					email: auth.currentUser.email,
+					photoURL: auth.currentUser.photoURL,
+					uid: auth.currentUser.uid,
+				});
+			})
 			.catch((error) => {
 				var errorCode = error.code;
 

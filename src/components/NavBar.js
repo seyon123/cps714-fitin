@@ -29,8 +29,9 @@ function NavBar() {
 				</Navbar.Collapse>
 
 				<NavDropdown
+					menuVariant="dark"
 					align="end"
-					title={<img alt="logo" className="logo" src={user?.photoURL ? user.photoURL : `https://avatars.dicebear.com/api/initials/${user?.displayName.trim()}.svg`} />}
+					title={<img alt="logo" className="logo" src={user?.photoURL ? user.photoURL : `https://avatars.dicebear.com/api/initials/${user?.displayName?.trim()}.svg`} />}
 					id="basic-nav-dropdown"
 				>
 					<div className="profile-name">
