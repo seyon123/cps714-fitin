@@ -8,6 +8,15 @@ body {
     font-size: "200%";
 }
 
+
+.newRoutine {
+    transition: 0.3s;
+}
+
+.newRoutine:hover {
+    background-color: #363d47 !important;
+}
+
 .mainPage {
     min-height: 100vh;
     color: white;

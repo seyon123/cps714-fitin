@@ -82,7 +82,7 @@ function WorkoutPage() {
 							))}
 
 							{/* Add New Routine */}
-							<Card bg="dark" border="white" role="button" onClick={newRoutine}>
+							<Card className="newRoutine" bg="dark" border="white" role="button" onClick={newRoutine}>
 								<Card.Body className="d-flex align-items-center justify-content-between">
 									<Card.Title className="text-light mb-0">New Routine</Card.Title>
 									<span>
