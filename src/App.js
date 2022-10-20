@@ -1,14 +1,10 @@
 import { BrowserRouter, Routes, Route, Navigate } from "react-router-dom";
 import { useAuth } from "./contexts/AuthContext";
 import LandingPage from "./pages/LandingPage";
-import WorkoutPage from "./pages/WorkoutPage";
-import SocialPage from "./pages/SocialPage";
 import Login from "./components/Login";
 import SignUp from "./components/SignUp";
 import NavBar from "./components/NavBar";
-import { useAuth } from "./contexts/AuthContext";
 import WorkoutPage from "./pages/WorkoutPage";
-import { Navigate } from "react-router-dom";
 import SocialPage from "./pages/SocialPage";
 import ResetPassword from "./components/ResetPassword";
 
