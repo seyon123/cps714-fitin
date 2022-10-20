@@ -1,79 +1,36 @@
-.titleFont {
-    font-family: 'Inter';
-    font-style: normal;
-    font-weight: 700;
-    font-size: 25px;
-    line-height: 150%;
-    /* or 60px */
-
-    letter-spacing: -0.01em;
-
-    color: #FFFFFF;
-}
-
-.titleLine {
-    border-width: 3px;
-    width: 28%;
-}
-.categoryTitleLine {
-    border-width: 3px;
-    width: 60%;
-}
-@media screen and (max-width: 767px) {
-    .exploreWorkoutsContainer{
-        height: 60vh;
-        width: 100%
-    }
-
-}
-.exploreWorkoutsContainer{
-    overflow-y: scroll;
-    overflow-x:hidden;
-    width: 100%;
-    height: 80vh;
-    background-color: #141414;
-}
-
-body{
+body {
     overflow-x: hidden;
 }
 
-.titleFont {
-    font-family: 'Inter';
-    font-style: normal;
-    font-weight: 700;
-    font-size: 25px;
-    line-height: 150%;
-    /* or 60px */
-
-    letter-spacing: -0.01em;
-
-    color: #FFFFFF;
-}
-
 .titleLine {
     border-width: 3px;
     width: 28%;
 }
+
 .categoryTitleLine {
     border-width: 3px;
     width: 60%;
 }
-@media screen and (max-width: 767px) {
-    .exploreWorkoutsContainer{
-        height: 60vh;
-        width: 100%
-    }
 
-}
-.exploreWorkoutsContainer{
-    overflow-y: scroll;
-    overflow-x:hidden;
-    width: 100%;
+.exploreWorkoutsContainer {
+    overflow-y: auto;
+    overflow-x: hidden;
     height: 80vh;
     background-color: #141414;
 }
+.workoutCardImg {
+    max-height: 130px; 
+    width: 100%; 
+    object-fit: Cover;
+}
+.colWorkout {
+    min-width: 200px; 
+    max-height: 200px;
 
-
-
-
+}
+@media screen and (max-width: 767px) {
+    .exploreWorkoutsContainer {
+        height: 60vh;
+        width: 100%
+    }
+}

@@ -23,9 +23,9 @@ function SocialPage() {
 	}, []);
 
 	return (
-		<Container fluid className={"mainPage p-0"}>
-			<NavBar></NavBar>
-            <h1>SOCIAL PAGE</h1>
+		<Container fluid className="mainPage p-0">
+			<NavBar />
+			<h1>Social Page</h1>
 			<Col>
 				<Row className="noMargin">Name: {user.displayName}</Row>
 				<Row className="noMargin">Email: {user.email}</Row>

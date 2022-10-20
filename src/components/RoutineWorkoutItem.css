@@ -1,0 +1,9 @@
+.workoutItemCard {
+    margin-bottom: 15px;
+    background-color: #363d47 !important;
+}
+
+.workoutItemImg {
+    width: 10%;
+    margin-right: 15px;
+}
