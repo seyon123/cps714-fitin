@@ -1,0 +1,30 @@
+.categoriesContainer, .workoutsContainer {
+    overflow-y: auto;
+    overflow-x: hidden;
+    height: 60vh;
+}
+
+.workoutCard {
+    transition: 0.3s;
+}
+
+.workoutCard:hover {
+    background-color: #363d47 !important;
+}
+
+.workoutCardImg {
+    max-height: 130px; 
+    width: 100%; 
+    object-fit: Cover;
+}
+.colWorkout {
+    min-width: 200px; 
+    max-height: 200px;
+
+}
+@media screen and (max-width: 767px) {
+    .exploreWorkoutsContainer {
+        height: 60vh;
+        width: 100%
+    }
+}
