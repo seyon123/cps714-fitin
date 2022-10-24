@@ -23,17 +23,21 @@ function SocialPage() {
 	}, []);
 
 	return (
+		<div>
 		<Container fluid className="mainPage p-0">
 			<h1>Social Page</h1>
 			<Col>
+			<CreatePost></CreatePost>
 				<Row className="noMargin">Name: {user.displayName}</Row>
 				<Row className="noMargin">Email: {user.email}</Row>
 				<Row className="noMargin">ID: {user.uid}</Row>
 				<Image roundedCircle src={user.photoURL} />
 				<button onClick={handleSignOut}>Sign Out</button>
 			</Col>
-			<CreatePost/>
+			
 		</Container>
+		
+		</div>
 	);
 }
 

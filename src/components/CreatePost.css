@@ -1,0 +1,31 @@
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@700&display=swap');
+.postBackground{
+    background-color: #22252D;
+    border-radius: 12px;
+    height: 100%;
+    width: 100%;
+}
+
+.postCreationLabelFont{
+}
+.labelStyle{
+    font-size: 30px;
+    font-weight: 600;
+}
+
+.formStyle{
+    padding: 20px;
+}
+
+.uploadBar{
+    background-color:  rgba(34,37,45,1);
+}
+.postButtonStyle{
+    background-color:  rgba(34,37,45,1);
+    border-radius: 12px;
+    border-width: 1px;
+    border-color: white;
+    width: 100px;
+    font-weight: 600;
+    font-size: 24px;
+}
