@@ -5,6 +5,7 @@ import Col from "react-bootstrap/Col";
 import { useAuth } from "../contexts/AuthContext";
 import { Image } from "react-bootstrap";
 import "./SocialPage.css";
+import CreatePost from "../components/CreatePost";
 
 function SocialPage() {
 	const { getUser, logOut } = useAuth();
@@ -31,6 +32,7 @@ function SocialPage() {
 				<Image roundedCircle src={user.photoURL} />
 				<button onClick={handleSignOut}>Sign Out</button>
 			</Col>
+			<CreatePost/>
 		</Container>
 	);
 }
