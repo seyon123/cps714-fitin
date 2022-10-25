@@ -1,20 +1,21 @@
-import React from "react";
+import React, { useState } from "react";
 // import Row from "react-bootstrap/Row";
 // import Col from "react-bootstrap/Col";
 import { Row, Col, Button, Container } from "react-bootstrap";
 import "./ExploreWorkouts.css";
 import Card from "react-bootstrap/Card";
+import ExerciseInfoModal from "./Modals/ExerciseInfoModal";
 
 function ExploreWorkouts() {
 	const workouts = [
-		{ id: 1, type: 1, image: "workoutPlaceholder.png", name: "Aerobics", description: "description 1" },
-		{ id: 2, type: 2, image: "workoutplaceholder2.jpg", name: "Circuit Training", description: "description 2" },
-		{ id: 3, type: 3, image: "workoutPlaceholder.png", name: "Cycling", description: "description 3" },
-		{ id: 4, type: 4, image: "workoutplaceholder2.jpg", name: "Hiking", description: "description 4" },
-		{ id: 5, type: 5, image: "workoutPlaceholder.png", name: "Running", description: "description 5" },
-		{ id: 6, type: 6, image: "workoutPlaceholder.png", name: "Skipping Rope", description: "description 6" },
-		{ id: 7, type: 7, image: "workoutPlaceholder.png", name: "Swimming", description: "description 7" },
-		{ id: 8, type: 8, image: "workoutPlaceholder.png", name: "Walking", description: "description 8" },
+		{ id: 1, type: 1, images: ["workoutPlaceholder.png"], name: "Aerobics", description: ["description 1" ] },
+		{ id: 2, type: 2, images: ["workoutplaceholder2.jpg"], name: "Circuit Training", description: ["description 2"] },
+		{ id: 3, type: 3, images: ["workoutPlaceholder.png", "workoutplaceholder2.jpg"], name: "Cycling", description: ["description 3","description 312312", "description 3312"] },
+		{ id: 4, type: 4, images: ["workoutplaceholder2.jpg"], name: "Hiking", description: ["description 4"] },
+		{ id: 5, type: 5, images: ["workoutPlaceholder.png"], name: "Running", description: ["description 5"] },
+		{ id: 6, type: 6, images: ["workoutPlaceholder.png"], name: "Skipping Rope", description: ["description 6"] },
+		{ id: 7, type: 7, images: ["workoutPlaceholder.png"], name: "Swimming", description: ["description 7"] },
+		{ id: 8, type: 8, images: ["workoutPlaceholder.png"], name: "Walking", description: ["description 8"] },
 	];
 
 	const workoutTypes = [
@@ -32,6 +33,23 @@ function ExploreWorkouts() {
 		{ id: 13, type: "Stretches" },
 		{ id: 16, type: "Dumbell Only"}
 	];
+
+	const [show, setShow] = useState(false);
+	const [workoutName, setWorkoutName] = useState("");
+	const [workoutImage, setWorkoutImage] = useState([]);
+	const [workoutDescription, setWorkoutDescription] = useState([]);
+
+    const handleShow = (name, images, description) => {
+		setWorkoutName(name);
+		setWorkoutImage(images);
+		setWorkoutDescription(description);
+		setShow(true);
+	}
+    const handleClose = () => {
+		setWorkoutName([]);
+		setWorkoutImage([]);
+		setShow(false);
+	}
 
 	return (
 		<div className="exploreWorkoutsContainer">
@@ -58,10 +76,10 @@ function ExploreWorkouts() {
 				</Row>
 				<div className="workoutsContainer">
 					<Row style={{flexWrap: "unset"}}>
-						{workouts.map(({ id, name, image }) => (
+						{workouts.map(({ id, name, images, description }) => (
 							<Col className="colWorkout" key={id}>
-								<Card className="workoutCard" bg="dark" role="button">
-									<Card.Img className="workoutCardImg" variant="top" src={image} />
+								<Card className="workoutCard" bg="dark" role="button" onClick={() => handleShow(name, images, description)}>
+									<Card.Img className="workoutCardImg" variant="top" src={images[0]} />
 									<Card.Body style={{ minHeight: "70px" }}>
 										<Card.Title>{name}</Card.Title>
 									</Card.Body>
@@ -71,6 +89,7 @@ function ExploreWorkouts() {
 					</Row>
 				</div>
 			</Container>
+			<ExerciseInfoModal show={show} onClose={handleClose} workoutName={workoutName} workoutImage={workoutImage} workoutDescription={workoutDescription}/>
 		</div>
 	);
 }
