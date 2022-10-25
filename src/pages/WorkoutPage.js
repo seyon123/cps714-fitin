@@ -6,10 +6,12 @@ import { useAuth } from "../contexts/AuthContext";
 import { Image } from "react-bootstrap";
 import "./WorkoutPage.css";
 import NavBar from "../components/NavBar";
+import CreateRoutine from "../components/Modals/CreateRoutine";
 
 function WorkoutPage() {
 	const { getUser, logOut } = useAuth();
 	const user = getUser();
+	const [modalShow, setModalShow] = React.useState(false);
 
 	console.log(user);
 
@@ -32,7 +34,14 @@ function WorkoutPage() {
 				<Row className="noMargin">ID: {user.uid}</Row>
 				<Image roundedCircle src={user.photoURL} />
 				<button onClick={handleSignOut}>Sign Out</button>
+				<br></br>
+				<button onClick={() => setModalShow(true)}>+ Create new Routine</button>
 			</Col>
+			<CreateRoutine
+				show={modalShow}
+				onHide={() => setModalShow(false)}
+				handler={setModalShow}
+			></CreateRoutine>
 		</Container>
 	);
 }
