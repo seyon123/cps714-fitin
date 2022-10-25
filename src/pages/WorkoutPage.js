@@ -12,6 +12,7 @@ import { MdAddCircle, MdAddCircleOutline } from "react-icons/md";
 import "./WorkoutPage.css";
 import { DayPicker } from "react-day-picker";
 import "react-day-picker/dist/style.css";
+import {ChangeRoutine} from "../components/ChangeRoutine";
 
 function WorkoutPage() {
 	const [date, setDate] = useState(new Date());
@@ -34,7 +35,9 @@ function WorkoutPage() {
 		document.title = `Workout Page | FitIn`;
 	}, []);
 
-	function changeRoutine() {
+	const [showModal,setShowModal]=useState(false);
+	const changeRoutine=()=> {
+		setShowModal(prev=>!prev); {/* Toggle state once button is clicked*/}
 		alert("Change Routine");
 	}
 
@@ -63,7 +66,8 @@ function WorkoutPage() {
 									<MdAddCircle />
 									&nbsp; Change Routine
 								</span>
-							</p>
+								<ChangeRoutine showModal={showModal} setShowModal={setShowModal}/>
+							</p>						
 						</Card.Title>
 						<Card.Body style={{ overflowY: "auto", maxHeight: "50vh" }}>
 							{dummyWorkouts.map(({ id, name, completed, image, sets, reps }) => (
