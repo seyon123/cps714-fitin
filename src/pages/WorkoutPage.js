@@ -6,6 +6,7 @@ import Card from "react-bootstrap/Card";
 import RoutineItem from "../components/RoutineItem";
 import RoutineWorkoutItem from "../components/RoutineWorkoutItem";
 import ExploreWorkouts from "../components/ExploreWorkouts";
+import CreateRoutine from "../components/Modals/CreateRoutine";
 
 import { MdAddCircle, MdAddCircleOutline } from "react-icons/md";
 

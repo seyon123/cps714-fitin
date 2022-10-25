@@ -3,13 +3,13 @@ import Container from "react-bootstrap/Container";
 import Row from "react-bootstrap/Row";
 import Col from "react-bootstrap/Col";
 import Button from 'react-bootstrap/Button';
-//import { useAuth } from "../contexts/AuthContext";
 import { Modal } from "react-bootstrap";
 import "./CreateRoutine.css";
 
+import {  MdAddCircleOutline } from "react-icons/md";
+
 function CreateRoutine(props){
 
-    //const { getUser, logOut } = useAuth();
     const [exercises, setExercises] = useState([]);
     const [routineName, setRoutineName] = useState("New Routine");
     const [showWorkoutList, viewWorkoutList] = useState(false);
@@ -163,7 +163,7 @@ function CreateRoutine(props){
                     className="exercise-row add-exercise"
                     onClick={() => viewWorkoutList(true)}
                 >
-                   <Col md="auto"><img src="addIcon.png" className="img-thumbnail" alt="Add button"/></Col>
+                   <Col md="auto"><MdAddCircleOutline size="4em" /></Col>
                    <Col><h4>Add workout</h4></Col>
                 </Row>
             </Container>
