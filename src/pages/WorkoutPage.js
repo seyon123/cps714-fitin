@@ -1,27 +1,21 @@
 import React, { useEffect, useState } from "react";
-
-import Container from "react-bootstrap/Container";
-import Card from "react-bootstrap/Card";
+import { Container, Card }  from "react-bootstrap";
+import { collection, onSnapshot } from "firebase/firestore";
+import { useAuth } from "../contexts/AuthContext";
+import { db } from "../firebase";
+import { DayPicker } from "react-day-picker";
+import { MdAddCircle, MdAddCircleOutline } from "react-icons/md";
+import "react-day-picker/dist/style.css";
+import "./WorkoutPage.css";
 
 import RoutineItem from "../components/RoutineItem";
 import RoutineWorkoutItem from "../components/RoutineWorkoutItem";
 import ExploreWorkouts from "../components/ExploreWorkouts";
 import CreateRoutine from "../components/Modals/CreateRoutine";
 
-import { MdAddCircle, MdAddCircleOutline } from "react-icons/md";
-
-import "./WorkoutPage.css";
-
-
-import { DayPicker } from "react-day-picker";
-import "react-day-picker/dist/style.css";
-import { addDoc, collection, onSnapshot } from "firebase/firestore";
-import { useAuth } from "../contexts/AuthContext";
-import { db } from "../firebase";
-
 function WorkoutPage() {
 	const [date, setDate] = useState(new Date());
-    const [modalShow, setModalShow] = useState(false);
+	const [modalShow, setModalShow] = useState(false);
 	const [routines, setRoutines] = useState([]);
 	const { currentUser } = useAuth();
 
@@ -50,26 +44,10 @@ function WorkoutPage() {
 		alert("Change Routine");
 	}
 
-	async function newRoutine() {
-		const routineName = prompt("Enter a name for a routine");
-		const totalWorkouts = prompt("Enter the # of workouts");
-		if (routineName && totalWorkouts) {
-			await addDoc(collection(db, `users/${currentUser.uid}/routines`), {
-				name: routineName,
-				exercises: totalWorkouts,
-			});
-		}
-	}
-
 	return (
 		<Container fluid className="mainPage px-4">
-      
-      <CreateRoutine
-				show={modalShow}
-				onHide={() => setModalShow(false)}
-				handler={setModalShow}
-			></CreateRoutine>
-      
+			<CreateRoutine show={modalShow} onHide={() => setModalShow(false)} setModalShow={setModalShow}></CreateRoutine>
+
 			<h1 className="pt-4">My Workouts</h1>
 			<hr></hr>
 

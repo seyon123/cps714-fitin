@@ -1,10 +1,10 @@
 import React from "react";
 import Card from "react-bootstrap/Card";
 import { MdDelete } from "react-icons/md";
-import "./RoutineItem.css";
 import { doc, deleteDoc } from "firebase/firestore";
 import { useAuth } from "../contexts/AuthContext";
 import { db } from "../firebase";
+import "./RoutineItem.css";
 
 function RoutineItem({ id, name, exercises }) {
 	const { currentUser } = useAuth();
@@ -20,7 +20,7 @@ function RoutineItem({ id, name, exercises }) {
 			<Card.Body className="d-flex align-items-center justify-content-between">
 				<div>
 					<Card.Title className="text-light">{name}</Card.Title>
-					<Card.Subtitle className="text-light">{exercises} exercises</Card.Subtitle>
+					<Card.Subtitle className="text-light">{exercises.length} exercises</Card.Subtitle>
 				</div>
 				<span role="button">
 					<MdDelete color="#ae0000" size="2em" onClick={editRoutine} />
