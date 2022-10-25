@@ -1,6 +1,7 @@
 import React from "react";
-import Row from "react-bootstrap/Row";
-import Col from "react-bootstrap/Col";
+// import Row from "react-bootstrap/Row";
+// import Col from "react-bootstrap/Col";
+import { Row, Col, Button, Container } from "react-bootstrap";
 import "./ExploreWorkouts.css";
 import Card from "react-bootstrap/Card";
 
@@ -24,44 +25,39 @@ function ExploreWorkouts() {
 		{ id: 5, type: "Stretches" },
 		{ id: 6, type: "Weights" },
 		{ id: 7, type: "Machines" },
-		{ id: 8, type: "Dumbell Only" },
 		{ id: 9, type: "Back" },
 		{ id: 10, type: "Chest" },
 		{ id: 11, type: "Yoga" },
 		{ id: 12, type: "Legs" },
 		{ id: 13, type: "Stretches" },
-		{ id: 14, type: "Weights" },
-		{ id: 15, type: "Machines" },
-		{ id: 16, type: "Dumbell Only" },
+		{ id: 16, type: "Dumbell Only"}
 	];
 
 	return (
-		<div className="exploreWorkoutsContainer d-flex">
-			<Col xs={2} md={2}>
+		<div className="exploreWorkoutsContainer">
+			<Container fluid>
 				<Row>
 					<h3>Categories</h3>
 				</Row>
 				<div className="categoriesContainer">
-					<Row style={{ width: "95%", margin: "10px 0px" }}>
-						<button type="button" className="btn btn-dark">
-							<h5>All Categories</h5>
-						</button>
+					<Row style={{flexWrap: "unset"}}>
+						{workoutTypes.map(({ id, type }) => (
+							<Col key={id} style={{paddingRight: "1%"}}>
+								<Button>
+									<h4 style={{paddingRight: "20px", paddingLeft: "20px", margin: "0px"}} className="text-nowrap">{type}</h4>
+								</Button>
+							</Col>
+						))}
 					</Row>
-					{workoutTypes.map(({ id, type }) => (
-						<Row key={id} style={{ width: "95%", margin: "10px 0px" }}>
-							<button type="button" className="btn btn-dark">
-								<h5>{type}</h5>
-							</button>
-						</Row>
-					))}
 				</div>
-			</Col>
-			<Col xs={4} md={4}>
+			</Container>
+				<br/><br/>
+			<Container fluid>
 				<Row>
-					<h3>FitIn Workouts</h3>
+					<h3>Fitin Workouts</h3>
 				</Row>
 				<div className="workoutsContainer">
-					<Row xs={4} md={2} className="g-4">
+					<Row style={{flexWrap: "unset"}}>
 						{workouts.map(({ id, name, image }) => (
 							<Col className="colWorkout" key={id}>
 								<Card className="workoutCard" bg="dark" role="button">
@@ -71,10 +67,10 @@ function ExploreWorkouts() {
 									</Card.Body>
 								</Card>
 							</Col>
-						))}
+					))}
 					</Row>
 				</div>
-			</Col>
+			</Container>
 		</div>
 	);
 }

@@ -1,7 +1,19 @@
-.categoriesContainer, .workoutsContainer {
+/* .categoriesContainer, .workoutsContainer {
     overflow-y: auto;
     overflow-x: hidden;
     height: 60vh;
+} */
+
+.categoriesContainer {
+    overflow-y: hidden;
+    overflow-x: auto;   
+    height: 68px;
+}
+
+.workoutsContainer {
+    overflow-y: hidden;
+    overflow-x: auto;   
+    height: 230px;
 }
 
 .workoutCard {
@@ -24,7 +36,7 @@
 }
 @media screen and (max-width: 767px) {
     .exploreWorkoutsContainer {
-        height: 60vh;
+        height: 50px;
         width: 100%
     }
 }

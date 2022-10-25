@@ -6,10 +6,13 @@ import Card from "react-bootstrap/Card";
 import RoutineItem from "../components/RoutineItem";
 import RoutineWorkoutItem from "../components/RoutineWorkoutItem";
 import ExploreWorkouts from "../components/ExploreWorkouts";
+import CreateRoutine from "../components/Modals/CreateRoutine";
 
 import { MdAddCircle, MdAddCircleOutline } from "react-icons/md";
 
 import "./WorkoutPage.css";
+
+
 import { DayPicker } from "react-day-picker";
 import "react-day-picker/dist/style.css";
 import { addDoc, collection, onSnapshot } from "firebase/firestore";
@@ -18,6 +21,7 @@ import { db } from "../firebase";
 
 function WorkoutPage() {
 	const [date, setDate] = useState(new Date());
+    const [modalShow, setModalShow] = useState(false);
 	const [routines, setRoutines] = useState([]);
 	const { currentUser } = useAuth();
 
@@ -59,6 +63,13 @@ function WorkoutPage() {
 
 	return (
 		<Container fluid className="mainPage px-4">
+      
+      <CreateRoutine
+				show={modalShow}
+				onHide={() => setModalShow(false)}
+				handler={setModalShow}
+			></CreateRoutine>
+      
 			<h1 className="pt-4">My Workouts</h1>
 			<hr></hr>
 
@@ -94,7 +105,7 @@ function WorkoutPage() {
 						<Card.Body style={{ overflowY: "auto", maxHeight: "50vh" }}>
 							{routines?.length > 0 && routines.map(({ id, name, exercises }) => <RoutineItem key={id} id={id} name={name} exercises={exercises} />)}
 							{/* Add New Routine */}
-							<Card className="newRoutine" bg="dark" border="white" role="button" onClick={newRoutine}>
+							<Card className="newRoutine" bg="dark" border="white" role="button" onClick={() => setModalShow(true)}>
 								<Card.Body className="d-flex align-items-center justify-content-between">
 									<Card.Title className="text-light mb-0">New Routine</Card.Title>
 									<span>
