@@ -7,6 +7,7 @@ import RoutineItem from "../components/RoutineItem";
 import RoutineWorkoutItem from "../components/RoutineWorkoutItem";
 import ExploreWorkouts from "../components/ExploreWorkouts";
 import CreateRoutine from "../components/Modals/CreateRoutine";
+import ChangeRoutine from "../components/Modals/ChangeRoutine";
 
 import { MdAddCircle, MdAddCircleOutline } from "react-icons/md";
 
@@ -15,11 +16,12 @@ import "./WorkoutPage.css";
 
 import { DayPicker } from "react-day-picker";
 import "react-day-picker/dist/style.css";
-import {ChangeRoutine} from "../components/ChangeRoutine";
+
 
 function WorkoutPage() {
 	const [date, setDate] = useState(new Date());
-  const [modalShow, setModalShow] = useState(false);
+  	const [modalShow, setModalShow] = useState(false);
+	const [changeRoutineShow,setChangeRoutineShow] = useState(false);
 
 	const dummyRoutines = [
 		{ id: 1, name: "Push Day", exercises: "4" },
@@ -39,12 +41,6 @@ function WorkoutPage() {
 		document.title = `Workout Page | FitIn`;
 	}, []);
 
-	const [showModal,setShowModal]=useState(false);
-	const changeRoutine=()=> {
-		setShowModal(prev=>!prev); {/* Toggle state once button is clicked*/}
-		alert("Change Routine");
-	}
-
 	return (
 		<Container fluid className="mainPage px-4">
       
@@ -53,7 +49,7 @@ function WorkoutPage() {
 				onHide={() => setModalShow(false)}
 				handler={setModalShow}
 			></CreateRoutine>
-      
+			<ChangeRoutine show={changeRoutineShow} onHide={()=>setChangeRoutineShow(false)} setModalShow={setChangeRoutineShow}></ChangeRoutine>
 			<h1 className="pt-4">My Workouts</h1>
 			<hr></hr>
 
@@ -69,11 +65,10 @@ function WorkoutPage() {
 						<Card.Title>
 							<p className="m-3">
 								<span>Routine: </span> <span>"My Pull Day"</span>
-								<span className="float-end" role="button" onClick={changeRoutine}>
+								<span className="float-end" role="button" onClick={()=>setChangeRoutineShow(true)}>
 									<MdAddCircle />
 									&nbsp; Change Routine
 								</span>
-								<ChangeRoutine showModal={showModal} setShowModal={setShowModal}/>
 							</p>						
 						</Card.Title>
 						<Card.Body style={{ overflowY: "auto", maxHeight: "50vh" }}>
