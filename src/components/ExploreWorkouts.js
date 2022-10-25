@@ -1,9 +1,10 @@
-import React from "react";
+import React, { useState } from "react";
 // import Row from "react-bootstrap/Row";
 // import Col from "react-bootstrap/Col";
 import { Row, Col, Button, Container } from "react-bootstrap";
 import "./ExploreWorkouts.css";
 import Card from "react-bootstrap/Card";
+import ExerciseInfoModal from "./Modals/ExerciseInfoModal";
 
 function ExploreWorkouts() {
 	const workouts = [
@@ -33,6 +34,23 @@ function ExploreWorkouts() {
 		{ id: 16, type: "Dumbell Only"}
 	];
 
+	const [show, setShow] = useState(false);
+	const [workoutName, setWorkoutName] = useState("");
+	const [workoutImage, setWorkoutImage] = useState("");
+	const [workoutDescription, setWorkoutDescription] = useState("");
+
+    const handleShow = (name, image, description) => {
+		setWorkoutName(name);
+		setWorkoutImage(image);
+		setWorkoutDescription(description);
+		setShow(true);
+	}
+    const handleClose = () => {
+		setWorkoutName(null);
+		setWorkoutImage(null);
+		setShow(false);
+	}
+
 	return (
 		<div className="exploreWorkoutsContainer">
 			<Container fluid>
@@ -58,9 +76,9 @@ function ExploreWorkouts() {
 				</Row>
 				<div className="workoutsContainer">
 					<Row style={{flexWrap: "unset"}}>
-						{workouts.map(({ id, name, image }) => (
+						{workouts.map(({ id, name, image, description }) => (
 							<Col className="colWorkout" key={id}>
-								<Card className="workoutCard" bg="dark" role="button">
+								<Card className="workoutCard" bg="dark" role="button" onClick={() => handleShow(name, image, description)}>
 									<Card.Img className="workoutCardImg" variant="top" src={image} />
 									<Card.Body style={{ minHeight: "70px" }}>
 										<Card.Title>{name}</Card.Title>
@@ -71,6 +89,7 @@ function ExploreWorkouts() {
 					</Row>
 				</div>
 			</Container>
+			<ExerciseInfoModal show={show} onClose={handleClose} workoutName={workoutName} workoutImage={workoutImage} workoutDescription={workoutDescription}/>
 		</div>
 	);
 }
