@@ -4,14 +4,14 @@ import { collection, onSnapshot } from "firebase/firestore";
 import { useAuth } from "../contexts/AuthContext";
 import { db } from "../firebase";
 import { DayPicker } from "react-day-picker";
-import { MdAddCircle, MdAddCircleOutline } from "react-icons/md";
+import { MdAddCircleOutline } from "react-icons/md";
 import "react-day-picker/dist/style.css";
 import "./WorkoutPage.css";
 
 import RoutineItem from "../components/RoutineItem";
 import RoutineWorkoutItem from "../components/RoutineWorkoutItem";
 import ExploreWorkouts from "../components/ExploreWorkouts";
-import CreateRoutine from "../components/Modals/CreateRoutine";
+import CreateRoutineModal from "../components/Modals/CreateRoutineModal";
 
 function WorkoutPage() {
 	const [date, setDate] = useState(new Date());
@@ -47,7 +47,14 @@ function WorkoutPage() {
 
 	return (
 		<Container fluid className="mainPage px-4">
-			<CreateRoutine show={modalShow} onHide={() => setModalShow(false)} setModalShow={setModalShow} currentRoutine={currentRoutine}></CreateRoutine>
+			{/* Modal for Create Routine button */}
+			<CreateRoutineModal
+				show={modalShow}
+				onHide={() => setModalShow(false)}
+				setModalShow={setModalShow}
+				setCurrentRoutine={setCurrentRoutine}
+				currentRoutine={currentRoutine}
+			></CreateRoutineModal>
 
 			<h1 className="pt-4">My Workouts</h1>
 			<hr></hr>
@@ -65,7 +72,7 @@ function WorkoutPage() {
 							<p className="m-3">
 								<span>Routine: </span> <span>"My Pull Day"</span>
 								<span className="float-end" role="button" onClick={changeRoutine}>
-									<MdAddCircle />
+									<MdAddCircleOutline />
 									&nbsp; Change Routine
 								</span>
 							</p>

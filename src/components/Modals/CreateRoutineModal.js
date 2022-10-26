@@ -1,14 +1,14 @@
 import { useState, useEffect } from "react";
 import { Container, Card, Button, Modal } from "react-bootstrap";
 import { useAuth } from "../../contexts/AuthContext";
-import { doc, addDoc, getDoc, collection, onSnapshot } from "firebase/firestore";
+import { doc, addDoc, getDoc, deleteDoc, setDoc, collection, onSnapshot } from "firebase/firestore";
 import { db } from "../../firebase";
 import { MdAddCircleOutline } from "react-icons/md";
 import ExerciseItem from "./ExerciseItem";
 import SelectWorkoutItem from "./SelectWorkoutItem";
-import "./CreateRoutine.css";
+import "./CreateRoutineModal.css";
 
-function CreateRoutine({ show, onHide, setModalShow, currentRoutine }) {
+function CreateRoutineModal({ show, onHide, setModalShow, currentRoutine, setCurrentRoutine }) {
 	const { currentUser } = useAuth();
 	const [exercises, setExercises] = useState([]);
 	const [workouts, setWorkouts] = useState([]);
@@ -31,7 +31,9 @@ function CreateRoutine({ show, onHide, setModalShow, currentRoutine }) {
 	const resetState = () => {
 		setExercises([]);
 		setRoutineName("");
+		setCurrentRoutine({ name: "", exercises: [] });
 		viewWorkoutList(false);
+		setModalShow(false);
 	};
 
 	const addToRoutine = async (workoutPath) => {
@@ -49,30 +51,44 @@ function CreateRoutine({ show, onHide, setModalShow, currentRoutine }) {
 		setExercises(exercisesList);
 	};
 
+	function deleteRoutine() {
+		const deleteRoutine = window.confirm("Are you sure you want to delete the routine called: " + routineName + "?");
+		if (deleteRoutine) {
+			deleteDoc(doc(db, `users/${currentUser.uid}/routines`, currentRoutine?.id));
+			resetState();
+		}
+	}
+
 	async function onSubmit() {
-		setModalShow(false);
-		await addDoc(collection(db, `users/${currentUser.uid}/routines`), {
-			name: routineName,
-			exercises: exercises,
-		});
-		resetState();
+		if (exercises.length <= 0) {
+			alert("You must add at least one exercise to your routine");
+		} else if (routineName === "") {
+			alert("You must give your routine a name");
+		} else {
+			if (currentRoutine.id) {
+				await setDoc(doc(db, `users/${currentUser.uid}/routines`, currentRoutine.id), {
+					name: routineName,
+					exercises: exercises,
+				});
+			} else {
+				await addDoc(collection(db, `users/${currentUser.uid}/routines`), {
+					name: routineName,
+					exercises: exercises,
+				});
+			}
+			resetState();
+		}
 	}
 
 	return (
 		<Modal show={show} onHide={onHide} setModalShow={setModalShow} size="lg" aria-labelledby="contained-modal-title-vcenter" centered onExit={() => resetState()} className="create-routine">
 			<Modal.Header closeButton closeVariant="white">
-				{console.log(currentRoutine)}
 				<Modal.Title id="contained-modal-title-vcenter">
-					<input
-						maxlength="50"
-						value={routineName}
-						className="routine-title"
-						type="text"
-						placeholder="New Routine Name"
-						onChange={(e) => setRoutineName(e.target.value)}
-						style={{ display: !showWorkoutList ? "block" : "none" }}
-					/>
-					<h3 style={{ display: showWorkoutList ? "block" : "none" }}>Select Workouts</h3>
+					{showWorkoutList ? (
+						<h3>Select Workouts</h3>
+					) : (
+						<input required maxLength="50" value={routineName} className="routine-title" type="text" placeholder="New Routine Name" onChange={(e) => setRoutineName(e.target.value)} />
+					)}
 				</Modal.Title>
 			</Modal.Header>
 
@@ -98,16 +114,24 @@ function CreateRoutine({ show, onHide, setModalShow, currentRoutine }) {
 				</Container>
 			</Modal.Body>
 
-			<Modal.Footer className="border-0">
-				<Button closeButton className="btn-secondary" style={{ display: showWorkoutList ? "block" : "none" }} onClick={() => viewWorkoutList(false)}>
-					Select
-				</Button>
-				<Button className="submit-button" style={{ display: !showWorkoutList ? "block" : "none" }} onClick={() => onSubmit()}>
-					Save
-				</Button>
+			<Modal.Footer>
+				{currentRoutine?.id && (
+					<Button variant="danger" size="lg" onClick={() => deleteRoutine()}>
+						Delete
+					</Button>
+				)}
+				{showWorkoutList ? (
+					<Button size="lg" closeButton onClick={() => viewWorkoutList(false)}>
+						Select
+					</Button>
+				) : (
+					<Button size="lg" onClick={() => onSubmit()}>
+						Save
+					</Button>
+				)}
 			</Modal.Footer>
 		</Modal>
 	);
 }
 
-export default CreateRoutine;
+export default CreateRoutineModal;

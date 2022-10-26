@@ -6,7 +6,6 @@ function SelectWorkoutItem({ id, name, imageURL, exercises, addToRoutine, remove
 
 	useEffect(() => {
 		exercises.map((item) => item.id).includes(id) ? setWorkoutSelected(true) : setWorkoutSelected(false);
-		console.log(exercises);
 	}, [id, exercises]);
 
 	function handleWorkoutSelected(checked) {

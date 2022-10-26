@@ -1,19 +1,12 @@
 import React from "react";
 import Card from "react-bootstrap/Card";
-import { MdDelete } from "react-icons/md";
-import { doc, deleteDoc, getDoc } from "firebase/firestore";
+import { MdEdit } from "react-icons/md";
+import { doc, getDoc } from "firebase/firestore";
 import { useAuth } from "../contexts/AuthContext";
 import { db } from "../firebase";
 
 function RoutineItem({ id, name, exercises, setModalShow, setCurrentRoutine }) {
 	const { currentUser } = useAuth();
-
-	function deleteRoutine() {
-		const deleteRoutine = window.confirm("Are you sure you want to delete the routine called: " + name + "?");
-		if (deleteRoutine) {
-			deleteDoc(doc(db, `users/${currentUser.uid}/routines`, id));
-		}
-	}
 
 	async function handleModal() {
 		setModalShow(true);
@@ -29,8 +22,8 @@ function RoutineItem({ id, name, exercises, setModalShow, setCurrentRoutine }) {
 					<Card.Title className="text-light">{name}</Card.Title>
 					<Card.Subtitle className="text-light">{exercises.length} exercises</Card.Subtitle>
 				</div>
-				<span role="button" onClick={() => deleteRoutine()}>
-					<MdDelete color="white" size="2em" />
+				<span role="button">
+					<MdEdit color="white" size="2em" />
 				</span>
 			</Card.Body>
 		</Card>

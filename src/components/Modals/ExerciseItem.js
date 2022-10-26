@@ -17,6 +17,15 @@ function ExerciseItem({ docRef, exercises, setExercises, removeFromRoutine }) {
 		fetchDocByRef(docRef);
 	}, [docRef]);
 
+	useEffect(() => {
+		exercises.forEach((item) => {
+			if (item.ref === docRef) {
+				setNumSets(item.sets);
+				setNumReps(item.reps);
+			}
+		});
+	}, [exercises, docRef]);
+
 	const updateSets = (docRef, amount) => {
 		const exercisesList = exercises;
 		exercisesList.forEach((item) => {
@@ -58,7 +67,7 @@ function ExerciseItem({ docRef, exercises, setExercises, removeFromRoutine }) {
 							<h5>{numReps} reps</h5>
 							<span className="down-button" onClick={() => updateReps(docRef, -1)}></span>
 						</div>
-						<div role="button">
+						<div role="button" onClick={() => removeFromRoutine(`workouts/${workout.id}`)}>
 							<MdDelete color="white" size="2em" />
 						</div>
 					</div>

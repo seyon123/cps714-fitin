@@ -37,10 +37,12 @@
 
 .routine-title{
     position: relative;
-    background: transparent;
+    padding: 5px;
+    padding-left: 10px;
+    border-radius: 10px;
+    background: #363d47;
     color: white;
     border: none;
-    border-bottom: 2px solid white ;
     outline: none;
     width: 100%;
     /* margin-bottom: 20px; */
