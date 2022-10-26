@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
 import { Container, Card } from "react-bootstrap";
-import { collection, onSnapshot, doc, getDoc } from "firebase/firestore";
+import { collection, onSnapshot, doc, getDoc, setDoc } from "firebase/firestore";
 import { useAuth } from "../contexts/AuthContext";
 import { db } from "../firebase";
 import { DayPicker } from "react-day-picker";
@@ -65,7 +65,7 @@ function WorkoutPage() {
 	async function handleChangeRoutine(routinePath) {
 		const dateString = date.toISOString().split("T")[0];
 		const docRef = doc(db, `users/${currentUser.uid}/schedule`, dateString);
-		await setDoc(docRef, { da });
+		await setDoc(docRef, {});
 	}
 
 	return (

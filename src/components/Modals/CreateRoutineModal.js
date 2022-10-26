@@ -52,8 +52,8 @@ function CreateRoutineModal({ show, onHide, setModalShow, currentRoutine, setCur
 	};
 
 	function deleteRoutine() {
-		const deleteRoutine = window.confirm("Are you sure you want to delete the routine called: " + routineName + "?");
-		if (deleteRoutine) {
+		const deleteConfirm = window.confirm("Are you sure you want to delete the routine: " + routineName + "?");
+		if (deleteConfirm) {
 			deleteDoc(doc(db, `users/${currentUser.uid}/routines`, currentRoutine?.id));
 			resetState();
 		}
@@ -61,9 +61,9 @@ function CreateRoutineModal({ show, onHide, setModalShow, currentRoutine, setCur
 
 	async function onSubmit() {
 		if (exercises.length <= 0) {
-			alert("You must add at least one exercise to your routine");
+			alert("Please add at least one exercise to your routine!");
 		} else if (routineName === "") {
-			alert("You must give your routine a name");
+			alert("Please name your routine to save changes!");
 		} else {
 			if (currentRoutine.id) {
 				await setDoc(doc(db, `users/${currentUser.uid}/routines`, currentRoutine.id), {
@@ -81,7 +81,7 @@ function CreateRoutineModal({ show, onHide, setModalShow, currentRoutine, setCur
 	}
 
 	return (
-		<Modal show={show} onHide={onHide} setModalShow={setModalShow} size="lg" aria-labelledby="contained-modal-title-vcenter" centered onExit={() => resetState()} className="create-routine">
+		<Modal className="create-routine" show={show} onHide={onHide} setModalShow={setModalShow} size="lg" aria-labelledby="contained-modal-title-vcenter" centered onExit={() => resetState()}>
 			<Modal.Header closeButton closeVariant="white">
 				<Modal.Title id="contained-modal-title-vcenter">
 					{showWorkoutList ? (
@@ -93,32 +93,36 @@ function CreateRoutineModal({ show, onHide, setModalShow, currentRoutine, setCur
 			</Modal.Header>
 
 			<Modal.Body>
-				<Container className="routine-modalContainer" style={{ display: !showWorkoutList ? "block" : "none" }}>
-					{exercises?.map(({ id, ref }) => (
-						<ExerciseItem key={id} docRef={ref} exercises={exercises} setExercises={setExercises} removeFromRoutine={removeFromRoutine} />
-					))}
-					<Card className="workoutItemCard hover-overlay" role="button" onClick={() => viewWorkoutList(true)}>
-						<Card.Body className="d-flex align-items-center justify-content-center">
-							<span className="pe-3">
-								<MdAddCircleOutline size="3em" />
-							</span>
-							<h3>Add Workout</h3>
-						</Card.Body>
-					</Card>
-				</Container>
-
-				<Container className="workouts-selection-container" style={{ display: showWorkoutList ? "block" : "none" }}>
-					{workouts.map(({ id, name, imageURL }) => {
-						return <SelectWorkoutItem key={id} id={id} name={name} imageURL={imageURL} exercises={exercises} addToRoutine={addToRoutine} removeFromRoutine={removeFromRoutine} />;
-					})}
-				</Container>
+				{showWorkoutList ? (
+					<Container className="routine-modalContainer">
+						{workouts.map(({ id, name, imageURL }) => {
+							return <SelectWorkoutItem key={id} id={id} name={name} imageURL={imageURL} exercises={exercises} addToRoutine={addToRoutine} removeFromRoutine={removeFromRoutine} />;
+						})}
+					</Container>
+				) : (
+					<Container className="routine-modalContainer">
+						{exercises?.map(({ id, ref }) => (
+							<ExerciseItem key={id} docRef={ref} exercises={exercises} setExercises={setExercises} removeFromRoutine={removeFromRoutine} />
+						))}
+						<Card className="workoutItemCard hover-overlay" role="button" onClick={() => viewWorkoutList(true)}>
+							<Card.Body className="d-flex align-items-center justify-content-center">
+								<span className="pe-3">
+									<MdAddCircleOutline size="3em" />
+								</span>
+								<h3 className="text-light mb-0">Add Workout</h3>
+							</Card.Body>
+						</Card>
+					</Container>
+				)}
 			</Modal.Body>
 
-			<Modal.Footer>
-				{currentRoutine?.id && (
+			<Modal.Footer style={{ justifyContent: "space-between" }}>
+				{currentRoutine?.id ? (
 					<Button variant="danger" size="lg" onClick={() => deleteRoutine()}>
 						Delete
 					</Button>
+				) : (
+					<span></span>
 				)}
 				{showWorkoutList ? (
 					<Button size="lg" closeButton onClick={() => viewWorkoutList(false)}>

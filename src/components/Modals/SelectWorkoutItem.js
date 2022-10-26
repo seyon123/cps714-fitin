@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from "react";
 import Card from "react-bootstrap/Card";
+import "./SelectWorkoutItem.css";
 
 function SelectWorkoutItem({ id, name, imageURL, exercises, addToRoutine, removeFromRoutine }) {
 	const [workoutSelected, setWorkoutSelected] = useState(false);
@@ -22,7 +23,7 @@ function SelectWorkoutItem({ id, name, imageURL, exercises, addToRoutine, remove
 				</span>
 				<span>
 					<input
-						className="form-check-input"
+						className="form-check-input checkbox"
 						id={`selectWorkout-${id}`}
 						type="checkbox"
 						value={name}

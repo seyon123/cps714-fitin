@@ -21,7 +21,13 @@ function RoutineWorkoutItem({ id, name, completed, image, sets, reps }) {
 				<img className="workoutItemImg float-start" src={image} alt={name}></img>
 				<Card.Title className="text-light">
 					{name}
-					<input className="form-check-input float-end" type="checkbox" id={`checkbox-${id}`} onChange={(e) => handleWorkoutCompleted(e.target.checked)} checked={workoutCompleted}></input>
+					<input
+						className="form-check-input checkbox float-end"
+						type="checkbox"
+						id={`checkbox-${id}`}
+						onChange={(e) => handleWorkoutCompleted(e.target.checked)}
+						checked={workoutCompleted}
+					></input>
 				</Card.Title>
 				<Card.Subtitle className="mb-2 text-light">
 					{sets} sets | {reps} reps

@@ -1,41 +1,16 @@
-.create-routine .modal-content{
+.create-routine {
     background-color: rgb(34, 37, 45);
     color: white;
     height: 90%;
 }
 
-.test{
-    background-color: aqua;
-}
-
-.img-thumbnail{
-    width: 4em;
-}
-
-.cter{
-    display: flex;
-   justify-content: center;
-    background-color: blue;
-}
-
-.align-right {
-    display: flex;
-    justify-content: right;
-}
-
-.exercise-row {
-    margin: 15px 0 !important;
-    background-color: #363d47 !important;
-    transition: 0.3s;
-}
-
-.routine-modalContainer, .workouts-selection-container{
+.routine-modalContainer {
     width: 10vw; 
     height: 50vh;
     overflow: auto;
 }
 
-.routine-title{
+.routine-title {
     position: relative;
     padding: 5px;
     padding-left: 10px;
@@ -45,28 +20,5 @@
     border: none;
     outline: none;
     width: 100%;
-    /* margin-bottom: 20px; */
     font-size: 1.2em;
-}
-
-.up-button, .down-button{
-    display: block;
-    position: relative;
-    width: 12px;
-    height: 12px;
-    top: 0%;
-    left: 50%;
-    margin: 2px;
-    z-index: 1;
-    border-top: 2px solid white;
-    border-left: 2px solid white;
-    transform: rotate(45deg);
-}
-
-.down-button{
-    transform: rotate(225deg);
-}
-
-.up-button:hover, .down-button:hover, .add-exercise:hover{
-    cursor: pointer;
 }
