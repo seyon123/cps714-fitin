@@ -1,29 +1,36 @@
 import React from "react";
 import Card from "react-bootstrap/Card";
 import { MdDelete } from "react-icons/md";
-import { doc, deleteDoc } from "firebase/firestore";
+import { doc, deleteDoc, getDoc } from "firebase/firestore";
 import { useAuth } from "../contexts/AuthContext";
 import { db } from "../firebase";
-import "./RoutineItem.css";
 
-function RoutineItem({ id, name, exercises }) {
+function RoutineItem({ id, name, exercises, setModalShow, setCurrentRoutine }) {
 	const { currentUser } = useAuth();
-	function editRoutine() {
+
+	function deleteRoutine() {
 		const deleteRoutine = window.confirm("Are you sure you want to delete the routine called: " + name + "?");
-		if (deleteRoutine === true) {
+		if (deleteRoutine) {
 			deleteDoc(doc(db, `users/${currentUser.uid}/routines`, id));
 		}
 	}
 
+	async function handleModal() {
+		setModalShow(true);
+		const routineRef = doc(db, `users/${currentUser.uid}/routines/`, id);
+		const routineSnap = await getDoc(routineRef);
+		setCurrentRoutine({ ...routineSnap.data(), id: routineSnap.id });
+	}
+
 	return (
-		<Card className="routineItemCard">
+		<Card className="newRoutine workoutItemCard hover-overlay shadow-1-strong" role="button" onClick={() => handleModal()}>
 			<Card.Body className="d-flex align-items-center justify-content-between">
 				<div>
 					<Card.Title className="text-light">{name}</Card.Title>
 					<Card.Subtitle className="text-light">{exercises.length} exercises</Card.Subtitle>
 				</div>
-				<span role="button">
-					<MdDelete color="#ae0000" size="2em" onClick={editRoutine} />
+				<span role="button" onClick={() => deleteRoutine()}>
+					<MdDelete color="white" size="2em" />
 				</span>
 			</Card.Body>
 		</Card>

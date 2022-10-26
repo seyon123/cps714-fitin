@@ -1,5 +1,6 @@
 import { useState, useEffect } from "react";
-import { Row, Col } from "react-bootstrap";
+import { Card } from "react-bootstrap";
+import { MdDelete } from "react-icons/md";
 import { getDoc } from "firebase/firestore";
 import "./ExerciseItem.css";
 
@@ -40,28 +41,29 @@ function ExerciseItem({ docRef, exercises, setExercises, removeFromRoutine }) {
 
 	return (
 		workout && (
-			<Row key={workout.id} className="exercise-row">
-				<Col md="auto">
-					<img src={workout.data().imageURL} alt="Exercise Thumbnail" className="img-thumbnail" />
-				</Col>
-				<Col>
-					<h4>{workout.data().name}</h4>
-				</Col>
-				<Col md="auto">
-					<span className="up-button" onClick={() => updateSets(docRef, 1)}></span>
-					<h5>{numSets} sets</h5>
-					<span className="down-button" onClick={() => updateSets(docRef, -1)}></span>
-				</Col>
-				<Col md="auto">
-					<span className="up-button" onClick={() => updateReps(docRef, 1)}></span>
-					<h5>{numReps} reps</h5>
-					<span className="down-button" onClick={() => updateReps(docRef, -1)}></span>
-				</Col>
-				<Col md={1} className="align-right" onClick={() => removeFromRoutine(`workouts/${workout.id}`)}>
-					{" "}
-					X{" "}
-				</Col>
-			</Row>
+			<Card key={workout.id} className="exercise-row">
+				<Card.Body className="d-flex align-items-center justify-content-between">
+					<div className="">
+						<img src={workout.data().imageURL} alt="Exercise Thumbnail" className="workoutItemImg float-start" />
+						<h4 className="float-end">{workout.data().name}</h4>
+					</div>
+					<div className="d-flex align-items-center justify-content-between w-25">
+						<div>
+							<span className="up-button" onClick={() => updateSets(docRef, 1)}></span>
+							<h5>{numSets} sets</h5>
+							<span className="down-button" onClick={() => updateSets(docRef, -1)}></span>
+						</div>
+						<div>
+							<span className="up-button" onClick={() => updateReps(docRef, 1)}></span>
+							<h5>{numReps} reps</h5>
+							<span className="down-button" onClick={() => updateReps(docRef, -1)}></span>
+						</div>
+						<div role="button">
+							<MdDelete color="white" size="2em" />
+						</div>
+					</div>
+				</Card.Body>
+			</Card>
 		)
 	);
 }

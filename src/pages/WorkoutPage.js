@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react";
-import { Container, Card }  from "react-bootstrap";
+import { Container, Card } from "react-bootstrap";
 import { collection, onSnapshot } from "firebase/firestore";
 import { useAuth } from "../contexts/AuthContext";
 import { db } from "../firebase";
@@ -17,6 +17,7 @@ function WorkoutPage() {
 	const [date, setDate] = useState(new Date());
 	const [modalShow, setModalShow] = useState(false);
 	const [routines, setRoutines] = useState([]);
+	const [currentRoutine, setCurrentRoutine] = useState({ name: "", exercises: [] });
 	const { currentUser } = useAuth();
 
 	const dummyWorkouts = [
@@ -46,7 +47,7 @@ function WorkoutPage() {
 
 	return (
 		<Container fluid className="mainPage px-4">
-			<CreateRoutine show={modalShow} onHide={() => setModalShow(false)} setModalShow={setModalShow}></CreateRoutine>
+			<CreateRoutine show={modalShow} onHide={() => setModalShow(false)} setModalShow={setModalShow} currentRoutine={currentRoutine}></CreateRoutine>
 
 			<h1 className="pt-4">My Workouts</h1>
 			<hr></hr>
@@ -81,7 +82,10 @@ function WorkoutPage() {
 					<Card bg="dark" className="h-100">
 						<Card.Header className="myRoutines">My Routines</Card.Header>
 						<Card.Body style={{ overflowY: "auto", maxHeight: "50vh" }}>
-							{routines?.length > 0 && routines.map(({ id, name, exercises }) => <RoutineItem key={id} id={id} name={name} exercises={exercises} />)}
+							{routines?.length > 0 &&
+								routines.map(({ id, name, exercises }) => (
+									<RoutineItem key={id} id={id} name={name} exercises={exercises} setModalShow={setModalShow} setCurrentRoutine={setCurrentRoutine} />
+								))}
 							{/* Add New Routine */}
 							<Card className="newRoutine" bg="dark" border="white" role="button" onClick={() => setModalShow(true)}>
 								<Card.Body className="d-flex align-items-center justify-content-between">
