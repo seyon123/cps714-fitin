@@ -11,6 +11,22 @@ function ChangeRoutine({show,onHide,setModalShow}){
       { id: 1, name: "Push Day", exercises: "4" },
       { id: 2, name: "Pull Day", exercises: "5" }
     ];
+    const [routines,setRoutines]=useState([]);
+    let routineList=dummyRoutines.map((item,index)=>{
+            return(
+              
+              <Card className="routineItemCard">
+              <Card.Body role="button">
+
+
+
+              <h5>{item.name}</h5>
+              </Card.Body>
+              </Card>
+            );
+    });
+
+
     return( 
       <Modal className='create-routine' show={show} onHide={onHide} setModalShow={setModalShow} centered>
       
@@ -19,7 +35,9 @@ function ChangeRoutine({show,onHide,setModalShow}){
       </Modal.Header>
 
       <Modal.Body>
-        <p>jkllkjljkljlkjkljlkjlj</p>
+        <p>Select from existing routines:</p>
+        <br></br>
+        {routineList}
       </Modal.Body>
 
       <Modal.Footer>
