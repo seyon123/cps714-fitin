@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
 import { Container, Card } from "react-bootstrap";
-import { collection, onSnapshot } from "firebase/firestore";
+import { collection, onSnapshot, doc, getDoc } from "firebase/firestore";
 import { useAuth } from "../contexts/AuthContext";
 import { db } from "../firebase";
 import { DayPicker } from "react-day-picker";
@@ -18,6 +18,7 @@ function WorkoutPage() {
 	const [modalShow, setModalShow] = useState(false);
 	const [routines, setRoutines] = useState([]);
 	const [currentRoutine, setCurrentRoutine] = useState({ name: "", exercises: [] });
+	const [todaysRoutine, setTodaysRoutine] = useState(null);
 	const { currentUser } = useAuth();
 
 	const dummyWorkouts = [
@@ -41,8 +42,30 @@ function WorkoutPage() {
 		[currentUser.uid]
 	);
 
+	useEffect(() => {
+		async function getTodaysRoutine() {
+			const dateString = date.toISOString().split("T")[0];
+			const docRef = doc(db, `users/${currentUser.uid}/schedule`, dateString);
+			const docSnap = await getDoc(docRef);
+
+			if (docSnap.exists()) {
+				setTodaysRoutine({ ...docSnap.data(), id: docSnap.id });
+			}
+		}
+
+		getTodaysRoutine();
+
+		console.log(date.toISOString().split("T")[0]);
+	}, [date, currentUser.uid]);
+
 	function changeRoutine() {
 		alert("Change Routine");
+	}
+
+	async function handleChangeRoutine(routinePath) {
+		const dateString = date.toISOString().split("T")[0];
+		const docRef = doc(db, `users/${currentUser.uid}/schedule`, dateString);
+		await setDoc(docRef, { da });
 	}
 
 	return (
@@ -93,7 +116,7 @@ function WorkoutPage() {
 								routines.map(({ id, name, exercises }) => (
 									<RoutineItem key={id} id={id} name={name} exercises={exercises} setModalShow={setModalShow} setCurrentRoutine={setCurrentRoutine} />
 								))}
-							{/* Add New Routine */}
+							{/* New Routine Button */}
 							<Card className="newRoutine" bg="dark" border="white" role="button" onClick={() => setModalShow(true)}>
 								<Card.Body className="d-flex align-items-center justify-content-between">
 									<Card.Title className="text-light mb-0">New Routine</Card.Title>
