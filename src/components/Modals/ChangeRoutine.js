@@ -1,5 +1,4 @@
 import React, {useState} from 'react'
-import Container from "react-bootstrap/Container";
 import Card from 'react-bootstrap/Card';
 import Button from 'react-bootstrap/Button';
 import { Modal } from "react-bootstrap";
@@ -11,38 +10,30 @@ function ChangeRoutine({show,onHide,setModalShow}){
       { id: 1, name: "Push Day", exercises: "4" },
       { id: 2, name: "Pull Day", exercises: "5" }
     ];
-    const [routines,setRoutines]=useState([]);
+
     let routineList=dummyRoutines.map((item,index)=>{
             return(
-              
-              <Card className="routineItemCard">
-              <Card.Body role="button">
-
-
-
-              <h5>{item.name}</h5>
+              <Card className="routineItemCard" role="button" >
+              <Card.Body className='d-flex align-items-center justify-content-between'>
+              <div>
+                <Card.Title className="text-light">{item.name}</Card.Title>
+                <Card.Subtitle className="text-light">{item.exercises} exercises</Card.Subtitle>
+              </div>
               </Card.Body>
               </Card>
             );
     });
-
-
     return( 
       <Modal className='create-routine' show={show} onHide={onHide} setModalShow={setModalShow} centered>
-      
       <Modal.Header closeButton closeVariant='white'>
         <Modal.Title>Change today's routine</Modal.Title>
       </Modal.Header>
-
       <Modal.Body>
         <p>Select from existing routines:</p>
         <br></br>
         {routineList}
       </Modal.Body>
-
-      <Modal.Footer>
-        <Button variant="primary">Save changes</Button>
-      </Modal.Footer>
+ 
     </Modal>
     );
 };
