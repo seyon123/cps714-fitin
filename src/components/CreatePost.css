@@ -9,12 +9,17 @@
 .postCreationLabelFont{
 }
 .labelStyle{
-    font-size: 30px;
+    font-size: 24px;
     font-weight: 600;
 }
 
 .formStyle{
     padding: 20px;
+}
+.form-control{
+    background-color: #141414 !important;
+    border: none !important;
+    border-radius: 12px !important;
 }
 
 .uploadBar{
@@ -29,3 +34,18 @@
     font-weight: 600;
     font-size: 24px;
 }
+
+.rti--container {
+    --rti-bg: #141414 !important;
+    --rti-border: none !important;
+    --rti-main: #141414 !important;
+    --rti-radius: 12px !important;
+    --rti-s: 6px !important; 
+    --rti-tag: #2C3039 !important;
+    --rti-tag-remove: #0088FF !important;
+  }
+
+  .iconFormat{
+    height: 30px;
+    width: 30px;
+  }
