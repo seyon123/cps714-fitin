@@ -10,7 +10,7 @@ function ChangeRoutine({ show, onHide, setModalShow }) {
 
 	let routineList = dummyRoutines.map((item, index) => {
 		return (
-			<Card key={index} className="routineItemCard" role="button">
+			<Card key={index} className="newRoutine workoutItemCard hover-overlay shadow-1-strong" role="button">
 				<Card.Body className="d-flex align-items-center justify-content-between">
 					<div>
 						<Card.Title className="text-light">{item.name}</Card.Title>
