@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react";
-import { Container, Card }  from "react-bootstrap";
+import { Container, Card, InputGroup, Form, Button }  from "react-bootstrap";
 import { collection, onSnapshot } from "firebase/firestore";
 import { useAuth } from "../contexts/AuthContext";
 import { db } from "../firebase";
@@ -17,6 +17,7 @@ function WorkoutPage() {
 	const [date, setDate] = useState(new Date());
 	const [modalShow, setModalShow] = useState(false);
 	const [routines, setRoutines] = useState([]);
+	const [pageSteps, setPageSteps] = useState(4000); // pagesteps should be independant of what we have in firebase
 	const { currentUser } = useAuth();
 
 	const dummyWorkouts = [
@@ -44,6 +45,22 @@ function WorkoutPage() {
 		alert("Change Routine");
 	}
 
+	function getStepsOfDay() {
+		// Using the current date as a filter, get the steps field from firebase
+		// setPageSteps(300);
+		return pageSteps;
+	}
+
+	function setStepsOfDay() {
+		var newSteps = document.getElementById('newSteps').value;
+		setPageSteps(Number(newSteps));
+	}
+
+	function addToSteps(n) {
+		var currentSteps = document.getElementById('newSteps').value
+		document.getElementById('newSteps').value = Number(currentSteps) + n;
+	}
+
 	return (
 		<Container fluid className="mainPage px-4">
 			<CreateRoutine show={modalShow} onHide={() => setModalShow(false)} setModalShow={setModalShow}></CreateRoutine>
@@ -56,6 +73,28 @@ function WorkoutPage() {
 					<div className="calendarStyle">
 						<DayPicker required numberOfMonths={1} pagedNavigation mode="single" onSelect={setDate} selected={date} />
 					</div>
+					<div className="col-md-22">
+						<Card bg="dark">
+							<Card.Header className="currentStepHead">Track your steps for this day</Card.Header>
+							<Card.Body style={{ overflowY: "auto", maxHeight: "50vh" }}>
+								<br/>
+								<h3>Your steps: {pageSteps}</h3>
+								<br/>
+								<InputGroup>
+									<Button onClick={() => addToSteps(-10)} variant="outline-secondary">-10</Button>
+									<Button onClick={() => addToSteps(10)} variant="outline-secondary">+10</Button>
+									<Form.Control
+										id="newSteps"
+										defaultValue="3000"
+										placeholder="Update your steps"
+										aria-label="Update your steps for today."
+									></Form.Control>
+									<Button variant="primary" type="submit" onClick={setStepsOfDay}>Update</Button>
+								</InputGroup>
+							</Card.Body>
+						</Card>
+					</div>
+					<br/>
 				</div>
 				<div className="col-md-6">
 					<Card className="currentRoutine" bg="dark">

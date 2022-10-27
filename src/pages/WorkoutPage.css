@@ -45,6 +45,12 @@ body {
     background-color: #347aeb !important;
     font-size: 31px;
 }
+.currentStepHead {
+    text-align: center;
+    /* background-color: #303030 !important; */
+    background-color: #181c24 !important; 
+    font-size: 21px;
+}
 .myRoutines {
     text-align: center; 
     background-color: #181c24 !important; 
