@@ -1,0 +1,10 @@
+.exerciseInfoModal .modal-content {
+    background-color: #363D47;
+    color: #ffffff
+}
+
+.workoutExerciseInfoImg {
+    max-height: 30%; 
+    width: 100%; 
+    object-fit: Cover;
+}
