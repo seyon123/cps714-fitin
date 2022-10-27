@@ -5,7 +5,7 @@ import { collection, onSnapshot, doc, getDoc } from "firebase/firestore";
 import { useAuth } from "../contexts/AuthContext";
 import { db } from "../firebase";
 import { DayPicker } from "react-day-picker";
-import { MdAddCircleOutline } from "react-icons/md";
+import { MdAddCircleOutline, MdEdit } from "react-icons/md";
 import "react-day-picker/dist/style.css";
 import "./WorkoutPage.css";
 
@@ -22,7 +22,12 @@ function WorkoutPage() {
 	const [routines, setRoutines] = useState([]);
 	const [currentRoutine, setCurrentRoutine] = useState({ name: "", exercises: [] });
 	const [todaysWorkouts, setTodaysWorkouts] = useState(null);
+	// const [completedWorkouts, setCompletedWorkouts] = useState([]);
 	const { currentUser } = useAuth();
+
+	// const updateCompletedWorkouts = (list) => {
+	// 	setCompletedWorkouts(list);
+	// };
 
 	useEffect(() => {
 		document.title = `Workout Page | FitIn`;
@@ -51,7 +56,7 @@ function WorkoutPage() {
 			}
 		}
 		getTodaysRoutine();
-	}, [date, currentUser.uid, changeRoutineShow]);
+	}, [date, currentUser.uid, todaysWorkouts, changeRoutineShow]);
 
 	return (
 		<Container fluid className="mainPage px-4">
@@ -70,24 +75,42 @@ function WorkoutPage() {
 				<div className="col-md-6">
 					<Card className="currentRoutine" bg="dark">
 						<Card.Header className="currentRoutineHead">{date?.toDateString()}</Card.Header>
-						<Card.Title>
-							<p className="m-3">
-								<span>{todaysWorkouts?.name}</span>
-
-								{/* Change Routine Button */}
-								<span className="float-end" role="button" onClick={() => setChangeRoutineShow(true)}>
-									<MdAddCircleOutline />
-									&nbsp; {todaysWorkouts ? "Change Routine" : "Add Routine"}
+						<Card.Title className="m-3 d-flex justify-content-between align-items-center">
+							<span className="h3 m-0">{todaysWorkouts ? todaysWorkouts.name : "No routine selected 😞"}</span>
+							{/* Change Routine Button */}
+							{todaysWorkouts && (
+								<span className="d-flex align-items-center justify-content-between" role="button" onClick={() => setChangeRoutineShow(true)}>
+									{" Change Routine"}
+									<MdEdit size="1.2em" className="ms-2" />
 								</span>
-							</p>
+							)}
 						</Card.Title>
 
 						{/* List of Workouts */}
 						<Card.Body style={{ overflowY: "auto", maxHeight: "50vh" }}>
-							{todaysWorkouts?.exercises.map(({ id, ref, completed, sets, reps }) => (
-								<RoutineWorkoutItem key={id} id={id} docRef={ref} completed={completed} sets={sets} reps={reps} date={date} />
+							{!todaysWorkouts && (
+								<Card className="workoutItemCard hover-overlay" role="button" onClick={() => setChangeRoutineShow(true)}>
+									<Card.Body className="d-flex align-items-center justify-content-center ">
+										<span className="pe-3">
+											<MdAddCircleOutline size="3em" />
+										</span>
+										<h3 className="text-light mb-0">Select Routine</h3>
+									</Card.Body>
+								</Card>
+							)}
+							{todaysWorkouts?.exercises.map(({ id, ref, sets, reps }) => (
+								<RoutineWorkoutItem
+									key={id}
+									id={id}
+									docRef={ref}
+									sets={sets}
+									reps={reps}
+									date={date}
+									// updateCompletedWorkouts={updateCompletedWorkouts}
+								/>
 							))}
 						</Card.Body>
+						{/* <Card.Footer>{`${completedWorkouts?.length}/${todaysWorkouts?.exercises.length} exercises completed`}</Card.Footer> */}
 					</Card>
 				</div>
 
@@ -105,7 +128,7 @@ function WorkoutPage() {
 							{/* New Routine Button */}
 							<Card className="newRoutine" bg="dark" border="white" role="button" onClick={() => setModalShow(true)}>
 								<Card.Body className="d-flex align-items-center justify-content-between">
-									<Card.Title className="text-light mb-0">New Routine</Card.Title>
+									<Card.Title className="text-light mb-0">Create Routine</Card.Title>
 									<span>
 										<MdAddCircleOutline size="2em" />
 									</span>
@@ -123,7 +146,14 @@ function WorkoutPage() {
 			<CreateRoutineModal show={modalShow} onHide={() => setModalShow(false)} setModalShow={setModalShow} setCurrentRoutine={setCurrentRoutine} currentRoutine={currentRoutine} />
 
 			{/* Change Routine Modal */}
-			<ChangeRoutineModal show={changeRoutineShow} onHide={() => setChangeRoutineShow(false)} setModalShow={setChangeRoutineShow} routines={routines} date={date} />
+			<ChangeRoutineModal
+				show={changeRoutineShow}
+				onHide={() => setChangeRoutineShow(false)}
+				setModalShow={setChangeRoutineShow}
+				routines={routines}
+				todaysWorkouts={todaysWorkouts}
+				date={date}
+			/>
 		</Container>
 	);
 }

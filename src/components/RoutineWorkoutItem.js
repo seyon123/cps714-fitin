@@ -6,7 +6,7 @@ import { useAuth } from "../contexts/AuthContext";
 import { db } from "../firebase";
 import "./RoutineWorkoutItem.css";
 
-function RoutineWorkoutItem({ id, docRef, sets, reps, date }) {
+function RoutineWorkoutItem({ id, docRef, sets, reps, date, updateCompletedWorkouts }) {
 	const { currentUser } = useAuth();
 	const [workout, setWorkout] = useState();
 	const [workoutCompleted, setWorkoutCompleted] = useState(false);
@@ -21,9 +21,11 @@ function RoutineWorkoutItem({ id, docRef, sets, reps, date }) {
 
 	useEffect(() => {
 		async function checkChecked() {
+			setWorkoutCompleted(false);
 			const dateString = moment(date).format("YYYY-MM-DD");
 			const docRef = doc(db, `users/${currentUser.uid}/schedule`, dateString);
 			const docScheduleSnap = await getDoc(docRef);
+			// updateCompletedWorkouts(docScheduleSnap.data()?.completed);
 			if (docScheduleSnap.data()?.completed?.includes(id)) {
 				setWorkoutCompleted(true);
 			}
@@ -40,21 +42,28 @@ function RoutineWorkoutItem({ id, docRef, sets, reps, date }) {
 		} else {
 			await updateDoc(docRef, { completed: arrayRemove(id) });
 		}
-
-		// TODO: Update workout completed status in Firestore DB
-
-		// TEMP LOGIC
-		// var workoutById = workoutObj.find((workout) => workout.id === id);
-		// workoutById.completed = !workoutById.completed;
 	}
 
 	return (
-		<Card className="workoutItemCard hover-overlay shadow-1-strong" onClick={() => handleWorkoutCompleted(!document.getElementById(`checkbox-${id}`).checked)}>
+		<Card
+			className="workoutItemCard hover-overlay shadow-1-strong"
+			style={{ opacity: `${workoutCompleted ? "50%" : "100%"}` }}
+			onClick={() => handleWorkoutCompleted(!document.getElementById(`checkbox-${id}`).checked)}
+		>
 			<Card.Body role="button">
 				<img className="workoutItemImg float-start" src={workout?.imageURL} alt={workout?.name}></img>
 				<Card.Title className="text-light">
 					{workout?.name}
-					<input className="form-check-input float-end" type="checkbox" id={`checkbox-${id}`} onChange={(e) => handleWorkoutCompleted(e.target.checked)} checked={workoutCompleted}></input>
+					<span className="float-end">
+						{workoutCompleted && <span className="h3">DONE</span>}
+						<input
+							className="form-check-input ms-3 checkbox"
+							type="checkbox"
+							id={`checkbox-${id}`}
+							onChange={(e) => handleWorkoutCompleted(e.target.checked)}
+							checked={workoutCompleted}
+						></input>
+					</span>
 				</Card.Title>
 				<Card.Subtitle className="mb-2 text-light">
 					{sets} sets | {reps} reps

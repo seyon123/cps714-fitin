@@ -20,7 +20,7 @@ function RoutineItem({ id, name, exercises, setModalShow, setCurrentRoutine }) {
 			<Card.Body className="d-flex align-items-center justify-content-between">
 				<div>
 					<Card.Title className="text-light">{name}</Card.Title>
-					<Card.Subtitle className="text-light">{exercises.length} exercises</Card.Subtitle>
+					<Card.Subtitle className="text-light">{exercises.length} workouts</Card.Subtitle>
 				</div>
 				<span role="button">
 					<MdEdit color="white" size="2em" />

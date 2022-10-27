@@ -61,7 +61,7 @@ function CreateRoutineModal({ show, onHide, setModalShow, currentRoutine, setCur
 
 	async function onSubmit() {
 		if (exercises.length <= 0) {
-			alert("Please add at least one exercise to your routine!");
+			alert("Please add at least one workout to your routine!");
 		} else if (routineName === "") {
 			alert("Please name your routine to save changes!");
 		} else {
