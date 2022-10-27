@@ -18,6 +18,7 @@ function WorkoutPage() {
 	const [modalShow, setModalShow] = useState(false);
 	const [routines, setRoutines] = useState([]);
 	const [currentRoutine, setCurrentRoutine] = useState({ name: "", exercises: [] });
+	// eslint-disable-next-line
 	const [todaysRoutine, setTodaysRoutine] = useState(null);
 	const { currentUser } = useAuth();
 
@@ -61,7 +62,7 @@ function WorkoutPage() {
 	function changeRoutine() {
 		alert("Change Routine");
 	}
-
+	// eslint-disable-next-line
 	async function handleChangeRoutine(routinePath) {
 		const dateString = date.toISOString().split("T")[0];
 		const docRef = doc(db, `users/${currentUser.uid}/schedule`, dateString);
