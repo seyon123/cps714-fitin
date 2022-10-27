@@ -1,0 +1,33 @@
+.tessst{
+    color: blueviolet;
+}
+
+.friends-list-wrap{
+    width: 100%;
+    height: 100vh;
+    padding: 0;
+    margin: 0;
+}
+
+.friends-list-header{
+    background-color: rgb(28, 31, 37);
+    color: white;
+    padding: 2px;
+    
+    
+}
+
+.friends-list-body{
+    background-color: rgb(34, 37, 45);
+    position: inherit;
+    height: 90%;
+    overflow: auto;
+    
+}
+
+
+.friend-name{
+    color: white;
+    font-size: 1.3em;
+    line-height: 3em;
+}
