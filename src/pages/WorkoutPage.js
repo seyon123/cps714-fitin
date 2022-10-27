@@ -12,10 +12,12 @@ import RoutineItem from "../components/RoutineItem";
 import RoutineWorkoutItem from "../components/RoutineWorkoutItem";
 import ExploreWorkouts from "../components/ExploreWorkouts";
 import CreateRoutineModal from "../components/Modals/CreateRoutineModal";
+import ChangeRoutine from "../components/Modals/ChangeRoutine";
 
 function WorkoutPage() {
 	const [date, setDate] = useState(new Date());
 	const [modalShow, setModalShow] = useState(false);
+	const [changeRoutineShow, setChangeRoutineShow] = useState(false);
 	const [routines, setRoutines] = useState([]);
 	const [currentRoutine, setCurrentRoutine] = useState({ name: "", exercises: [] });
 	// eslint-disable-next-line
@@ -59,9 +61,6 @@ function WorkoutPage() {
 		console.log(date.toISOString().split("T")[0]);
 	}, [date, currentUser.uid]);
 
-	function changeRoutine() {
-		alert("Change Routine");
-	}
 	// eslint-disable-next-line
 	async function handleChangeRoutine(routinePath) {
 		const dateString = date.toISOString().split("T")[0];
@@ -79,6 +78,7 @@ function WorkoutPage() {
 				setCurrentRoutine={setCurrentRoutine}
 				currentRoutine={currentRoutine}
 			></CreateRoutineModal>
+			<ChangeRoutine show={changeRoutineShow} onHide={() => setChangeRoutineShow(false)} setModalShow={setChangeRoutineShow}></ChangeRoutine>
 
 			<h1 className="pt-4">My Workouts</h1>
 			<hr></hr>
@@ -95,7 +95,7 @@ function WorkoutPage() {
 						<Card.Title>
 							<p className="m-3">
 								<span>Routine: </span> <span>"My Pull Day"</span>
-								<span className="float-end" role="button" onClick={changeRoutine}>
+								<span className="float-end" role="button" onClick={() => setChangeRoutineShow(true)}>
 									<MdAddCircleOutline />
 									&nbsp; Change Routine
 								</span>
