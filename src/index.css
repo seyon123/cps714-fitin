@@ -11,6 +11,10 @@ body {
   background-color: #12130f;
 }
 
+.w-30 {
+  width: 30%;
+}
+
 .formCenter {
   margin-bottom: 100px;
 }
