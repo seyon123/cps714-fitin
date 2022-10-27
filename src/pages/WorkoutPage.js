@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react";
-import { Container, Card }  from "react-bootstrap";
+import { Container, Card } from "react-bootstrap";
 import { collection, onSnapshot } from "firebase/firestore";
 import { useAuth } from "../contexts/AuthContext";
 import { db } from "../firebase";
@@ -12,10 +12,12 @@ import RoutineItem from "../components/RoutineItem";
 import RoutineWorkoutItem from "../components/RoutineWorkoutItem";
 import ExploreWorkouts from "../components/ExploreWorkouts";
 import CreateRoutine from "../components/Modals/CreateRoutine";
+import ChangeRoutine from "../components/Modals/ChangeRoutine";
 
 function WorkoutPage() {
 	const [date, setDate] = useState(new Date());
 	const [modalShow, setModalShow] = useState(false);
+	const [changeRoutineShow, setChangeRoutineShow] = useState(false);
 	const [routines, setRoutines] = useState([]);
 	const { currentUser } = useAuth();
 
@@ -40,13 +42,10 @@ function WorkoutPage() {
 		[currentUser.uid]
 	);
 
-	function changeRoutine() {
-		alert("Change Routine");
-	}
-
 	return (
 		<Container fluid className="mainPage px-4">
 			<CreateRoutine show={modalShow} onHide={() => setModalShow(false)} setModalShow={setModalShow}></CreateRoutine>
+			<ChangeRoutine show={changeRoutineShow} onHide={() => setChangeRoutineShow(false)} setModalShow={setChangeRoutineShow}></ChangeRoutine>
 
 			<h1 className="pt-4">My Workouts</h1>
 			<hr></hr>
@@ -63,7 +62,7 @@ function WorkoutPage() {
 						<Card.Title>
 							<p className="m-3">
 								<span>Routine: </span> <span>"My Pull Day"</span>
-								<span className="float-end" role="button" onClick={changeRoutine}>
+								<span className="float-end" role="button" onClick={() => setChangeRoutineShow(true)}>
 									<MdAddCircle />
 									&nbsp; Change Routine
 								</span>
