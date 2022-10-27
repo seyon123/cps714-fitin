@@ -42,10 +42,6 @@ function WorkoutPage() {
 		[currentUser.uid]
 	);
 
-	function changeRoutine() {
-		alert("Change Routine");
-	}
-
 	return (
 		<Container fluid className="mainPage px-4">
 			<CreateRoutine show={modalShow} onHide={() => setModalShow(false)} setModalShow={setModalShow}></CreateRoutine>
