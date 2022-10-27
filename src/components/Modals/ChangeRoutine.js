@@ -10,7 +10,7 @@ function ChangeRoutine({ show, onHide, setModalShow }) {
 
 	let routineList = dummyRoutines.map((item, index) => {
 		return (
-			<Card className="routineItemCard" role="button">
+			<Card key={index} className="routineItemCard" role="button">
 				<Card.Body className="d-flex align-items-center justify-content-between">
 					<div>
 						<Card.Title className="text-light">{item.name}</Card.Title>
@@ -20,14 +20,14 @@ function ChangeRoutine({ show, onHide, setModalShow }) {
 			</Card>
 		);
 	});
+
 	return (
 		<Modal className="create-routine" show={show} onHide={onHide} setModalShow={setModalShow} centered>
 			<Modal.Header closeButton closeVariant="white">
-				<Modal.Title>Change today's routine</Modal.Title>
+				<Modal.Title>Change Today's Routine</Modal.Title>
 			</Modal.Header>
 			<Modal.Body>
-				<p>Select from existing routines:</p>
-				<br></br>
+				<p>Select from your existing routines:</p>
 				{routineList}
 			</Modal.Body>
 		</Modal>
