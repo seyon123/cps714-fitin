@@ -56,7 +56,7 @@ function WorkoutPage() {
 			}
 		}
 		getTodaysRoutine();
-	}, [date, currentUser.uid, todaysWorkouts, changeRoutineShow]);
+	}, [date, currentUser.uid, changeRoutineShow]);
 
 	return (
 		<Container fluid className="mainPage px-4">
