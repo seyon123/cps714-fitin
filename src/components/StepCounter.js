@@ -57,7 +57,14 @@ function StepCounter({ date, dayData }) {
 					<Button onClick={() => setAddStepsToInput(parseInt(addStepsToInput + 10))} variant="outline-secondary">
 						+10
 					</Button>
-					<Form.Control min="0" max="100000000" type="number" placeholder="Update your steps" value={addStepsToInput} onChange={(e) => setAddStepsToInput(e.target.value)}></Form.Control>
+					<Form.Control
+						min="0"
+						max="100000000"
+						type="number"
+						placeholder="Update your steps"
+						value={addStepsToInput}
+						onChange={(e) => setAddStepsToInput(parseInt(e.target.value))}
+					></Form.Control>
 					<Button variant="primary" onClick={() => handleAddSteps()}>
 						Update
 					</Button>
