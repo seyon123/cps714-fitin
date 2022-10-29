@@ -6,11 +6,12 @@ import { useAuth } from "../contexts/AuthContext";
 import { db } from "../firebase";
 import "./RoutineWorkoutItem.css";
 
-function RoutineWorkoutItem({ id, docRef, sets, reps, date, updateCompletedWorkouts }) {
+function RoutineWorkoutItem({ id, docRef, sets, reps, date, todaysWorkouts, updateCompletedWorkouts }) {
 	const { currentUser } = useAuth();
 	const [workout, setWorkout] = useState();
 	const [workoutCompleted, setWorkoutCompleted] = useState(false);
 
+	// Get the workout data
 	useEffect(() => {
 		async function getWorkout() {
 			const workoutDocSnap = await getDoc(docRef);
@@ -19,6 +20,7 @@ function RoutineWorkoutItem({ id, docRef, sets, reps, date, updateCompletedWorko
 		getWorkout();
 	}, [docRef]);
 
+	// Mark the workout as completed from database
 	useEffect(() => {
 		async function checkChecked() {
 			setWorkoutCompleted(false);
@@ -31,8 +33,9 @@ function RoutineWorkoutItem({ id, docRef, sets, reps, date, updateCompletedWorko
 			}
 		}
 		checkChecked();
-	}, [date, id, currentUser.uid]);
+	}, [date, id, currentUser.uid, todaysWorkouts]);
 
+	// Update the workout as completed 
 	async function handleWorkoutCompleted(checked) {
 		setWorkoutCompleted(checked);
 		const dateString = moment(date).format("YYYY-MM-DD");

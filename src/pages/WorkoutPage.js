@@ -29,10 +29,12 @@ function WorkoutPage() {
 	// 	setCompletedWorkouts(list);
 	// };
 
+	// Set the page title
 	useEffect(() => {
 		document.title = `Workout Page | FitIn`;
 	}, []);
 
+	// Get all user defined routines
 	useEffect(
 		() =>
 			onSnapshot(collection(db, `users/${currentUser.uid}/routines`), (snapshot) => {
@@ -40,23 +42,20 @@ function WorkoutPage() {
 			}),
 		[currentUser.uid]
 	);
-
+	// Get a list of all the workouts for the current day
 	useEffect(() => {
 		async function getTodaysRoutine() {
 			const dateString = moment(date).format("YYYY-MM-DD");
 			const docRef = doc(db, `users/${currentUser.uid}/schedule`, dateString);
 			const docScheduleSnap = await getDoc(docRef);
 			if (docScheduleSnap.exists()) {
-				const docRoutineSnap = await getDoc(docScheduleSnap.data().ref);
-				if (docRoutineSnap.exists()) {
-					setTodaysWorkouts({ ...docRoutineSnap.data(), id: docRoutineSnap.id });
-				}
+				setTodaysWorkouts({ ...docScheduleSnap.data(), id: docScheduleSnap.id });
 			} else {
 				setTodaysWorkouts(null);
 			}
 		}
 		getTodaysRoutine();
-	}, [date, currentUser.uid, changeRoutineShow, routines]);
+	}, [date, currentUser.uid, changeRoutineShow]);
 
 	return (
 		<Container fluid className="mainPage px-4">
@@ -86,8 +85,8 @@ function WorkoutPage() {
 							)}
 						</Card.Title>
 
-						{/* List of Workouts */}
 						<Card.Body style={{ overflowY: "auto", maxHeight: "50vh" }}>
+							{/* Seect Routine Button */}
 							{!todaysWorkouts && (
 								<Card className="workoutItemCard hover-overlay" role="button" onClick={() => setChangeRoutineShow(true)}>
 									<Card.Body className="d-flex align-items-center justify-content-center ">
@@ -98,6 +97,7 @@ function WorkoutPage() {
 									</Card.Body>
 								</Card>
 							)}
+							{/* List of Workouts for Day*/}
 							{todaysWorkouts?.exercises.map(({ id, ref, sets, reps }) => (
 								<RoutineWorkoutItem
 									key={id}
@@ -106,6 +106,7 @@ function WorkoutPage() {
 									sets={sets}
 									reps={reps}
 									date={date}
+									todaysWorkouts={todaysWorkouts}
 									// updateCompletedWorkouts={updateCompletedWorkouts}
 								/>
 							))}
