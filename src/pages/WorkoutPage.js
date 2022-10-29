@@ -59,20 +59,20 @@ function WorkoutPage() {
 		getTodaysRoutine();
 	}, [date, currentUser.uid, changeRoutineShow]);
 
-	function getStepsOfDay() {
-		// Using the current date as a filter, get the steps field from firebase
-		// setPageSteps(300);
-		return pageSteps;
-	}
+	// function getStepsOfDay() {
+	// 	// Using the current date as a filter, get the steps field from firebase
+	// 	// setPageSteps(300);
+	// 	return pageSteps;
+	// }
 
 	function setStepsOfDay() {
-		var newSteps = document.getElementById('newSteps').value;
+		var newSteps = document.getElementById("newSteps").value;
 		setPageSteps(Number(newSteps));
 	}
 
 	function addToSteps(n) {
-		var currentSteps = document.getElementById('newSteps').value
-		document.getElementById('newSteps').value = Number(currentSteps) + n;
+		var currentSteps = document.getElementById("newSteps").value;
+		document.getElementById("newSteps").value = Number(currentSteps) + n;
 	}
 
 	return (
@@ -90,24 +90,25 @@ function WorkoutPage() {
 						<Card bg="dark">
 							<Card.Header className="currentStepHead">Track your steps for this day</Card.Header>
 							<Card.Body style={{ overflowY: "auto", maxHeight: "50vh" }}>
-								<br/>
+								<br />
 								<h3>Your steps: {pageSteps}</h3>
-								<br/>
+								<br />
 								<InputGroup>
-									<Button onClick={() => addToSteps(-10)} variant="outline-secondary">-10</Button>
-									<Button onClick={() => addToSteps(10)} variant="outline-secondary">+10</Button>
-									<Form.Control
-										id="newSteps"
-										defaultValue="3000"
-										placeholder="Update your steps"
-										aria-label="Update your steps for today."
-									></Form.Control>
-									<Button variant="primary" type="submit" onClick={setStepsOfDay}>Update</Button>
+									<Button onClick={() => addToSteps(-10)} variant="outline-secondary">
+										-10
+									</Button>
+									<Button onClick={() => addToSteps(10)} variant="outline-secondary">
+										+10
+									</Button>
+									<Form.Control id="newSteps" defaultValue="3000" placeholder="Update your steps" aria-label="Update your steps for today."></Form.Control>
+									<Button variant="primary" type="submit" onClick={setStepsOfDay}>
+										Update
+									</Button>
 								</InputGroup>
 							</Card.Body>
 						</Card>
 					</div>
-					<br/>
+					<br />
 				</div>
 
 				{/* Today's Workouts */}
