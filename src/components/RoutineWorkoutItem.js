@@ -6,7 +6,7 @@ import { useAuth } from "../contexts/AuthContext";
 import { db } from "../firebase";
 import "./RoutineWorkoutItem.css";
 
-function RoutineWorkoutItem({ id, docRef, sets, reps, date, todaysWorkouts, updateCompletedWorkouts }) {
+function RoutineWorkoutItem({ id, docRef, sets, reps, date, dayData, updateCompletedWorkouts }) {
 	const { currentUser } = useAuth();
 	const [workout, setWorkout] = useState();
 	const [workoutCompleted, setWorkoutCompleted] = useState(false);
@@ -24,18 +24,15 @@ function RoutineWorkoutItem({ id, docRef, sets, reps, date, todaysWorkouts, upda
 	useEffect(() => {
 		async function checkChecked() {
 			setWorkoutCompleted(false);
-			const dateString = moment(date).format("YYYY-MM-DD");
-			const docRef = doc(db, `users/${currentUser.uid}/schedule`, dateString);
-			const docScheduleSnap = await getDoc(docRef);
 			// updateCompletedWorkouts(docScheduleSnap.data()?.completed);
-			if (docScheduleSnap.data()?.completed?.includes(id)) {
+			if (dayData?.completed?.includes(id)) {
 				setWorkoutCompleted(true);
 			}
 		}
 		checkChecked();
-	}, [date, id, currentUser.uid, todaysWorkouts]);
+	}, [date, id, currentUser.uid, dayData]);
 
-	// Update the workout as completed 
+	// Update the workout as completed
 	async function handleWorkoutCompleted(checked) {
 		setWorkoutCompleted(checked);
 		const dateString = moment(date).format("YYYY-MM-DD");

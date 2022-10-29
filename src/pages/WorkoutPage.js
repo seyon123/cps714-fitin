@@ -60,12 +60,6 @@ function WorkoutPage() {
 		getTodaysRoutine();
 	}, [date, currentUser.uid, changeRoutineShow]);
 
-	// function getStepsOfDay() {
-	// 	// Using the current date as a filter, get the steps field from firebase
-	// 	// setPageSteps(300);
-	// 	return pageSteps;
-	// }
-
 	return (
 		<Container fluid className="mainPage px-4">
 			<h1 className="pt-4">My Workouts</h1>
@@ -85,9 +79,9 @@ function WorkoutPage() {
 					<Card className="currentRoutine" bg="dark">
 						<Card.Header className="currentRoutineHead">{date?.toDateString()}</Card.Header>
 						<Card.Title className="m-3 d-flex justify-content-between align-items-center">
-							<span className="h3 m-0">{dayData ? dayData.name : "No routine selected 😞"}</span>
+							<span className="h3 m-0">{dayData?.name ? dayData.name : "No routine selected 😞"}</span>
 							{/* Change Routine Button */}
-							{dayData && (
+							{dayData?.name && (
 								<span className="d-flex align-items-center justify-content-between" role="button" onClick={() => setChangeRoutineShow(true)}>
 									{" Change Routine"}
 									<MdEdit size="1.2em" className="ms-2" />
@@ -97,7 +91,7 @@ function WorkoutPage() {
 
 						<Card.Body style={{ overflowY: "auto", maxHeight: "50vh" }}>
 							{/* Seect Routine Button */}
-							{!dayData && (
+							{!dayData?.exercises && (
 								<Card className="workoutItemCard hover-overlay" role="button" onClick={() => setChangeRoutineShow(true)}>
 									<Card.Body className="d-flex align-items-center justify-content-center ">
 										<span className="pe-3">
