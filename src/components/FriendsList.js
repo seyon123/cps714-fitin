@@ -11,17 +11,17 @@ function FriendsList(){
         {id: 3, name: "Tiago", image: "usericon1.png"},
         {id: 4, name: "Raj", image: "usericon1.png"},
         {id: 5, name: "Hamdan", image: "usericon1.png"},
-        {id: 5, name: "Noah", image: "usericon1.png"},
-        {id: 5, name: "Jawwad", image: "usericon1.png"},
-        {id: 5, name: "Leslie", image: "usericon1.png"},
-        {id: 5, name: "Haaland", image: "usericon1.png"},
-        {id: 5, name: "Ronaldo", image: "usericon1.png"},
-        {id: 5, name: "Messi", image: "usericon1.png"},
-        {id: 5, name: "Tobi", image: "usericon1.png"},
-        {id: 5, name: "Rowlet", image: "usericon1.png"}
+        {id: 6, name: "Noah", image: "usericon1.png"},
+        {id: 7, name: "Jawwad", image: "usericon1.png"},
+        {id: 8, name: "Leslie", image: "usericon1.png"},
+        {id: 9, name: "Haaland", image: "usericon1.png"},
+        {id: 10, name: "Ronaldo", image: "usericon1.png"},
+        {id: 11, name: "Messi", image: "usericon1.png"},
+        {id: 12, name: "Tobi", image: "usericon1.png"},
+        {id: 13, name: "Rowlet", image: "usericon1.png"}
     ];
     
-    const [friends, setFriends] = useState(dummyFriends);
+    const [friends] = useState(dummyFriends);
 
     return (
         <Container fluid className="friends-list-wrap px-0">
