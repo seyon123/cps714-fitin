@@ -12,7 +12,7 @@ function StepCounter({ date, dayData }) {
 	const { currentUser } = useAuth();
 
 	async function handleAddSteps() {
-		setSteps(addStepsToInput);
+		setSteps(parseInt(addStepsToInput));
 		const dateString = moment(date).format("YYYY-MM-DD");
 		const docRef = doc(db, `users/${currentUser.uid}/schedule`, dateString);
 		if (dayData) {
@@ -22,11 +22,18 @@ function StepCounter({ date, dayData }) {
 		}
 	}
 
+	// Validation so stepcounter does not got below 0
+	useEffect(() => {
+		if (addStepsToInput < 0) {
+			setAddStepsToInput(0);
+		}
+	}, [addStepsToInput]);
+
 	useEffect(() => {
 		async function getTodaysSteps() {
 			if (dayData?.steps) {
-				setSteps(dayData?.steps);
-				setAddStepsToInput(dayData?.steps);
+				setSteps(parseInt(dayData?.steps));
+				setAddStepsToInput(parseInt(dayData?.steps));
 			} else {
 				setSteps(0);
 				setAddStepsToInput(0);
@@ -44,13 +51,13 @@ function StepCounter({ date, dayData }) {
 				</h3>
 				<br />
 				<InputGroup>
-					<Button onClick={() => setAddStepsToInput(addStepsToInput - 10)} variant="outline-secondary">
+					<Button onClick={() => setAddStepsToInput(parseInt(addStepsToInput - 10))} variant="outline-secondary">
 						-10
 					</Button>
-					<Button onClick={() => setAddStepsToInput(addStepsToInput + 10)} variant="outline-secondary">
+					<Button onClick={() => setAddStepsToInput(parseInt(addStepsToInput + 10))} variant="outline-secondary">
 						+10
 					</Button>
-					<Form.Control placeholder="Update your steps" value={addStepsToInput} onChange={(e) => setAddStepsToInput(e.target.value)}></Form.Control>
+					<Form.Control min="0" max="100000000" type="number" placeholder="Update your steps" value={addStepsToInput} onChange={(e) => setAddStepsToInput(e.target.value)}></Form.Control>
 					<Button variant="primary" onClick={() => handleAddSteps()}>
 						Update
 					</Button>
