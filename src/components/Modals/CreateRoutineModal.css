@@ -1,0 +1,24 @@
+.create-routine .modal-content{
+    background-color: rgb(34, 37, 45);
+    color: white;
+    height: 90%;
+}
+
+.routine-modalContainer {
+    width: 10vw; 
+    height: 50vh;
+    overflow: auto;
+}
+
+.routine-title {
+    position: relative;
+    padding: 5px;
+    padding-left: 10px;
+    border-radius: 10px;
+    background: #363d47;
+    color: white;
+    border: none;
+    outline: none;
+    width: 100%;
+    font-size: 1.2em;
+}
