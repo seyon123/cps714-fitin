@@ -1,7 +1,7 @@
 import { useState, useEffect } from "react";
 import { Container, Card, Button, Modal } from "react-bootstrap";
 import { useAuth } from "../../contexts/AuthContext";
-import { doc, addDoc, getDoc, deleteDoc, setDoc, collection, onSnapshot } from "firebase/firestore";
+import { doc, addDoc, getDoc, getDocs, deleteDoc, setDoc, collection, onSnapshot } from "firebase/firestore";
 import { db } from "../../firebase";
 import { MdAddCircleOutline } from "react-icons/md";
 import ExerciseItem from "./ExerciseItem";
@@ -15,13 +15,19 @@ function CreateRoutineModal({ show, onHide, setModalShow, currentRoutine, setCur
 	const [routineName, setRoutineName] = useState("");
 	const [showWorkoutList, viewWorkoutList] = useState(false);
 
-	useEffect(
-		() =>
-			onSnapshot(collection(db, `workouts`), (snapshot) => {
-				setWorkouts(snapshot.docs.map((doc) => ({ ...doc.data(), id: doc.id })));
-			}),
-		[currentUser.uid]
-	);
+	useEffect(() => {
+		// async function getWorkouts() {
+		// 	const collRef = collection(db, `workouts`);
+		// 	const collSnapshot = await getDocs(collRef);
+		// 	collSnapshot.forEach((doc) => {
+		// 		setWorkouts((workouts) => [...workouts, { ...doc.data(), id: doc.id }]);
+		// 	});
+		// }
+		// getWorkouts();
+		onSnapshot(collection(db, `workouts`), (snapshot) => {
+			setWorkouts(snapshot.docs.map((doc) => ({ ...doc.data(), id: doc.id })));
+		});
+	}, [currentUser.uid]);
 
 	useEffect(() => {
 		setExercises(currentRoutine.exercises);
@@ -82,6 +88,7 @@ function CreateRoutineModal({ show, onHide, setModalShow, currentRoutine, setCur
 
 	return (
 		<Modal className="create-routine" show={show} onHide={onHide} setModalShow={setModalShow} size="lg" aria-labelledby="contained-modal-title-vcenter" centered onExit={() => resetState()}>
+			{console.log(workouts)}
 			<Modal.Header closeButton closeVariant="white">
 				<Modal.Title id="contained-modal-title-vcenter">
 					{showWorkoutList ? (

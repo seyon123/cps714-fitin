@@ -2,10 +2,10 @@ import { Button, Card, Modal } from "react-bootstrap";
 import moment from "moment";
 import { db } from "../../firebase";
 import "./ChangeRoutineModal.css";
-import { doc, setDoc, getDoc, deleteDoc } from "firebase/firestore";
+import { doc, getDoc, updateDoc, deleteField } from "firebase/firestore";
 import { useAuth } from "../../contexts/AuthContext";
 
-function ChangeRoutineModal({ show, onHide, setModalShow, routines, todaysWorkouts, date }) {
+function ChangeRoutineModal({ show, onHide, setModalShow, routines, dayData, date }) {
 	const { currentUser } = useAuth();
 
 	// Cnange the routine for the current day to the selected routine
@@ -14,7 +14,7 @@ function ChangeRoutineModal({ show, onHide, setModalShow, routines, todaysWorkou
 		const docRef = doc(db, `users/${currentUser.uid}/schedule`, dateString);
 		const todaysRoutineRef = doc(db, `users/${currentUser.uid}/routines`, id);
 		const docSnap = await getDoc(todaysRoutineRef);
-		await setDoc(docRef, { ...docSnap.data() });
+		await updateDoc(docRef, { ...docSnap.data() });
 		setModalShow(false);
 	}
 	// Delete the current routine for the current day
@@ -22,7 +22,11 @@ function ChangeRoutineModal({ show, onHide, setModalShow, routines, todaysWorkou
 		const dateString = moment(date).format("YYYY-MM-DD");
 		const removeConfirm = window.confirm("Are you sure you want to remove the routine for " + dateString + "?");
 		if (removeConfirm) {
-			deleteDoc(doc(db, `users/${currentUser.uid}/schedule`, dateString));
+			updateDoc(doc(db, `users/${currentUser.uid}/schedule`, dateString), {
+				exercises: deleteField(),
+				completed: deleteField(),
+				name: deleteField(),
+			});
 			setModalShow(false);
 		}
 	}
@@ -47,7 +51,7 @@ function ChangeRoutineModal({ show, onHide, setModalShow, routines, todaysWorkou
 				))}
 			</Modal.Body>
 			{/* Show remove button if there is a routine selected */}
-			{todaysWorkouts && (
+			{dayData && (
 				<Modal.Footer style={{ justifyContent: "space-between" }}>
 					<Button variant="danger" size="lg" onClick={() => removeRoutine()}>
 						Remove
