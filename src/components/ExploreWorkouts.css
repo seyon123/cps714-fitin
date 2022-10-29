@@ -7,13 +7,11 @@
 .categoriesContainer {
     overflow-y: hidden;
     overflow-x: auto;   
-    height: 68px;
 }
 
 .workoutsContainer {
     overflow-y: hidden;
     overflow-x: auto;   
-    height: 230px;
 }
 
 .workoutCard {

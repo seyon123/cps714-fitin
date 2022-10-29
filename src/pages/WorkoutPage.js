@@ -21,6 +21,7 @@ function WorkoutPage() {
 	const [modalShow, setModalShow] = useState(false);
 	const [changeRoutineShow, setChangeRoutineShow] = useState(false);
 	const [routines, setRoutines] = useState([]);
+	const [workouts, setWorkouts] = useState([]);
 	const [currentRoutine, setCurrentRoutine] = useState({ name: "", exercises: [] });
 	const [dayData, setDayDate] = useState(null);
 
@@ -31,6 +32,12 @@ function WorkoutPage() {
 	// const updateCompletedWorkouts = (list) => {
 	// 	setCompletedWorkouts(list);
 	// };
+
+	useEffect(() => {
+		onSnapshot(collection(db, `workouts`), (snapshot) => {
+			setWorkouts(snapshot.docs.map((doc) => ({ ...doc.data(), id: doc.id })));
+		});
+	}, [currentUser.uid]);
 
 	// Set the page title
 	useEffect(() => {
@@ -145,10 +152,17 @@ function WorkoutPage() {
 			</div>
 
 			{/* Explore Workouts Component */}
-			<ExploreWorkouts />
+			<ExploreWorkouts workouts={workouts}/>
 
 			{/* Create Routine Modal */}
-			<CreateRoutineModal show={modalShow} onHide={() => setModalShow(false)} setModalShow={setModalShow} setCurrentRoutine={setCurrentRoutine} currentRoutine={currentRoutine} />
+			<CreateRoutineModal
+				show={modalShow}
+				onHide={() => setModalShow(false)}
+				setModalShow={setModalShow}
+				setCurrentRoutine={setCurrentRoutine}
+				currentRoutine={currentRoutine}
+				workouts={workouts}
+			/>
 
 			{/* Change Routine Modal */}
 			<ChangeRoutineModal show={changeRoutineShow} onHide={() => setChangeRoutineShow(false)} setModalShow={setChangeRoutineShow} routines={routines} dayData={dayData} date={date} />
