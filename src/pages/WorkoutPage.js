@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react";
 import moment from "moment";
-import { Container, Card } from "react-bootstrap";
+import { Container, Card, InputGroup, Form, Button } from "react-bootstrap";
 import { collection, onSnapshot, doc, getDoc, query, orderBy } from "firebase/firestore";
 import { useAuth } from "../contexts/AuthContext";
 import { db } from "../firebase";
@@ -20,9 +20,11 @@ function WorkoutPage() {
 	const [modalShow, setModalShow] = useState(false);
 	const [changeRoutineShow, setChangeRoutineShow] = useState(false);
 	const [routines, setRoutines] = useState([]);
+	const [pageSteps, setPageSteps] = useState(4000); // pagesteps should be independant of what we have in firebase
 	const [currentRoutine, setCurrentRoutine] = useState({ name: "", exercises: [] });
 	const [todaysWorkouts, setTodaysWorkouts] = useState(null);
 	// const [completedWorkouts, setCompletedWorkouts] = useState([]);
+
 	const { currentUser } = useAuth();
 
 	// const updateCompletedWorkouts = (list) => {
@@ -57,6 +59,22 @@ function WorkoutPage() {
 		getTodaysRoutine();
 	}, [date, currentUser.uid, changeRoutineShow]);
 
+	// function getStepsOfDay() {
+	// 	// Using the current date as a filter, get the steps field from firebase
+	// 	// setPageSteps(300);
+	// 	return pageSteps;
+	// }
+
+	function setStepsOfDay() {
+		var newSteps = document.getElementById("newSteps").value;
+		setPageSteps(Number(newSteps));
+	}
+
+	function addToSteps(n) {
+		var currentSteps = document.getElementById("newSteps").value;
+		document.getElementById("newSteps").value = Number(currentSteps) + n;
+	}
+
 	return (
 		<Container fluid className="mainPage px-4">
 			<h1 className="pt-4">My Workouts</h1>
@@ -68,6 +86,29 @@ function WorkoutPage() {
 					<div className="calendarStyle">
 						<DayPicker required numberOfMonths={1} pagedNavigation mode="single" onSelect={setDate} selected={date} />
 					</div>
+					<div className="col-md-22">
+						<Card bg="dark">
+							<Card.Header className="currentStepHead">Track your steps for this day</Card.Header>
+							<Card.Body style={{ overflowY: "auto", maxHeight: "50vh" }}>
+								<br />
+								<h3>Your steps: {pageSteps}</h3>
+								<br />
+								<InputGroup>
+									<Button onClick={() => addToSteps(-10)} variant="outline-secondary">
+										-10
+									</Button>
+									<Button onClick={() => addToSteps(10)} variant="outline-secondary">
+										+10
+									</Button>
+									<Form.Control id="newSteps" defaultValue="3000" placeholder="Update your steps" aria-label="Update your steps for today."></Form.Control>
+									<Button variant="primary" type="submit" onClick={setStepsOfDay}>
+										Update
+									</Button>
+								</InputGroup>
+							</Card.Body>
+						</Card>
+					</div>
+					<br />
 				</div>
 
 				{/* Today's Workouts */}
