@@ -1,7 +1,7 @@
 import { useEffect, useState } from "react";
 import moment from "moment";
 import { Container, Card } from "react-bootstrap";
-import { collection, onSnapshot, doc, getDoc } from "firebase/firestore";
+import { collection, onSnapshot, doc, getDoc, query, orderBy } from "firebase/firestore";
 import { useAuth } from "../contexts/AuthContext";
 import { db } from "../firebase";
 import { DayPicker } from "react-day-picker";
@@ -37,7 +37,7 @@ function WorkoutPage() {
 	// Get all user defined routines
 	useEffect(
 		() =>
-			onSnapshot(collection(db, `users/${currentUser.uid}/routines`), (snapshot) => {
+			onSnapshot(query(collection(db, `users/${currentUser.uid}/routines`), orderBy("name")), (snapshot) => {
 				setRoutines(snapshot.docs.map((doc) => ({ ...doc.data(), id: doc.id })));
 			}),
 		[currentUser.uid]
