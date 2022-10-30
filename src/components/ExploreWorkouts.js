@@ -36,9 +36,16 @@ function ExploreWorkouts({ workouts }) {
 		<div className="exploreWorkoutsContainer">
 			<h1 className="pt-4">Explore Workouts</h1>
 			<hr></hr>
-			<Container fluid className="p-0  mb-3">
+			<Container fluid className="p-0 mb-3">
 				<div className="categoriesContainer">
 					<Row className="m-0" style={{ flexWrap: "unset" }}>
+						<Col className="px-2" onClick={() => setSelectedCategory(null)}>
+							<Button>
+								<h5 style={{ margin: "0px" }} className="text-nowrap mx-3">
+									All
+								</h5>
+							</Button>
+						</Col>
 						{categories?.map(({ id, name }) => (
 							<Col key={id} className="px-2" onClick={() => setSelectedCategory(id)}>
 								<Button>
@@ -52,9 +59,9 @@ function ExploreWorkouts({ workouts }) {
 				</div>
 			</Container>
 
-			<Container fluid className="">
+			<Container fluid className="p-0">
 				<div className="workoutsContainer">
-					<Row className="w-100" style={{ flexWrap: "unset", overflowX: "auto" }}>
+					<Row className="m-0" style={{ flexWrap: "unset", overflowX: "auto" }}>
 						{/* Show workouts for the selected category */}
 						{workouts
 							.filter(({ categories }) => {
