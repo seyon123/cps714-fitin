@@ -15,13 +15,11 @@ function CreateRoutineModal({ show, onHide, setModalShow, currentRoutine, setCur
 	const [routineName, setRoutineName] = useState("");
 	const [showWorkoutList, viewWorkoutList] = useState(false);
 
-	useEffect(
-		() =>
-			onSnapshot(collection(db, `workouts`), (snapshot) => {
-				setWorkouts(snapshot.docs.map((doc) => ({ ...doc.data(), id: doc.id })));
-			}),
-		[currentUser.uid]
-	);
+	useEffect(() => {
+		onSnapshot(collection(db, `workouts`), (snapshot) => {
+			setWorkouts(snapshot.docs.map((doc) => ({ ...doc.data(), id: doc.id })));
+		});
+	}, [currentUser.uid]);
 
 	useEffect(() => {
 		setExercises(currentRoutine.exercises);
