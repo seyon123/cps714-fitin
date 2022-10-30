@@ -2,13 +2,6 @@ body {
     overflow-x: hidden;
 }
 
-.mainCardWorkouts {
-    text-align: "center";
-    background-color: "#347aeb";
-    font-size: "200%";
-}
-
-
 .newRoutine {
     transition: 0.3s;
 }
