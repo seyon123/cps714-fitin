@@ -39,7 +39,7 @@ function ExploreWorkouts({ workouts }) {
 			<Container fluid className="p-0 mb-3">
 				<div className="categoriesContainer">
 					<Row className="m-0" style={{ flexWrap: "unset" }}>
-						<Col className="px-2" onClick={() => setSelectedCategory(null)}>
+						<Col className="p-2" onClick={() => setSelectedCategory(null)}>
 							<Button>
 								<h5 style={{ margin: "0px" }} className="text-nowrap mx-3">
 									All
@@ -47,7 +47,7 @@ function ExploreWorkouts({ workouts }) {
 							</Button>
 						</Col>
 						{categories?.map(({ id, name }) => (
-							<Col key={id} className="px-2" onClick={() => setSelectedCategory(id)}>
+							<Col key={id} className="p-2" onClick={() => setSelectedCategory(id)}>
 								<Button>
 									<h5 style={{ margin: "0px" }} className="text-nowrap mx-3">
 										{name}
@@ -72,7 +72,7 @@ function ExploreWorkouts({ workouts }) {
 								}
 							})
 							.map(({ id, name, description, imageURL }) => (
-								<Col key={id} style={{ maxWidth: "300px", minWidth: "300px" }}>
+								<Col key={id} className="p-2" style={{ maxWidth: "300px", minWidth: "300px" }}>
 									<Card className="workoutCard" bg="dark" role="button" onClick={() => handleShow(name, description.images, description.instructions)}>
 										<Card.Img className="workoutCardImg" variant="top" src={imageURL} />
 										<Card.Body style={{ minHeight: "50px" }}>
