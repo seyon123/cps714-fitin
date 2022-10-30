@@ -27,7 +27,7 @@ function SocialPage() {
 		<Container fluid className="mainPage p-0">
 			<h1>Social Page</h1>
 			<Col>
-			<div style={{margin:"30px;"}}>
+			<div style={{marginLeft:"5px",marginRight: "5px"}}>
 			<CreatePost></CreatePost>
 			</div>
 				<Row className="noMargin">Name: {user.displayName}</Row>
