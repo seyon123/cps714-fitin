@@ -12,6 +12,10 @@ body {
   background-color: #12130f;
 }
 
+.w-30 {
+  width: 30%;
+}
+
 .formCenter {
   margin-bottom: 100px;
 }
@@ -121,6 +125,11 @@ body {
   margin-left: 5px;
 }
 
+.checkbox {
+  width: 1.5em !important;
+  height: 1.5em !important;
+}
+
 .formAuthText {
   display: block;
   font-weight: 500;
@@ -137,7 +146,6 @@ body {
 .googleBtn > div {
   background-color: transparent !important;
 }
-
 
 /* custom scrollbar */
 *{

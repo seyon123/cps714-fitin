@@ -10,6 +10,7 @@
 		"bootstrap-icons": "^1.9.1",
 		"date-fns": "^2.29.3",
 		"firebase": "9.10.0",
+		"moment": "^2.29.4",
 		"react": "18.2.0",
 		"react-bootstrap": "2.5.0",
 		"react-day-picker": "^8.3.5",
