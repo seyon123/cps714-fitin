@@ -30,7 +30,7 @@ function RoutineWorkoutItem({ id, docRef, sets, reps, date, dayData, updateCompl
 			}
 		}
 		checkChecked();
-	}, [date, id, currentUser.uid, dayData]);
+	}, [id, currentUser.uid, dayData]);
 
 	// Update the workout as completed
 	async function handleWorkoutCompleted(checked) {

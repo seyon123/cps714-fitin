@@ -1,21 +1,17 @@
 import "./ExerciseInfoModal.css";
-import { MdCancel } from "react-icons/md";
 import { Modal, Carousel } from "react-bootstrap";
 
 function ExerciseInfoModal({ show, onClose, workoutName, workoutImage, workoutDescription }) {
 	return (
 		<Modal className="exerciseInfo_modal" size="lg" show={show} onHide={onClose} centered>
-			<Modal.Header>
+			<Modal.Header closeButton closeVariant="white">
 				<Modal.Title>{workoutName}</Modal.Title>
-				<span role="button" onClick={onClose}>
-					<MdCancel size="2em" />
-				</span>
 			</Modal.Header>
 			<Modal.Body>
 				<Carousel variant="light">
-					{workoutImage.map((image) => {
+					{workoutImage.map((image, i) => {
 						return (
-							<Carousel.Item>
+							<Carousel.Item key={i}>
 								<div className="text-center">
 									<img className="d-block" height="300px" src={image} alt="First slide" style={{ marginRight: "auto", marginLeft: "auto" }} />
 								</div>
@@ -25,7 +21,7 @@ function ExerciseInfoModal({ show, onClose, workoutName, workoutImage, workoutDe
 				</Carousel>
 				{workoutDescription.map((description, i) => {
 					return (
-						<div className="d-flex align-items-center">
+						<div key={i} className="d-flex align-items-center">
 							<div className="h1 me-2" style={{ width: "20px" }}>
 								{i + 1}
 							</div>

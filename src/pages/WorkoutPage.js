@@ -83,7 +83,7 @@ function WorkoutPage() {
 
 				{/* Today's Workouts */}
 				<div className="col-md-6">
-					<Card className="currentRoutine" bg="dark">
+					<Card className="currentRoutine" bg="dark" style={{ maxHeight: "70vh" }}>
 						<Card.Header className="currentRoutineHead">{date?.toDateString()}</Card.Header>
 						<Card.Title className="m-3 d-flex justify-content-between align-items-center">
 							<span className="h3 m-0">{dayData?.name ? dayData.name : "No routine selected 😞"}</span>
@@ -96,7 +96,7 @@ function WorkoutPage() {
 							)}
 						</Card.Title>
 
-						<Card.Body style={{ overflowY: "auto", maxHeight: "50vh" }}>
+						<Card.Body style={{ overflowY: "auto" }}>
 							{/* Seect Routine Button */}
 							{!dayData?.exercises && (
 								<Card className="workoutItemCard hover-overlay" role="button" onClick={() => setChangeRoutineShow(true)}>
@@ -128,9 +128,9 @@ function WorkoutPage() {
 
 				{/* My Routines */}
 				<div className="col-md-3">
-					<Card bg="dark" className="h-100">
+					<Card bg="dark" style={{ maxHeight: "70vh" }}>
 						<Card.Header className="myRoutines">My Routines</Card.Header>
-						<Card.Body style={{ overflowY: "auto", maxHeight: "50vh" }}>
+						<Card.Body className="pb-2" style={{ overflowY: "auto" }}>
 							{/* List of Routines */}
 							{routines?.length > 0 &&
 								routines.map(({ id, name, exercises }) => (
@@ -152,7 +152,7 @@ function WorkoutPage() {
 			</div>
 
 			{/* Explore Workouts Component */}
-			<ExploreWorkouts workouts={workouts}/>
+			<ExploreWorkouts workouts={workouts} />
 
 			{/* Create Routine Modal */}
 			<CreateRoutineModal

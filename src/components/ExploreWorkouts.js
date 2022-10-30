@@ -8,6 +8,7 @@ import "./ExploreWorkouts.css";
 
 function ExploreWorkouts({ workouts }) {
 	const [show, setShow] = useState(false);
+	const [selectedCategory, setSelectedCategory] = useState(null);
 	const [categories, setCategories] = useState([]);
 	const [workoutName, setWorkoutName] = useState("");
 	const [workoutImage, setWorkoutImage] = useState([]);
@@ -35,11 +36,11 @@ function ExploreWorkouts({ workouts }) {
 		<div className="exploreWorkoutsContainer">
 			<h1 className="pt-4">Explore Workouts</h1>
 			<hr></hr>
-			<Container fluid className="p-0">
+			<Container fluid className="p-0  mb-3">
 				<div className="categoriesContainer">
 					<Row className="m-0" style={{ flexWrap: "unset" }}>
 						{categories?.map(({ id, name }) => (
-							<Col key={id} className="px-2">
+							<Col key={id} className="px-2" onClick={() => setSelectedCategory(id)}>
 								<Button>
 									<h5 style={{ margin: "0px" }} className="text-nowrap mx-3">
 										{name}
@@ -51,19 +52,45 @@ function ExploreWorkouts({ workouts }) {
 				</div>
 			</Container>
 
-			<Container fluid className="p-0">
+			<Container fluid className="">
 				<div className="workoutsContainer">
-					<Row style={{ flexWrap: "unset" }}>
-						{workouts.map(({ id, name, description, imageURL }) => (
-							<Col className="colWorkout" key={id}>
-								<Card className="workoutCard" bg="dark" role="button" onClick={() => handleShow(name, description.images, description.instructions)}>
-									<Card.Img className="workoutCardImg" variant="top" src={imageURL} />
-									<Card.Body style={{ minHeight: "70px" }}>
-										<Card.Title>{name}</Card.Title>
-									</Card.Body>
-								</Card>
+					<Row className="w-100" style={{ flexWrap: "unset", overflowX: "auto" }}>
+						{/* Show workouts for the selected category */}
+						{workouts
+							.filter(({ categories }) => {
+								if (selectedCategory) {
+									return categories?.includes(selectedCategory);
+								} else {
+									return true;
+								}
+							})
+							.map(({ id, name, description, imageURL }) => (
+								<Col key={id} style={{ maxWidth: "300px", minWidth: "300px" }}>
+									<Card className="workoutCard" bg="dark" role="button" onClick={() => handleShow(name, description.images, description.instructions)}>
+										<Card.Img className="workoutCardImg" variant="top" src={imageURL} />
+										<Card.Body style={{ minHeight: "50px" }}>
+											<Card.Title className="m-0">{name}</Card.Title>
+										</Card.Body>
+									</Card>
+								</Col>
+							))}
+						{/* Show when there are no workouts for the selected category */}
+						{workouts.filter(({ categories }) => {
+							if (selectedCategory) {
+								return categories?.includes(selectedCategory);
+							} else {
+								return true;
+							}
+						}).length === 0 && (
+							<Col className="text-center">
+								<h3>No workouts found for selected category.</h3>
+								<Button variant="secondary" onClick={() => setSelectedCategory(null)}>
+									<h5 style={{ margin: "0px" }} className="text-nowrap mx-3">
+										Clear Search
+									</h5>
+								</Button>
 							</Col>
-						))}
+						)}
 					</Row>
 				</div>
 			</Container>
