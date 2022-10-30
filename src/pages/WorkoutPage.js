@@ -23,7 +23,7 @@ function WorkoutPage() {
 	const [routines, setRoutines] = useState([]);
 	const [workouts, setWorkouts] = useState([]);
 	const [currentRoutine, setCurrentRoutine] = useState({ name: "", exercises: [] });
-	const [dayData, setDayDate] = useState(null);
+	const [dayData, setDayData] = useState(null);
 
 	// const [completedWorkouts, setCompletedWorkouts] = useState([]);
 
@@ -59,9 +59,9 @@ function WorkoutPage() {
 			const docRef = doc(db, `users/${currentUser.uid}/schedule`, dateString);
 			const docScheduleSnap = await getDoc(docRef);
 			if (docScheduleSnap.exists()) {
-				setDayDate({ ...docScheduleSnap.data(), id: docScheduleSnap.id });
+				setDayData({ ...docScheduleSnap.data(), id: docScheduleSnap.id });
 			} else {
-				setDayDate(null);
+				setDayData(null);
 			}
 		}
 		getTodaysRoutine();
