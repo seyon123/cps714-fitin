@@ -1,25 +1,18 @@
 import { useState, useEffect } from "react";
 import { Container, Card, Button, Modal } from "react-bootstrap";
 import { useAuth } from "../../contexts/AuthContext";
-import { doc, addDoc, getDoc, deleteDoc, setDoc, collection, onSnapshot } from "firebase/firestore";
+import { doc, addDoc, getDoc, deleteDoc, setDoc, collection } from "firebase/firestore";
 import { db } from "../../firebase";
 import { MdAddCircleOutline } from "react-icons/md";
 import ExerciseItem from "./ExerciseItem";
 import SelectWorkoutItem from "./SelectWorkoutItem";
 import "./CreateRoutineModal.css";
 
-function CreateRoutineModal({ show, onHide, setModalShow, currentRoutine, setCurrentRoutine }) {
+function CreateRoutineModal({ show, onHide, setModalShow, currentRoutine, setCurrentRoutine, workouts }) {
 	const { currentUser } = useAuth();
 	const [exercises, setExercises] = useState([]);
-	const [workouts, setWorkouts] = useState([]);
 	const [routineName, setRoutineName] = useState("");
 	const [showWorkoutList, viewWorkoutList] = useState(false);
-
-	useEffect(() => {
-		onSnapshot(collection(db, `workouts`), (snapshot) => {
-			setWorkouts(snapshot.docs.map((doc) => ({ ...doc.data(), id: doc.id })));
-		});
-	}, [currentUser.uid]);
 
 	useEffect(() => {
 		setExercises(currentRoutine.exercises);

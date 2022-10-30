@@ -21,8 +21,9 @@ function WorkoutPage() {
 	const [modalShow, setModalShow] = useState(false);
 	const [changeRoutineShow, setChangeRoutineShow] = useState(false);
 	const [routines, setRoutines] = useState([]);
+	const [workouts, setWorkouts] = useState([]);
 	const [currentRoutine, setCurrentRoutine] = useState({ name: "", exercises: [] });
-	const [dayData, setDayDate] = useState(null);
+	const [dayData, setDayData] = useState(null);
 
 	// const [completedWorkouts, setCompletedWorkouts] = useState([]);
 
@@ -31,6 +32,12 @@ function WorkoutPage() {
 	// const updateCompletedWorkouts = (list) => {
 	// 	setCompletedWorkouts(list);
 	// };
+
+	useEffect(() => {
+		onSnapshot(collection(db, `workouts`), (snapshot) => {
+			setWorkouts(snapshot.docs.map((doc) => ({ ...doc.data(), id: doc.id })));
+		});
+	}, [currentUser.uid]);
 
 	// Set the page title
 	useEffect(() => {
@@ -52,9 +59,9 @@ function WorkoutPage() {
 			const docRef = doc(db, `users/${currentUser.uid}/schedule`, dateString);
 			const docScheduleSnap = await getDoc(docRef);
 			if (docScheduleSnap.exists()) {
-				setDayDate({ ...docScheduleSnap.data(), id: docScheduleSnap.id });
+				setDayData({ ...docScheduleSnap.data(), id: docScheduleSnap.id });
 			} else {
-				setDayDate(null);
+				setDayData(null);
 			}
 		}
 		getTodaysRoutine();
@@ -76,7 +83,7 @@ function WorkoutPage() {
 
 				{/* Today's Workouts */}
 				<div className="col-md-6">
-					<Card className="currentRoutine" bg="dark">
+					<Card className="currentRoutine" bg="dark" style={{ maxHeight: "70vh" }}>
 						<Card.Header className="currentRoutineHead">{date?.toDateString()}</Card.Header>
 						<Card.Title className="m-3 d-flex justify-content-between align-items-center">
 							<span className="h3 m-0">{dayData?.name ? dayData.name : "No routine selected 😞"}</span>
@@ -89,7 +96,7 @@ function WorkoutPage() {
 							)}
 						</Card.Title>
 
-						<Card.Body style={{ overflowY: "auto", maxHeight: "50vh" }}>
+						<Card.Body style={{ overflowY: "auto" }}>
 							{/* Seect Routine Button */}
 							{!dayData?.exercises && (
 								<Card className="workoutItemCard hover-overlay" role="button" onClick={() => setChangeRoutineShow(true)}>
@@ -121,9 +128,9 @@ function WorkoutPage() {
 
 				{/* My Routines */}
 				<div className="col-md-3">
-					<Card bg="dark" className="h-100">
+					<Card bg="dark" style={{ maxHeight: "70vh" }}>
 						<Card.Header className="myRoutines">My Routines</Card.Header>
-						<Card.Body style={{ overflowY: "auto", maxHeight: "50vh" }}>
+						<Card.Body className="pb-2" style={{ overflowY: "auto" }}>
 							{/* List of Routines */}
 							{routines?.length > 0 &&
 								routines.map(({ id, name, exercises }) => (
@@ -145,10 +152,17 @@ function WorkoutPage() {
 			</div>
 
 			{/* Explore Workouts Component */}
-			<ExploreWorkouts />
+			<ExploreWorkouts workouts={workouts} />
 
 			{/* Create Routine Modal */}
-			<CreateRoutineModal show={modalShow} onHide={() => setModalShow(false)} setModalShow={setModalShow} setCurrentRoutine={setCurrentRoutine} currentRoutine={currentRoutine} />
+			<CreateRoutineModal
+				show={modalShow}
+				onHide={() => setModalShow(false)}
+				setModalShow={setModalShow}
+				setCurrentRoutine={setCurrentRoutine}
+				currentRoutine={currentRoutine}
+				workouts={workouts}
+			/>
 
 			{/* Change Routine Modal */}
 			<ChangeRoutineModal show={changeRoutineShow} onHide={() => setChangeRoutineShow(false)} setModalShow={setChangeRoutineShow} routines={routines} dayData={dayData} date={date} />

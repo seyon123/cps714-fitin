@@ -2,7 +2,7 @@ import { Button, Card, Modal } from "react-bootstrap";
 import moment from "moment";
 import { db } from "../../firebase";
 import "./ChangeRoutineModal.css";
-import { doc, getDoc, updateDoc, deleteField } from "firebase/firestore";
+import { doc, getDoc, updateDoc, deleteField, setDoc } from "firebase/firestore";
 import { useAuth } from "../../contexts/AuthContext";
 
 function ChangeRoutineModal({ show, onHide, setModalShow, routines, dayData, date }) {
@@ -14,7 +14,12 @@ function ChangeRoutineModal({ show, onHide, setModalShow, routines, dayData, dat
 		const docRef = doc(db, `users/${currentUser.uid}/schedule`, dateString);
 		const todaysRoutineRef = doc(db, `users/${currentUser.uid}/routines`, id);
 		const docSnap = await getDoc(todaysRoutineRef);
-		await updateDoc(docRef, { ...docSnap.data() });
+		if (dayData) {
+			await updateDoc(docRef, { name: docSnap.data().name, exercises: docSnap.data().exercises, completed: [] });
+		} else {
+			await setDoc(docRef, { ...docSnap.data() });
+		}
+
 		setModalShow(false);
 	}
 	// Delete the current routine for the current day
@@ -51,7 +56,7 @@ function ChangeRoutineModal({ show, onHide, setModalShow, routines, dayData, dat
 				))}
 			</Modal.Body>
 			{/* Show remove button if there is a routine selected */}
-			{dayData && (
+			{dayData?.name && (
 				<Modal.Footer style={{ justifyContent: "space-between" }}>
 					<Button variant="danger" size="lg" onClick={() => removeRoutine()}>
 						Remove
