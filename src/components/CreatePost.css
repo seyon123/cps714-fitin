@@ -6,15 +6,19 @@
     width: 100%;
 }
 
-.postCreationLabelFont{
+.inputArea{
+    margin-right: 20px;
 }
 .labelStyle{
     font-size: 24px;
     font-weight: 600;
+    padding-left: 10px;
 }
 
 .formStyle{
-    padding: 20px;
+    padding-left: 20px;
+    padding-top: 10px;
+    padding-bottom: 10px;
 }
 .form-control{
     background-color: #141414 !important;
@@ -23,16 +27,36 @@
 }
 
 .uploadBar{
-    background-color:  rgba(34,37,45,1);
+    background-color:  #22252D;
+    border-radius: 12px;
+    border-width: 1px;
+    box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.7);
+
+
 }
 .postButtonStyle{
-    background-color:  rgba(34,37,45,1);
     border-radius: 12px;
     border-width: 1px;
     border-color: white;
     width: 100px;
     font-weight: 600;
     font-size: 24px;
+    margin-right: 20px;
+    background:none; 
+    border:none;    
+}
+
+.photosButtonStyle{
+    background:none; 
+    border:none;    
+}
+
+.postButtonStyle {
+    transition: 0.3s;
+}
+
+.postButtonStyle:hover{
+    background: #0088FF;
 }
 
 .rti--container {
@@ -48,4 +72,9 @@
   .iconFormat{
     height: 30px;
     width: 30px;
+  }
+
+  #uploadBar{
+    display:flex;
+    justify-content:space-between;
   }
