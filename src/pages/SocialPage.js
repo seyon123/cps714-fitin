@@ -1,23 +1,11 @@
 import React, { useEffect } from "react";
 import Container from "react-bootstrap/Container";
-import Row from "react-bootstrap/Row";
 import Col from "react-bootstrap/Col";
-import { useAuth } from "../contexts/AuthContext";
-import { Image } from "react-bootstrap";
 import "./SocialPage.css";
 import PostFeedItem from "../components/PostFeedItem"
 import FriendsList from "../components/FriendsList";
 
 function SocialPage() {
-	const { getUser, logOut } = useAuth();
-	const user = getUser();
-
-	//console.log(user);
-
-	function handleSignOut(e) {
-		e.preventDefault();
-		logOut();
-	}
 
 	useEffect(() => {
 		document.title = `Social Page | FitIn`;
