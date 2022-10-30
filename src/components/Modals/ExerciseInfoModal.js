@@ -1,8 +1,6 @@
 import "./ExerciseInfoModal.css";
 import { MdCancel } from "react-icons/md";
-
 import { Modal, Carousel } from "react-bootstrap";;
-
 
 function ExerciseInfoModal(props) {
 	const { show, onClose, workoutName, workoutImage, workoutDescription } = props;
