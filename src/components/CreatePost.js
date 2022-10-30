@@ -2,6 +2,7 @@
 import React, {useState} from "react";
 import "./CreatePost.css";
 import { TagsInput } from "react-tag-input-component";
+import { AiFillCamera, AiFillPicture } from 'react-icons/ai';
 
 function CreatePost() {
     const [tags, setTags] = useState([]);
@@ -12,7 +13,6 @@ function CreatePost() {
         document.getElementById("imageUpload").click()
     }
     function postContent(e) {
-        console.log("GO!");
         alert("Post Text: "+ postText + ", post Tags: ["+ tags + "].");
     }
 	return (
@@ -41,8 +41,8 @@ function CreatePost() {
             <div className="inputArea formStyle">
                 <div className="uploadBar formStyle" id="uploadBar">
                         <button className="photosButtonStyle" onClick={uploadContent}>
-                            <img src="camera.png" style={{height:"30px",width:"auto",marginRight:"15px"}}/>
-                            <img src="pictures.png" style={{height:"30px",width:"auto"}}/>
+                            <AiFillCamera size="30px" style={{marginRight: "10px"}}/>
+                            <AiFillPicture size="30px"/>
                         </button>
                         <button className="postButtonStyle" onClick={postContent}>
                             Post
