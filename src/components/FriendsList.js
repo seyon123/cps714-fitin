@@ -1,5 +1,5 @@
 import { useState } from "react";
-import { Container, Row, Col} from "react-bootstrap";
+import { Container, Row, Col, Card} from "react-bootstrap";
 
 import "./FriendsList.css";
 
@@ -21,23 +21,31 @@ function FriendsList(){
         {id: 13, name: "Rowlet", image: "usericon1.png"}
     ];
     
-    const [friends] = useState(dummyFriends);
+    //const [friends] = useState(dummyFriends);
 
     return (
         <Container fluid className="friends-list-wrap px-0">
             <div className="friends-list-header rounded-top">
-                <h3 className="px-3">Friends</h3>
+                <h3 className="px-4">Friends</h3>
             </div>
 
-            <div className="friends-list-body px-4 pt-2">
-            
-            {friends.map(({ id, image, name })=>(
-                <Row className="mb-1" onClick={(event)=>{alert("Clicked on " + id + " " + name)}}>
-                    <Col md="3" className="p-1"><img src={image} className="w-100 rounded-circle" alt="" /></Col>
-                    <Col md="auto" className="align-self-center"><p className="friend-name">{name}</p></Col>   
-                </Row>
-            ))}
+            <div className="friends-list-body pt-2 rounded-bottom">
+                
+                {dummyFriends.map(({ id, image, name })=>(
+                    <Card 
+                        className="workoutItemCard hover-overlay shadow-1-strong" 
+                        role="button"
+                        onClick={()=>{alert("Clicked on " + id + " " + name)}}
+                    >
+                        <Card.Body className="d-flex align-items-center justify-content-start">
+                            <img src={image} className="w-25 rounded-circle" alt="Friend Profile" />
+                            <Card.Title className="text-light ms-3">{name}</Card.Title>
+                        </Card.Body>
+                    </Card>
+                ))}
+
             </div>
+
         </Container>
     );
 
