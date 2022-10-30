@@ -5,7 +5,7 @@ import Col from "react-bootstrap/Col";
 import { useAuth } from "../contexts/AuthContext";
 import { Image } from "react-bootstrap";
 import "./SocialPage.css";
-
+import PostFeedItem from "../components/PostFeedItem"
 import FriendsList from "../components/FriendsList";
 
 function SocialPage() {
@@ -32,11 +32,7 @@ function SocialPage() {
 
 				<div className="p-0 m-0 col-md-8">
 					<Col>
-						<Row className="noMargin">Name: {user.displayName}</Row>
-						<Row className="noMargin">Email: {user.email}</Row>
-						<Row className="noMargin">ID: {user.uid}</Row>
-						<Image roundedCircle src={user.photoURL} />
-						<button onClick={handleSignOut}>Sign Out</button>
+						<PostFeedItem />
 					</Col>
 				</div>
 			</div>
