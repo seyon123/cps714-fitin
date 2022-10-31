@@ -17,7 +17,6 @@ function CreatePost() {
     }
 	return (
 		<div className="postBackground pb-1">
-            <h1>{postText}</h1>
             <div className="formStyle">
                 <div className="form-group inputArea">
                     <label for="postTextArea" className="labelStyle">Post</label>
