@@ -40,8 +40,8 @@ function CreatePost() {
             <div className="inputArea formStyle">
                 <div className="uploadBar formStyle" id="uploadBar">
                         <button className="photosButtonStyle" onClick={uploadContent}>
-                            <AiFillCamera size="30px" style={{marginRight: "10px"}}/>
-                            <AiFillPicture size="30px"/>
+                            <AiFillCamera color="white" size="30px" style={{marginRight: "10px"}}/>
+                            <AiFillPicture color="white" size="30px"/>
                         </button>
                         <button className="postButtonStyle" onClick={postContent}>
                             Post

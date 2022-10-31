@@ -33,7 +33,7 @@ function SocialPage() {
 
 				<div className="p-0 m-0 col-md-8">
 					<Col>
-					<div style={{marginLeft:"5px",marginRight: "5px"}}>
+					<div style={{margin: "5px"}}>
 					<CreatePost></CreatePost>
 					</div>
 						<Row className="noMargin">Name: {user.displayName}</Row>

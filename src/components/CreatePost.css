@@ -13,6 +13,7 @@
     font-size: 24px;
     font-weight: 600;
     padding-left: 10px;
+    color: white;
 }
 
 .formStyle{
@@ -24,6 +25,7 @@
     background-color: #141414 !important;
     border: none !important;
     border-radius: 12px !important;
+    color: white !important;
 }
 
 .uploadBar{
@@ -43,7 +45,8 @@
     font-size: 24px;
     margin-right: 20px;
     background:none; 
-    border:none;    
+    border:none;
+    color: white;   
 }
 
 .photosButtonStyle{
@@ -68,6 +71,10 @@
     --rti-tag: #2C3039 !important;
     --rti-tag-remove: #0088FF !important;
   }
+.rti--input{
+    background-color: #141414 !important;
+    color: white !important;
+}
 
   .iconFormat{
     height: 30px;
