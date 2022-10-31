@@ -5,6 +5,7 @@ import Col from "react-bootstrap/Col";
 import { useAuth } from "../contexts/AuthContext";
 import { Image } from "react-bootstrap";
 import "./SocialPage.css";
+import CreatePost from "../components/CreatePost";
 
 import FriendsList from "../components/FriendsList";
 
@@ -32,6 +33,9 @@ function SocialPage() {
 
 				<div className="p-0 m-0 col-md-8">
 					<Col>
+					<div style={{margin: "5px"}}>
+					<CreatePost></CreatePost>
+					</div>
 						<Row className="noMargin">Name: {user.displayName}</Row>
 						<Row className="noMargin">Email: {user.email}</Row>
 						<Row className="noMargin">ID: {user.uid}</Row>
