@@ -3,6 +3,7 @@ import Nav from "react-bootstrap/Nav";
 import Navbar from "react-bootstrap/Navbar";
 import NavDropdown from "react-bootstrap/NavDropdown";
 import { useAuth } from "../contexts/AuthContext";
+import { FaUserEdit, FaCog, FaSignOutAlt, FaQuestionCircle } from "react-icons/fa";
 import "./NavBar.css";
 
 function NavBar() {
@@ -35,11 +36,15 @@ function NavBar() {
 					id="basic-nav-dropdown"
 				>
 					<div className="profile-name">
-						<strong>{user.displayName}</strong>
+						<NavDropdown.Header className="profile-name">{user.displayName}</NavDropdown.Header>
 					</div>
-					<NavDropdown.Item href="#">Edit Profile</NavDropdown.Item>
-					<NavDropdown.Divider />
-					<NavDropdown.Item onClick={handleSignOut}>Logout</NavDropdown.Item>
+					<div className="dropdownlinks">
+						<NavDropdown.Item href="#"> <span className="spanIcon"><FaUserEdit  /></span> Edit Profile</NavDropdown.Item>
+						<NavDropdown.Item href="#"> <span className="spanIcon"><FaCog  /></span> Settings </NavDropdown.Item>
+						<NavDropdown.Item href="#"> <span className="spanIcon"><FaQuestionCircle  /></span> Help</NavDropdown.Item>
+						<NavDropdown.Divider />
+						<NavDropdown.Item onClick={handleSignOut}> <FaSignOutAlt size="1.5em" /> Logout</NavDropdown.Item>
+					</div>
 				</NavDropdown>
 			</Container>
 		</Navbar>

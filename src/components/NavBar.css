@@ -13,11 +13,18 @@
     font-size: 1.5rem !important;
     color: #FFFFFF !important;
 }
-
+.dropdownlinks{
+    font-size: 1.1rem !important;
+}
 .link-col{
     padding-left: 0;
 }
-
+.spanIcon{
+    width: 23px;
+    font-size: 1.5rem !important;
+    padding-right: 2px !important;
+}
 .profile-name {
-    padding: var(--bs-dropdown-item-padding-y) var(--bs-dropdown-item-padding-x);
+    font-size: 1.5rem !important;
+    color: #FFFFFF !important;
 }
