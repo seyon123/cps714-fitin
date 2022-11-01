@@ -7,7 +7,7 @@
 
 .friends-list-body{
     background-color: rgb(34, 37, 45);
-    
+    width: 350px !important;
     position: inherit;
     max-height: calc(100vh - 140px);
     overflow: auto;
