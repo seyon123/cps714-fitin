@@ -19,13 +19,13 @@ function NavBar() {
 		<Navbar collapseOnSelect bg="dark" variant="dark">
 			<Container fluid>
 				<Navbar.Brand href="/">
-					<img alt="logo" className="logo" src={"./fitin_logo.png"} />{" "}
+					<img alt="logo" className="logo" src={"fitin_logo.png"} />{" "}
 				</Navbar.Brand>
 				<Navbar.Toggle aria-controls="navbarScroll" />
 				<Navbar.Collapse id="navbarScroll">
 					<Nav className="text-end my-2 my-lg-0" style={{ maxHeight: "100px" }} navbarScroll>
 						<Nav.Link href="/">Workout</Nav.Link>
-						<Nav.Link href="social">Social</Nav.Link>
+						<Nav.Link href="/social">Social</Nav.Link>
 					</Nav>
 				</Navbar.Collapse>
 
@@ -39,11 +39,32 @@ function NavBar() {
 						<NavDropdown.Header className="profile-name">{user.displayName}</NavDropdown.Header>
 					</div>
 					<div className="dropdownlinks">
-						<NavDropdown.Item href="#"> <span className="spanIcon"><FaUserEdit  /></span> Edit Profile</NavDropdown.Item>
-						<NavDropdown.Item href="#"> <span className="spanIcon"><FaCog  /></span> Settings </NavDropdown.Item>
-						<NavDropdown.Item href="#"> <span className="spanIcon"><FaQuestionCircle  /></span> Help</NavDropdown.Item>
+						<NavDropdown.Item href="#">
+							{" "}
+							<span className="spanIcon">
+								<FaUserEdit />
+							</span>{" "}
+							Edit Profile
+						</NavDropdown.Item>
+						<NavDropdown.Item href="#">
+							{" "}
+							<span className="spanIcon">
+								<FaCog />
+							</span>{" "}
+							Settings{" "}
+						</NavDropdown.Item>
+						<NavDropdown.Item href="#">
+							{" "}
+							<span className="spanIcon">
+								<FaQuestionCircle />
+							</span>{" "}
+							Help
+						</NavDropdown.Item>
 						<NavDropdown.Divider />
-						<NavDropdown.Item onClick={handleSignOut}> <FaSignOutAlt size="1.5em" /> Logout</NavDropdown.Item>
+						<NavDropdown.Item onClick={handleSignOut}>
+							{" "}
+							<FaSignOutAlt size="1.5em" /> Logout
+						</NavDropdown.Item>
 					</div>
 				</NavDropdown>
 			</Container>
