@@ -77,8 +77,8 @@ function UserProfilePage() {
 				<Row className="noMargin">Email: {user?.email}</Row>
 				<Row className="noMargin">ID: {user?.uid}</Row>
 				<Image roundedCircle height="100px" src={user?.photoURL} />
-				{/* {currentUser?.uid !== userid && ()} */}
-				{isFollowing ? <Button onClick={() => unfollowUser()}>Unfollow</Button> : <Button onClick={() => followUser()}>Follow</Button>}
+
+				{currentUser?.uid !== userid && (isFollowing ? <Button onClick={() => unfollowUser()}>Unfollow</Button> : <Button onClick={() => followUser()}>Follow</Button>)}
 
 				<h4>Followers: {followersCount}</h4>
 				<h4>Following: {followingCount}</h4>

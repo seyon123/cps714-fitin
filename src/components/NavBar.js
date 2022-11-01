@@ -4,6 +4,7 @@ import Navbar from "react-bootstrap/Navbar";
 import NavDropdown from "react-bootstrap/NavDropdown";
 import { useAuth } from "../contexts/AuthContext";
 import { FaUserEdit, FaCog, FaSignOutAlt, FaQuestionCircle } from "react-icons/fa";
+import { Link } from "react-router-dom";
 import "./NavBar.css";
 
 function NavBar() {
@@ -24,8 +25,12 @@ function NavBar() {
 				<Navbar.Toggle aria-controls="navbarScroll" />
 				<Navbar.Collapse id="navbarScroll">
 					<Nav className="text-end my-2 my-lg-0" style={{ maxHeight: "100px" }} navbarScroll>
-						<Nav.Link href="/">Workout</Nav.Link>
-						<Nav.Link href="/social">Social</Nav.Link>
+						<Link className="nav-link" to="/">
+							Workout
+						</Link>
+						<Link className="nav-link" to="/social">
+							Social
+						</Link>
 					</Nav>
 				</Navbar.Collapse>
 
