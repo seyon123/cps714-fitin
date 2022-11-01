@@ -71,7 +71,7 @@ function UserProfilePage() {
 	}
 
 	return (
-		<Container fluid className="m-0" style={{ color: "white" }}>
+		<Container fluid className="mainPage" style={{ color: "white" }}>
 			<Col>
 				<Row className="noMargin">Name: {user?.name}</Row>
 				<Row className="noMargin">Email: {user?.email}</Row>

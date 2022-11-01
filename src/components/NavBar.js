@@ -20,7 +20,7 @@ function NavBar() {
 		<Navbar collapseOnSelect bg="dark" variant="dark" className="fixed-top">
 			<Container fluid>
 				<Navbar.Brand href="/">
-					<img alt="logo" className="logo" src={"fitin_logo.png"} />{" "}
+					<img alt="logo" className="logo" src={"/fitin_logo.png"} />{" "}
 				</Navbar.Brand>
 				<Navbar.Toggle aria-controls="navbarScroll" />
 				<Navbar.Collapse id="navbarScroll">
@@ -44,30 +44,26 @@ function NavBar() {
 						<NavDropdown.Header className="profile-name">{user.displayName}</NavDropdown.Header>
 					</div>
 					<div className="dropdownlinks">
-						<NavDropdown.Item href="#">
-							{" "}
+						<Link to={`/users/${user?.uid}`} className="dropdown-item">
 							<span className="spanIcon">
 								<FaUserEdit />
 							</span>{" "}
 							Edit Profile
-						</NavDropdown.Item>
-						<NavDropdown.Item href="#">
-							{" "}
+						</Link>
+						<Link to="#" className="dropdown-item">
 							<span className="spanIcon">
 								<FaCog />
 							</span>{" "}
-							Settings{" "}
-						</NavDropdown.Item>
-						<NavDropdown.Item href="#">
-							{" "}
+							Settings
+						</Link>
+						<Link to="#" className="dropdown-item">
 							<span className="spanIcon">
 								<FaQuestionCircle />
 							</span>{" "}
 							Help
-						</NavDropdown.Item>
+						</Link>
 						<NavDropdown.Divider />
 						<NavDropdown.Item onClick={handleSignOut}>
-							{" "}
 							<FaSignOutAlt size="1.5em" /> Logout
 						</NavDropdown.Item>
 					</div>
