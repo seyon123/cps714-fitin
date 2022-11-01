@@ -1,0 +1,39 @@
+.postItemInline {
+    display: inline-flex;
+}
+
+.postItemMarginRightSmall {
+    margin-right: 1rem;
+}
+
+.postItemMarginTopSmall {
+    margin-top: 1rem;
+}
+
+.postFeedItem {
+    width: 100%;
+    height: 30vh;
+    margin-top: 1rem;
+}
+
+.postItemProfileImg {
+    max-width: 3rem;
+    max-height: 3rem;
+}
+
+.postImage {
+    min-width: 100%;
+}
+
+.postTagLink{
+    margin-left: 3px;
+    text-decoration: none !important;
+    color: #347aeb;
+}
+
+
+@media screen and (max-width: 767px) {
+    .postFeedItem {
+        width: 90%
+    }
+}
