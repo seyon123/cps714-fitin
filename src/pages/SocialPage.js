@@ -17,8 +17,8 @@ function SocialPage() {
 			author: "Noah Colaco",
 			authorImage: "usericon1.png",
 			tags: [
-				{ tag: "Yoga", url: "http://localhost:3000/social" },
-				{ tag: "Cardio", url: "http://localhost:3000/social" },
+				{ tag: "Yoga", url: "#" },
+				{ tag: "Cardio", url: "#" },
 			],
 			image: "usericon1.png",
 			content: "this is the post content an example of typing this thing is making me type this idk bruh, but ya boi out here doing all this typing stuff and we built diff out here gang gang",
@@ -27,8 +27,8 @@ function SocialPage() {
 			author: "Fabrizio Romano",
 			authorImage: "usericon1.png",
 			tags: [
-				{ tag: "Sports", url: "http://localhost:3000/social" },
-				{ tag: "France", url: "http://localhost:3000/social" },
+				{ tag: "Sports", url: "#" },
+				{ tag: "France", url: "#" },
 			],
 			image: "usericon1.png",
 			content: "Paul Pogba will miss the Qatar 2022 World Cup due to new injury, confirmed by his agent Rafaela Pimenta",
@@ -37,8 +37,8 @@ function SocialPage() {
 			author: "Simon Collings",
 			authorImage: "usericon1.png",
 			tags: [
-				{ tag: "Sports", url: "http://localhost:3000/social" },
-				{ tag: "Arsenal", url: "http://localhost:3000/social" },
+				{ tag: "Sports", url: "#" },
+				{ tag: "Arsenal", url: "#" },
 			],
 			image: "",
 			content: "No training for squad today, but Arsenal due to assess Bukayo Saka. Hope is nothing serious, but club should know more by Wednesday.",
@@ -53,7 +53,7 @@ function SocialPage() {
 				</div>
 				<div className="p-0 m-0 col-md-2"></div>
 
-				<div className="p-0 m-0 col-md-5">
+				<div className="m-0 col-md-5">
 					<Col>
 						<CreatePost></CreatePost>
 
