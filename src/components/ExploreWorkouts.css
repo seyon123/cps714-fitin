@@ -21,10 +21,3 @@
     width: 100%; 
     object-fit: Cover;
 }
-
-@media screen and (max-width: 767px) {
-    .exploreWorkoutsContainer {
-        height: 50px;
-        width: 100%
-    }
-}

@@ -3,6 +3,8 @@ import Container from "react-bootstrap/Container";
 import Col from "react-bootstrap/Col";
 import "./SocialPage.css";
 import PostFeedItem from "../components/PostFeedItem"
+import CreatePost from "../components/CreatePost";
+
 import FriendsList from "../components/FriendsList";
 
 function SocialPage() {
@@ -23,16 +25,21 @@ function SocialPage() {
 				<div className="p-0 m-0 pe-5 mt-2 col-md-3">
 					<FriendsList />
 				</div>
-
-				<div className="p-0 m-0 col-md-8">
+				<div className="p-0 m-0 col-md-1"></div>
+				<div className="p-0 m-0 col-md-4">
 					<Col>
+						<div style={{ margin: "5px" }}>
+							<CreatePost></CreatePost>
+						</div>
 						{posts?.length > 0 &&
 							posts.map(({ author, authorImage, tags, image, content }, id) => (
-								<PostFeedItem author={author} authorImage={authorImage} tags={tags} image={image} content={content} key={id}/>
+								<PostFeedItem author={author} authorImage={authorImage} tags={tags} image={image} content={content} key={id} />
 							))
 						}
 					</Col>
 				</div>
+				<div className="p-0 m-0 col-md-1"></div>
+				<div className="p-0 m-0 col-md-3"></div>
 			</div>
 		</Container>
 	);

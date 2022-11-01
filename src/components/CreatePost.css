@@ -1,0 +1,87 @@
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@700&display=swap');
+.postBackground{
+    background-color: #22252D;
+    border-radius: 12px;
+    height: 100%;
+    width: 100%;
+}
+
+.inputArea{
+    margin-right: 20px;
+}
+.labelStyle{
+    font-size: 24px;
+    font-weight: 600;
+    padding-left: 10px;
+    color: white;
+}
+
+.formStyle{
+    padding-left: 20px;
+    padding-top: 10px;
+    padding-bottom: 10px;
+}
+.form-control{
+    background-color: #141414 !important;
+    border: none !important;
+    border-radius: 12px !important;
+    color: white !important;
+}
+
+.uploadBar{
+    background-color:  #22252D;
+    border-radius: 12px;
+    border-width: 1px;
+    box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.7);
+
+
+}
+.postButtonStyle{
+    border-radius: 12px;
+    border-width: 1px;
+    border-color: white;
+    width: 100px;
+    font-weight: 600;
+    font-size: 24px;
+    margin-right: 20px;
+    background:none; 
+    border:none;
+    color: white;   
+}
+
+.photosButtonStyle{
+    background:none; 
+    border:none;    
+}
+
+.postButtonStyle {
+    transition: 0.3s;
+}
+
+.postButtonStyle:hover{
+    background: #0088FF;
+}
+
+.rti--container {
+    --rti-bg: #141414 !important;
+    --rti-border: none !important;
+    --rti-main: #141414 !important;
+    --rti-radius: 12px !important;
+    --rti-s: 6px !important; 
+    --rti-tag: #2C3039 !important;
+    --rti-tag-remove: #0088FF !important;
+  }
+.rti--input{
+    background-color: #141414 !important;
+    color: white !important;
+}
+
+  .iconFormat{
+    height: 30px;
+    width: 30px;
+  }
+
+  #uploadBar{
+    display:flex;
+    justify-content:space-between;
+  }
