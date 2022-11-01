@@ -7,6 +7,7 @@ import NavBar from "./components/NavBar";
 import WorkoutPage from "./pages/WorkoutPage";
 import SocialPage from "./pages/SocialPage";
 import ResetPassword from "./components/ResetPassword";
+import UserProfilePage from "./pages/UserProfilePage";
 
 function App() {
 	const { getUser } = useAuth();
@@ -37,6 +38,19 @@ function App() {
 							<>
 								<NavBar />
 								<SocialPage />
+							</>
+						) : (
+							<Navigate to="/signup" replace />
+						)
+					}
+				/>
+				<Route
+					path="/users/:userid"
+					element={
+						user ? (
+							<>
+								<NavBar />
+								<UserProfilePage />
 							</>
 						) : (
 							<Navigate to="/signup" replace />

@@ -4,6 +4,7 @@ import Navbar from "react-bootstrap/Navbar";
 import NavDropdown from "react-bootstrap/NavDropdown";
 import { useAuth } from "../contexts/AuthContext";
 import { FaUserEdit, FaCog, FaSignOutAlt, FaQuestionCircle } from "react-icons/fa";
+import { Link } from "react-router-dom";
 import "./NavBar.css";
 
 function NavBar() {
@@ -16,16 +17,20 @@ function NavBar() {
 	}
 
 	return (
-		<Navbar collapseOnSelect bg="dark" variant="dark">
+		<Navbar collapseOnSelect bg="dark" variant="dark" className="fixed-top">
 			<Container fluid>
 				<Navbar.Brand href="/">
-					<img alt="logo" className="logo" src={"./fitin_logo.png"} />{" "}
+					<img alt="logo" className="logo" src={"/fitin_logo.png"} />{" "}
 				</Navbar.Brand>
 				<Navbar.Toggle aria-controls="navbarScroll" />
 				<Navbar.Collapse id="navbarScroll">
 					<Nav className="text-end my-2 my-lg-0" style={{ maxHeight: "100px" }} navbarScroll>
-						<Nav.Link href="/">Workout</Nav.Link>
-						<Nav.Link href="social">Social</Nav.Link>
+						<Link className="nav-link" to="/">
+							Workout
+						</Link>
+						<Link className="nav-link" to="/social">
+							Social
+						</Link>
 					</Nav>
 				</Navbar.Collapse>
 
@@ -39,11 +44,28 @@ function NavBar() {
 						<NavDropdown.Header className="profile-name">{user.displayName}</NavDropdown.Header>
 					</div>
 					<div className="dropdownlinks">
-						<NavDropdown.Item href="#"> <span className="spanIcon"><FaUserEdit  /></span> Edit Profile</NavDropdown.Item>
-						<NavDropdown.Item href="#"> <span className="spanIcon"><FaCog  /></span> Settings </NavDropdown.Item>
-						<NavDropdown.Item href="#"> <span className="spanIcon"><FaQuestionCircle  /></span> Help</NavDropdown.Item>
+						<Link to={`/users/${user?.uid}`} className="dropdown-item">
+							<span className="spanIcon">
+								<FaUserEdit />
+							</span>{" "}
+							Edit Profile
+						</Link>
+						<Link to="#" className="dropdown-item">
+							<span className="spanIcon">
+								<FaCog />
+							</span>{" "}
+							Settings
+						</Link>
+						<Link to="#" className="dropdown-item">
+							<span className="spanIcon">
+								<FaQuestionCircle />
+							</span>{" "}
+							Help
+						</Link>
 						<NavDropdown.Divider />
-						<NavDropdown.Item onClick={handleSignOut}> <FaSignOutAlt size="1.5em" /> Logout</NavDropdown.Item>
+						<NavDropdown.Item onClick={handleSignOut}>
+							<FaSignOutAlt size="1.5em" /> Logout
+						</NavDropdown.Item>
 					</div>
 				</NavDropdown>
 			</Container>
