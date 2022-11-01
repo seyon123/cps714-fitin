@@ -1,32 +1,36 @@
-import { useEffect, useState } from "react";
+import "./PostFeedItem.css";
 import { Card } from "react-bootstrap";
+import { FaTag } from 'react-icons/fa'
 
-function PostFeedItem({post}) {
 
-	const postTitle = 'Post Title'
-
+function PostFeedItem({author, authorImage, tags, image, content}) {
+	
 	return (
-		<Card bg={'dark'}
-		key={'dark'}
-		text={'white'}
-		style={{ width: '40rem' }}
-		className="mb-2">
+		<Card bg='dark' text='white' className="postFeedItem">
 			<Card.Body>
-				<div style={{ display: 'inline-flex' }}>
-					<img src={"usericon1.png"} className="w-25 rounded-circle" alt="profile pic" />
-					<div style={{ marginLeft: '1rem' }}>
-						<Card.Title>{postTitle}</Card.Title>
-						<Card.Subtitle className="mb-2 text-muted">Card Subtitle</Card.Subtitle>
+				<div className="postItemInline">
+					<img src={authorImage} className="postItemProfileImg rounded-circle postItemMarginRightSmall" alt="profile pic"/>
+					<div>
+						<Card.Title>{author}</Card.Title>
+						<Card.Subtitle className="mb-2 text-muted">
+							{tags?.length > 0 &&
+								tags.map(({ tag, url }, id) => (
+									<div className="postItemInline postItemMarginRightSmall" key={id}>
+										<FaTag />
+										<Card.Link className="postTagLink" href={url}>{tag}</Card.Link>
+									</div>
+								))
+							}
+						</Card.Subtitle>
 					</div>
 				</div>
-				<div style={{ display: 'inline-flex' }}>
-					<div style={{ marginRight: '1rem' }}>
+				<div>
+					{ (image) && <img src={image} className="postImage postItemMarginTopSmall" alt="profile pic" /> }
+					<div className="postItemMarginRightSmall postItemMarginTopSmall">
 						<Card.Text>
-							Some quick example text to build on the card title and make up the
-							bulk of the card's content.
+							{content}
 						</Card.Text>
-					</div>
-					<img src={"usericon1.png"} className="w-25" alt="profile pic" />
+					</div>	
 				</div>
 			</Card.Body>
 		</Card>
