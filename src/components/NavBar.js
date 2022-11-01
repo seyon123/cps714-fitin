@@ -16,7 +16,7 @@ function NavBar() {
 	}
 
 	return (
-		<Navbar collapseOnSelect bg="dark" variant="dark">
+		<Navbar collapseOnSelect bg="dark" variant="dark" className="fixed-top">
 			<Container fluid>
 				<Navbar.Brand href="/">
 					<img alt="logo" className="logo" src={"fitin_logo.png"} />{" "}

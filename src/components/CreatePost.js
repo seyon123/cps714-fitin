@@ -15,7 +15,7 @@ function CreatePost() {
 		alert("Post Text: " + postText + ", post Tags: [" + tags + "].");
 	}
 	return (
-		<div className="postBackground pb-1">
+		<div className="postBackground pb-1 mt-3">
 			<div className="formStyle">
 				<div className="form-group inputArea">
 					<label htmlFor="postTextArea" className="labelStyle">

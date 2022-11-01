@@ -19,9 +19,9 @@ function FriendsList() {
 	//const [friends] = useState(dummyFriends);
 
 	return (
-		<Container fluid className="friends-list-wrap p-0">
-			<div className="friends-list-header m-0">
-				<h3 className=" text-center p-3 m-0">Find a Workout Buddy</h3>
+		<Container fluid className="friends-list-wrap position-fixed p-0">
+			<div className="friends-list-header m-0 w-100">
+				<h3 className=" text-center p-3 m-0 w-100">Find a Workout Buddy</h3>
 			</div>
 
 			<div className="friends-list-body p-2">

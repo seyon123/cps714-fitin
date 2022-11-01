@@ -34,6 +34,6 @@
 
 @media screen and (max-width: 767px) {
     .postFeedItem {
-        width: 90%
+        height: 40vh;
     }
 }
