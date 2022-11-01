@@ -36,6 +36,7 @@ function FriendsList(){
                         className="workoutItemCard hover-overlay shadow-1-strong" 
                         role="button"
                         onClick={()=>{alert("Clicked on " + id + " " + name)}}
+                        key={id}
                     >
                         <Card.Body className="d-flex align-items-center justify-content-start">
                             <img src={image} className="w-25 rounded-circle" alt="Friend Profile" />

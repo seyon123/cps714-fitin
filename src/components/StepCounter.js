@@ -40,7 +40,7 @@ function StepCounter({ date, dayData }) {
 			}
 		}
 		getTodaysSteps();
-	}, [dayData]);
+	}, [dayData, date]);
 
 	return (
 		<Card bg="dark">
