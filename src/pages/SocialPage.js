@@ -4,7 +4,7 @@ import Col from "react-bootstrap/Col";
 import "./SocialPage.css";
 import PostFeedItem from "../components/PostFeedItem";
 import CreatePost from "../components/CreatePost";
-import { collection, onSnapshot, query, orderBy } from "firebase/firestore";
+import { collection, onSnapshot, query, orderBy, limit } from "firebase/firestore";
 import { db } from "../firebase";
 import FriendsList from "../components/FriendsList";
 
@@ -16,7 +16,7 @@ function SocialPage() {
 	}, []);
 
 	useEffect(() => {
-		onSnapshot(query(collection(db, `posts`), orderBy("timestamp", "desc")), (snapshot) => {
+		onSnapshot(query(collection(db, `posts`), orderBy("timestamp", "desc"), limit(5)), (snapshot) => {
 			setPosts(snapshot.docs.map((doc) => ({ ...doc.data(), id: doc.id })));
 		});
 	}, []);
@@ -33,7 +33,7 @@ function SocialPage() {
 					<Col>
 						<CreatePost></CreatePost>
 
-						{posts?.length > 0 && posts.map(({ uid, tags, image, description }, id) => <PostFeedItem uid={uid} tags={tags} image={image} description={description} key={id} />)}
+						{posts?.length > 0 && posts.map(({ userRef, tags, image, description }, id) => <PostFeedItem userRef={userRef} tags={tags} image={image} description={description} key={id} />)}
 					</Col>
 				</div>
 				<div className="p-0 m-0 col-md-2"></div>

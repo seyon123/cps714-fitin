@@ -2,28 +2,24 @@ import "./PostFeedItem.css";
 import { useEffect, useState } from "react";
 import { Card } from "react-bootstrap";
 import { FaTag } from "react-icons/fa";
-import { db } from "../firebase";
-import { doc, getDoc } from "firebase/firestore";
+import { getDoc } from "firebase/firestore";
 
-function PostFeedItem({ uid, tags, image, description }) {
+function PostFeedItem({ userRef, tags, image, description }) {
 	const [user, setUser] = useState(null);
 
 	useEffect(() => {
 		//Get User from database
 		async function findUser() {
-			const docRef = doc(db, `users`, uid);
-			const docUserSnap = await getDoc(docRef);
-
+			const docUserSnap = await getDoc(userRef);
 			if (docUserSnap.exists()) {
 				setUser({ ...docUserSnap.data(), id: docUserSnap.id });
 			}
 		}
-		uid && findUser();
-	}, [uid]);
+		userRef && findUser();
+	}, [userRef]);
 
 	return (
 		<Card bg="dark" text="white" className="postFeedItem">
-			{console.log(user)}
 			<Card.Body>
 				<div className="d-flex align-items-center justify-content-start">
 					<img src={user?.photoURL} className="postItemProfileImg rounded-circle me-1" alt={user?.name} />
