@@ -1,12 +1,14 @@
 import React, { useState } from "react";
 import "./CreatePost.css";
 import { TagsInput } from "react-tag-input-component";
+import { Line } from "rc-progress";
 import { useAuth } from "../contexts/AuthContext";
 import { storage, db } from "../firebase";
-import { addDoc, collection, serverTimestamp } from "firebase/firestore";
+import { doc, addDoc, collection, serverTimestamp } from "firebase/firestore";
 import { ref, uploadBytesResumable, getDownloadURL } from "firebase/storage";
 import { AiFillCamera, AiFillPicture, AiFillCloseCircle } from "react-icons/ai";
 import { BsFillArrowRightCircleFill } from "react-icons/bs";
+import imageCompression from "browser-image-compression";
 
 function CreatePost() {
 	const { currentUser } = useAuth();
@@ -14,13 +16,22 @@ function CreatePost() {
 	const [postText, setPostText] = useState("");
 	const [file, setFile] = useState(null);
 	const [fileName, setFileName] = useState(null);
+	const [progress, setProgress] = useState(0);
 
 	function uploadContent() {
 		document.getElementById("imageUpload").click();
 	}
 
-	const handleFileChange = (e) => {
-		setFile(e.target.files[0]);
+	const handleFileChange = async (e) => {
+		const options = {
+			maxSizeMB: 1,
+			maxWidthOrHeight: 1920,
+			useWebWorker: true,
+		};
+
+		const compressedFile = await imageCompression(e.target.files[0], options);
+
+		setFile(compressedFile);
 		var filePath = e.target.value.toString().split("\\");
 		var name = filePath[filePath.length - 1];
 		if (name.length > 20) name = name.split(".")[0].substring(0, 20) + "...." + name.split(".")[name.split(".").length - 1];
@@ -30,6 +41,7 @@ function CreatePost() {
 	const handleTrash = () => {
 		setFileName(null);
 		setFile(null);
+		setProgress(0);
 	};
 
 	function resetCreatePost() {
@@ -37,6 +49,7 @@ function CreatePost() {
 		setPostText("");
 		setFile(null);
 		setFileName(null);
+		setProgress(0);
 	}
 
 	async function postContent() {
@@ -58,6 +71,7 @@ function CreatePost() {
 							break;
 						case "running":
 							console.log("Upload is running");
+							setProgress(progress);
 							break;
 						default:
 							break;
@@ -86,19 +100,20 @@ function CreatePost() {
 					getDownloadURL(uploadTask.snapshot.ref).then(async (downloadURL) => {
 						console.log("File available at", downloadURL);
 						await addDoc(collection(db, `posts`), {
-							uid: currentUser.uid,
+							userRef: doc(db, `users`, currentUser.uid),
 							tags: tags,
 							description: postText,
 							timestamp: serverTimestamp(),
 							image: downloadURL,
 						});
+						resetCreatePost();
 					});
 				}
 			);
 		!file &&
 			postText &&
 			(await addDoc(collection(db, `posts`), {
-				uid: currentUser.uid,
+				userRef: doc(db, `users`, currentUser.uid),
 				tags: tags,
 				description: postText,
 				timestamp: serverTimestamp(),
@@ -113,6 +128,7 @@ function CreatePost() {
 						Post
 					</label>
 					{file && <img className="rounded postImage my-2" src={URL.createObjectURL(file)} alt={fileName} />}
+					{progress > 0 && <Line percent={progress} strokeWidth={2} trailWidth={2} trailColor="#141414" strokeColor="#0088ff" />}
 					<textarea className="form-control" rows="6" id="postTextArea" value={postText} onChange={(e) => setPostText(e.target.value)}></textarea>
 				</div>
 				<div className="inputArea">
