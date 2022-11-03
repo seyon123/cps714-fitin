@@ -12,7 +12,9 @@
     font-family: 'Roboto', sans-serif;
     font-size: 1.5rem !important;
     color: #FFFFFF !important;
+    
 }
+
 .dropdownlinks{
     font-size: 1.1rem !important;
 }
@@ -28,3 +30,11 @@
     font-size: 1.5rem !important;
     color: #FFFFFF !important;
 }
+
+.FitInHeader{
+    display: flex;
+    justify-content: center;
+    width: 90%;
+    margin-right: 10%;
+}
+
