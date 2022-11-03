@@ -4,12 +4,13 @@ import Navbar from "react-bootstrap/Navbar";
 import NavDropdown from "react-bootstrap/NavDropdown";
 import { useAuth } from "../contexts/AuthContext";
 import { FaUserEdit, FaCog, FaSignOutAlt, FaQuestionCircle } from "react-icons/fa";
-import { Link } from "react-router-dom";
+import { Link, useLocation } from "react-router-dom";
 import "./NavBar.css";
 
 function NavBar() {
 	const { getUser, logOut } = useAuth();
 	const user = getUser();
+	let location = useLocation();
 
 	function handleSignOut(e) {
 		e.preventDefault();
@@ -25,12 +26,15 @@ function NavBar() {
 				<Navbar.Toggle aria-controls="navbarScroll" />
 				<Navbar.Collapse id="navbarScroll">
 					<Nav className="text-end my-2 my-lg-0" style={{ maxHeight: "100px" }} navbarScroll>
-						<Link className="nav-link" to="/">
-							Workout
-						</Link>
-						<Link className="nav-link" to="/social">
-							Social
-						</Link>
+						{location.pathname == '/' 
+							? <Link className="nav-link" to="/" style={{ textDecoration: 'underline #0d6efd' }}>Workout</Link>
+							: <Link className="nav-link" to="/">Workout</Link>
+						}
+					
+						{location.pathname == '/social' 
+							? <Link className="nav-link" to="/social" style={{ textDecoration: 'underline #0d6efd' }}>Social</Link>
+							: <Link className="nav-link" to="/social">Social</Link>
+						}
 					</Nav>
 				</Navbar.Collapse>
 
