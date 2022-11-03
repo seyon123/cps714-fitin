@@ -34,6 +34,12 @@ function NavBar() {
 					</Nav>
 				</Navbar.Collapse>
 
+				<div className = "FitInHeader">
+					<Navbar.Brand>
+						<h2>Fit<span style = {{color: "#0d6efd"}}>In</span></h2>
+					</Navbar.Brand>
+				</div>
+
 				<NavDropdown
 					menuVariant="dark"
 					align="end"

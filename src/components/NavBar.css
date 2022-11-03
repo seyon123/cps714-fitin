@@ -28,3 +28,14 @@
     font-size: 1.5rem !important;
     color: #FFFFFF !important;
 }
+
+.FitInHeader{
+    display: flex;
+    justify-content: center;
+    width: 90%;
+    margin-right: 10%;
+}
+
+.active{
+    text-decoration: underline
+} 
