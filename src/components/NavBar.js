@@ -26,12 +26,12 @@ function NavBar() {
 				<Navbar.Toggle aria-controls="navbarScroll" />
 				<Navbar.Collapse id="navbarScroll">
 					<Nav className="text-end my-2 my-lg-0" style={{ maxHeight: "100px" }} navbarScroll>
-						{location.pathname == '/' 
+						{location.pathname === '/' 
 							? <Link className="nav-link" to="/" style={{ textDecoration: 'underline #0d6efd' }}>Workout</Link>
 							: <Link className="nav-link" to="/">Workout</Link>
 						}
 					
-						{location.pathname == '/social' 
+						{location.pathname === '/social' 
 							? <Link className="nav-link" to="/social" style={{ textDecoration: 'underline #0d6efd' }}>Social</Link>
 							: <Link className="nav-link" to="/social">Social</Link>
 						}
