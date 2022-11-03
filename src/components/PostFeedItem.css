@@ -21,6 +21,11 @@
     color: #347aeb;
 }
 
+.postTime {
+    font-size: 0.8rem;
+    color: #8e8e8e;
+}
+
 
 @media screen and (max-width: 767px) {
     .postFeedItem {
