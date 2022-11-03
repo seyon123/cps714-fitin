@@ -40,7 +40,7 @@ function NavBar() {
 
 				<div className = "FitInHeader">
 					<Navbar.Brand>
-						<h2>Fit<span style = {{color: "#0d6efd"}}>In</span></h2>
+						<h2 style= {{fontWeight: "bold"}}>Fit<span style = {{color: "#0d6efd"}}>In</span></h2>
 					</Navbar.Brand>
 				</div>
 
