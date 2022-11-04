@@ -66,7 +66,7 @@ function NavBar() {
 							</span>{" "}
 							Settings
 						</Link>
-						<Link to="#" className="dropdown-item">
+						<Link to="/help" className="dropdown-item">
 							<span className="spanIcon">
 								<FaQuestionCircle />
 							</span>{" "}
