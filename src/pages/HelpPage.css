@@ -1,3 +1,18 @@
-.helpbox{
-    margin: 20px !important;
+.hcollapse{
+    font-size:32px !important;
+}
+.accordion-button{
+    font-size:32px !important;
+    color:white !important;
+    background-color:#22252D !important;
+}
+.accordion-body{
+    color:white !important;
+    background-color:#22252D !important;
+}
+.accordion-button:not(.collapsed){
+    color:white !important;
+}
+.accordion-item{
+    color:white !important;
 }
