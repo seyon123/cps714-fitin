@@ -1,12 +1,7 @@
 import React, { useEffect } from "react";
 import Container from "react-bootstrap/Container";
-import Row from "react-bootstrap/Row";
-import Col from "react-bootstrap/Col";
-import { NavLink } from "react-router-dom";
 import Accordion from "react-bootstrap/Accordion";
-
 import "./HelpPage.css";
-import { Card } from "react-bootstrap";
 
 function HelpPage() {
   // Set the page title
@@ -71,16 +66,16 @@ function HelpPage() {
             </Accordion.Body>
           </Accordion.Item>
         </Accordion>
-		<img src="https://static.vecteezy.com/system/resources/previews/005/951/415/large_2x/woman-doing-surfer-burpees-exercise-flat-illustration-isolated-on-white-background-free-vector.jpg" style={{height:"400px", margin:"12px"}}></img>
-		<img src="https://static.vecteezy.com/system/resources/previews/008/577/951/large_2x/a-young-man-is-cycling-a-bicycle-sports-activity-athlete-is-riding-a-bike-flat-style-illustration-free-vector.jpg" style={{height:"400px", margin:"12px"}}></img>
-		<img src="https://static.vecteezy.com/system/resources/previews/008/321/562/large_2x/man-doing-parallel-dip-bar-exercise-flat-illustration-isolated-on-white-background-free-vector.jpg" style={{height:"400px", margin:"12px"}}></img>
+		<img src="https://static.vecteezy.com/system/resources/previews/005/951/415/large_2x/woman-doing-surfer-burpees-exercise-flat-illustration-isolated-on-white-background-free-vector.jpg" style={{height:"400px", margin:"12px"}} alt="placeholder"></img>
+		<img src="https://static.vecteezy.com/system/resources/previews/008/577/951/large_2x/a-young-man-is-cycling-a-bicycle-sports-activity-athlete-is-riding-a-bike-flat-style-illustration-free-vector.jpg" style={{height:"400px", margin:"12px"}} alt="placeholder"></img>
+		<img src="https://static.vecteezy.com/system/resources/previews/008/321/562/large_2x/man-doing-parallel-dip-bar-exercise-flat-illustration-isolated-on-white-background-free-vector.jpg" style={{height:"400px", margin:"12px"}} alt="placeholder"></img>
 		<p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do
               eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut
               enim ad minim veniam, quis nostrud exercitation ullamco laboris
               nisi ut aliquip ex ea commodo consequat.</p>
-		<img src="https://static.vecteezy.com/system/resources/previews/008/056/908/large_2x/man-doing-barbell-bench-press-chest-press-flat-illustration-isolated-on-white-background-free-vector.jpg" style={{height:"400px", margin:"12px"}}></img>
-		<img src="https://static.vecteezy.com/system/resources/previews/006/417/685/large_2x/woman-doing-pull-up-exercise-flat-illustration-isolated-on-white-background-free-vector.jpg" style={{height:"400px", margin:"12px"}}></img>
-		<img src="https://static.vecteezy.com/system/resources/previews/006/417/622/large_2x/woman-doing-squat-with-barbell-exercise-flat-illustration-isolated-on-white-background-free-vector.jpg" style={{height:"400px", margin:"12px"}}></img>
+		<img src="https://static.vecteezy.com/system/resources/previews/008/056/908/large_2x/man-doing-barbell-bench-press-chest-press-flat-illustration-isolated-on-white-background-free-vector.jpg" style={{height:"400px", margin:"12px"}} alt="placeholder"></img>
+		<img src="https://static.vecteezy.com/system/resources/previews/006/417/685/large_2x/woman-doing-pull-up-exercise-flat-illustration-isolated-on-white-background-free-vector.jpg" style={{height:"400px", margin:"12px"}} alt="placeholder"></img>
+		<img src="https://static.vecteezy.com/system/resources/previews/006/417/622/large_2x/woman-doing-squat-with-barbell-exercise-flat-illustration-isolated-on-white-background-free-vector.jpg" style={{height:"400px", margin:"12px"}} alt="placeholder"></img>
 		<p className="m-0">Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do
               eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut
               enim ad minim veniam, quis nostrud exercitation ullamco laboris
