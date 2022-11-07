@@ -8,6 +8,7 @@ import WorkoutPage from "./pages/WorkoutPage";
 import SocialPage from "./pages/SocialPage";
 import ResetPassword from "./components/ResetPassword";
 import UserProfilePage from "./pages/UserProfilePage";
+import HelpPage from "./pages/HelpPage";
 
 function App() {
 	const { getUser } = useAuth();
@@ -38,6 +39,19 @@ function App() {
 							<>
 								<NavBar />
 								<SocialPage />
+							</>
+						) : (
+							<Navigate to="/signup" replace />
+						)
+					}
+				/>
+				<Route
+					path="/help"
+					element={
+						user ? (
+							<>
+								<NavBar />
+								<HelpPage />
 							</>
 						) : (
 							<Navigate to="/signup" replace />
