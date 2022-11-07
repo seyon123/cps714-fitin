@@ -33,8 +33,8 @@ function SocialPage() {
 					<Col>
 						<CreatePost></CreatePost>
 						{posts?.length > 0 ? (
-							posts.map(({ id, userRef, tags, timestamp, image, description, likes, comments }) => (
-								<PostFeedItem id={id} userRef={userRef} tags={tags} image={image} timestamp={timestamp} description={description} likes={likes} comments={comments} key={id} />
+							posts.map(({ id, userRef, tags, timestamp, image, description, likes }) => (
+								<PostFeedItem id={id} userRef={userRef} tags={tags} image={image} timestamp={timestamp} description={description} likes={likes} key={id} />
 							))
 						) : (
 							<h1 className="text-center mt-3">No posts yet</h1>

@@ -58,8 +58,6 @@ function App() {
 					}
 				/>
 				<Route path="/forgot-password" element={!user ? <LandingPage authComponent={<ResetPassword />} /> : <Navigate to="/signup" replace />} />
-				<Route path="/" element={user ? <WorkoutPage /> : <Navigate to="/signup" replace />} />
-				<Route path="/social" element={user ? <SocialPage /> : <Navigate to="/signup" replace />} />
 				<Route path="*" element={<Navigate to="/" replace />} />
 			</Routes>
 		</BrowserRouter>
