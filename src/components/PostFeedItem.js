@@ -3,14 +3,14 @@ import { useEffect, useState } from "react";
 import { Button, Card, Form } from "react-bootstrap";
 import { FaTag } from "react-icons/fa";
 import { db } from "../firebase";
-import { arrayUnion, arrayRemove, doc, getDoc, updateDoc, collection, addDoc, serverTimestamp, onSnapshot, orderBy, query, limit } from "firebase/firestore";
+import { arrayUnion, arrayRemove, doc, getDoc, updateDoc, collection, addDoc, serverTimestamp, onSnapshot, orderBy, query } from "firebase/firestore";
 import { useAuth } from "../contexts/AuthContext";
 import { FaHeart, FaRegHeart } from "react-icons/fa";
 
 import Moment from "react-moment";
 import "moment";
 import "moment-timezone";
-import { useNavigate } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 
 function Comment({ comment }) {
 	const [user, setUser] = useState();
@@ -28,7 +28,10 @@ function Comment({ comment }) {
 
 	return (
 		<div>
-			<strong>{user?.name}</strong>: {comment?.comment}
+			<Link style={{ textDecorationLine: "none" }} className="text-light" to={`users/${user?.id}`}>
+				<strong>{user?.name}</strong>
+			</Link>
+			: {comment?.comment}
 		</div>
 	);
 }
@@ -53,7 +56,7 @@ export default function PostFeedItem({ id, userRef, timestamp, tags, image, desc
 	}, [userRef]);
 
 	useEffect(() => {
-		onSnapshot(query(collection(db, `posts/${id}/comments`), orderBy("timestamp", "desc"), limit(5)), (snapshot) => {
+		onSnapshot(query(collection(db, `posts/${id}/comments`), orderBy("timestamp", "desc")), (snapshot) => {
 			setComments(snapshot.docs.map((doc) => ({ ...doc.data(), id: doc.id })));
 		});
 	}, [id]);
@@ -153,11 +156,13 @@ export default function PostFeedItem({ id, userRef, timestamp, tags, image, desc
 						</Form.Group>
 					</Form>
 				</div>
-				<div className="mt-2">
-					{comments.map((comment, id) => (
-						<Comment comment={comment} key={id} />
-					))}
-				</div>
+				{comments.length > 0 && (
+					<div className="mt-2 postComments p-3 rounded">
+						{comments.map((comment, id) => (
+							<Comment comment={comment} key={id} />
+						))}
+					</div>
+				)}
 			</Card.Body>
 		</Card>
 	);
