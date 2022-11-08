@@ -1,9 +1,25 @@
 .SearchBar{
     display:flex;
-    justify-content:center;
-    margin-top:15px
+    justify-content:left;
+    flex-direction:column;
+    
 }
 
 .SearchBar input{
+    margin-top:20px;
+    width:100%;
+    height:40px;
+    
+    background-color: #22252D !important;
+}
+.SearchBar p{
+    margin-top:10px;
+    margin-left:5px;
+}
+
+.ResultsItem{
+    background-color: #22252D;
+    color:white;
+    margin:0px;
     
 }
