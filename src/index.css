@@ -1,3 +1,4 @@
+
 body {
   margin: 0;
   font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen',
@@ -9,6 +10,11 @@ body {
 }
 #root {
   background-color: #12130f;
+  min-height: 100vh;
+}
+
+.w-30 {
+  width: 30%;
 }
 
 .formCenter {
@@ -120,6 +126,11 @@ body {
   margin-left: 5px;
 }
 
+.checkbox {
+  width: 1.5em !important;
+  height: 1.5em !important;
+}
+
 .formAuthText {
   display: block;
   font-weight: 500;
@@ -136,7 +147,6 @@ body {
 .googleBtn > div {
   background-color: transparent !important;
 }
-
 
 /* custom scrollbar */
 *{

@@ -1,0 +1,26 @@
+.friends-list-wrap {
+    left: 0;
+    width: 350px !important;
+    background-color: rgb(34, 37, 45);
+    color: white;
+}
+
+.friends-list-body{
+    background-color: rgb(34, 37, 45);
+    width: 350px !important;
+    position: inherit;
+    max-height: calc(100vh - 140px);
+    overflow: auto;
+}
+
+.friend-name{
+    color: white;
+    font-size: 1.3em;
+    line-height: 3em;
+}
+
+@media screen and (max-width: 767px) {
+    .friends-list-wrap {
+        display: none;
+    }
+}

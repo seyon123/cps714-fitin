@@ -2,13 +2,6 @@ body {
     overflow-x: hidden;
 }
 
-.mainCardWorkouts {
-    text-align: "center";
-    background-color: "#347aeb";
-    font-size: "200%";
-}
-
-
 .newRoutine {
     transition: 0.3s;
 }
@@ -18,10 +11,10 @@ body {
 }
 
 .mainPage {
-    min-height: 100vh;
     color: white;
     background: #12130f;
     max-width: 1700px;
+    margin-top: 73px;
     margin-left: 5px;
     margin-right: 5px;
 }
@@ -44,6 +37,12 @@ body {
     text-align: center;
     background-color: #347aeb !important;
     font-size: 31px;
+}
+.currentStepHead {
+    text-align: center;
+    /* background-color: #303030 !important; */
+    background-color: #181c24 !important; 
+    font-size: 21px;
 }
 .myRoutines {
     text-align: center; 

@@ -1,95 +1,108 @@
-import React, { useState } from "react";
-// import Row from "react-bootstrap/Row";
-// import Col from "react-bootstrap/Col";
-import { Row, Col, Button, Container } from "react-bootstrap";
-import "./ExploreWorkouts.css";
-import Card from "react-bootstrap/Card";
+import { useState, useEffect } from "react";
+import { Card, Row, Col, Button, Container } from "react-bootstrap";
+import { collection, onSnapshot } from "firebase/firestore";
+import { db } from "../firebase";
+
 import ExerciseInfoModal from "./Modals/ExerciseInfoModal";
+import "./ExploreWorkouts.css";
 
-function ExploreWorkouts() {
-	const workouts = [
-		{ id: 1, type: 1, images: ["workoutPlaceholder.png"], name: "Aerobics", description: ["description 1" ] },
-		{ id: 2, type: 2, images: ["workoutplaceholder2.jpg"], name: "Circuit Training", description: ["description 2"] },
-		{ id: 3, type: 3, images: ["workoutPlaceholder.png", "workoutplaceholder2.jpg"], name: "Cycling", description: ["description 3","description 312312", "description 3312"] },
-		{ id: 4, type: 4, images: ["workoutplaceholder2.jpg"], name: "Hiking", description: ["description 4"] },
-		{ id: 5, type: 5, images: ["workoutPlaceholder.png"], name: "Running", description: ["description 5"] },
-		{ id: 6, type: 6, images: ["workoutPlaceholder.png"], name: "Skipping Rope", description: ["description 6"] },
-		{ id: 7, type: 7, images: ["workoutPlaceholder.png"], name: "Swimming", description: ["description 7"] },
-		{ id: 8, type: 8, images: ["workoutPlaceholder.png"], name: "Walking", description: ["description 8"] },
-	];
-
-	const workoutTypes = [
-		{ id: 1, type: "Back" },
-		{ id: 2, type: "Chest" },
-		{ id: 3, type: "Yoga" },
-		{ id: 4, type: "Legs" },
-		{ id: 5, type: "Stretches" },
-		{ id: 6, type: "Weights" },
-		{ id: 7, type: "Machines" },
-		{ id: 9, type: "Back" },
-		{ id: 10, type: "Chest" },
-		{ id: 11, type: "Yoga" },
-		{ id: 12, type: "Legs" },
-		{ id: 13, type: "Stretches" },
-		{ id: 16, type: "Dumbell Only"}
-	];
-
+function ExploreWorkouts({ workouts }) {
 	const [show, setShow] = useState(false);
+	const [selectedCategory, setSelectedCategory] = useState(null);
+	const [categories, setCategories] = useState([]);
 	const [workoutName, setWorkoutName] = useState("");
 	const [workoutImage, setWorkoutImage] = useState([]);
 	const [workoutDescription, setWorkoutDescription] = useState([]);
 
-    const handleShow = (name, images, description) => {
+	useEffect(() => {
+		onSnapshot(collection(db, `workoutCategories`), (snapshot) => {
+			setCategories(snapshot.docs.map((doc) => ({ ...doc.data(), id: doc.id })));
+		});
+	}, []);
+
+	const handleShow = (name, images, description) => {
 		setWorkoutName(name);
 		setWorkoutImage(images);
 		setWorkoutDescription(description);
 		setShow(true);
-	}
-    const handleClose = () => {
+	};
+	const handleClose = () => {
 		setWorkoutName([]);
 		setWorkoutImage([]);
 		setShow(false);
-	}
+	};
 
 	return (
 		<div className="exploreWorkoutsContainer">
-			<Container fluid>
-				<Row>
-					<h3>Categories</h3>
-				</Row>
+			<h1 className="pt-4">Explore Workouts</h1>
+			<hr></hr>
+			<Container fluid className="p-0 mb-3">
 				<div className="categoriesContainer">
-					<Row style={{flexWrap: "unset"}}>
-						{workoutTypes.map(({ id, type }) => (
-							<Col key={id} style={{paddingRight: "1%"}}>
+					<Row className="m-0" style={{ flexWrap: "unset" }}>
+						<Col className="p-2" onClick={() => setSelectedCategory(null)}>
+							<Button>
+								<h5 style={{ margin: "0px" }} className="text-nowrap mx-3">
+									All
+								</h5>
+							</Button>
+						</Col>
+						{categories?.map(({ id, name }) => (
+							<Col key={id} className="p-2" onClick={() => setSelectedCategory(id)}>
 								<Button>
-									<h4 style={{paddingRight: "20px", paddingLeft: "20px", margin: "0px"}} className="text-nowrap">{type}</h4>
+									<h5 style={{ margin: "0px" }} className="text-nowrap mx-3">
+										{name}
+									</h5>
 								</Button>
 							</Col>
 						))}
 					</Row>
 				</div>
 			</Container>
-				<br/><br/>
-			<Container fluid>
-				<Row>
-					<h3>Fitin Workouts</h3>
-				</Row>
+
+			<Container fluid className="p-0">
 				<div className="workoutsContainer">
-					<Row style={{flexWrap: "unset"}}>
-						{workouts.map(({ id, name, images, description }) => (
-							<Col className="colWorkout" key={id}>
-								<Card className="workoutCard" bg="dark" role="button" onClick={() => handleShow(name, images, description)}>
-									<Card.Img className="workoutCardImg" variant="top" src={images[0]} />
-									<Card.Body style={{ minHeight: "70px" }}>
-										<Card.Title>{name}</Card.Title>
-									</Card.Body>
-								</Card>
+					<Row className="m-0" style={{ flexWrap: "unset", overflowX: "auto" }}>
+						{/* Show workouts for the selected category */}
+						{workouts
+							.filter(({ categories }) => {
+								if (selectedCategory) {
+									return categories?.includes(selectedCategory);
+								} else {
+									return true;
+								}
+							})
+							.map(({ id, name, description, imageURL }) => (
+								<Col key={id} className="p-2" style={{ maxWidth: "300px", minWidth: "300px" }}>
+									<Card className="workoutCard" bg="dark" role="button" onClick={() => handleShow(name, description.images, description.instructions)}>
+										<Card.Img className="workoutCardImg" variant="top" src={imageURL} />
+										<Card.Body style={{ minHeight: "50px" }}>
+											<Card.Title className="m-0">{name}</Card.Title>
+										</Card.Body>
+									</Card>
+								</Col>
+							))}
+						{/* Show when there are no workouts for the selected category */}
+						{workouts.filter(({ categories }) => {
+							if (selectedCategory) {
+								return categories?.includes(selectedCategory);
+							} else {
+								return true;
+							}
+						}).length === 0 && (
+							<Col className="text-center">
+								<h3>No workouts found for selected category.</h3>
+								<Button variant="secondary" onClick={() => setSelectedCategory(null)}>
+									<h5 style={{ margin: "0px" }} className="text-nowrap mx-3">
+										Clear Search
+									</h5>
+								</Button>
 							</Col>
-					))}
+						)}
 					</Row>
 				</div>
 			</Container>
-			<ExerciseInfoModal show={show} onClose={handleClose} workoutName={workoutName} workoutImage={workoutImage} workoutDescription={workoutDescription}/>
+			<ExerciseInfoModal show={show} onClose={handleClose} workoutName={workoutName} workoutImage={workoutImage} workoutDescription={workoutDescription} />
+			<br></br>
 		</div>
 	);
 }

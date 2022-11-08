@@ -1,19 +1,11 @@
-/* .categoriesContainer, .workoutsContainer {
-    overflow-y: auto;
-    overflow-x: hidden;
-    height: 60vh;
-} */
-
 .categoriesContainer {
     overflow-y: hidden;
     overflow-x: auto;   
-    height: 68px;
 }
 
 .workoutsContainer {
     overflow-y: hidden;
     overflow-x: auto;   
-    height: 230px;
 }
 
 .workoutCard {
@@ -25,18 +17,7 @@
 }
 
 .workoutCardImg {
-    max-height: 130px; 
+    max-height: 200px; 
     width: 100%; 
     object-fit: Cover;
-}
-.colWorkout {
-    min-width: 200px; 
-    max-height: 200px;
-
-}
-@media screen and (max-width: 767px) {
-    .exploreWorkoutsContainer {
-        height: 50px;
-        width: 100%
-    }
 }

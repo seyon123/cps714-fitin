@@ -1,0 +1,84 @@
+.postBackground{
+    background-color: #22252D;
+    border-radius: 12px;
+    height: 100%;
+    width: 100%;
+    -webkit-border-radius: 12px;
+    -moz-border-radius: 12px;
+    -ms-border-radius: 12px;
+    -o-border-radius: 12px;
+}
+
+.inputArea{
+    margin-right: 20px;
+}
+
+.labelStyle{
+    font-size: 24px;
+    font-weight: 600;
+    margin: 10px 0;
+    color: white;
+}
+
+.labelStyle2{
+    font-size: 18px;
+    font-weight: 600;
+    margin: 5px 0;
+    color: white;
+}
+
+.formStyle{
+    padding-left: 20px;
+    padding-top: 10px;
+    padding-bottom: 10px;
+}
+.form-control{
+    background-color: #141414 !important;
+    border: none !important;
+    border-radius: 12px ;
+    color: white !important;
+    -webkit-border-radius: 12px ;
+    -moz-border-radius: 12px ;
+    -ms-border-radius: 12px ;
+    -o-border-radius: 12px ;
+}
+
+.uploadBar{
+    background-color:  #22252D;
+    border-radius: 12px;
+    border-width: 1px;
+    box-shadow: 0 0 0 0.25rem rgb(13 110 253 / 25%);
+
+
+}
+.postButtonStyle{
+    width: 100px;
+    font-weight: 600 !important;
+    font-size: 22px !important;
+}
+
+.rti--container {
+    --rti-bg: #141414 !important;
+    --rti-border: none !important;
+    --rti-main: #141414 !important;
+    --rti-radius: 12px !important;
+    --rti-s: 6px !important; 
+    --rti-tag: #2C3039 !important;
+    --rti-tag-remove: #0088FF !important;
+    
+  }
+.rti--input{
+    background-color: #141414 !important;
+    color: white !important;
+    width: min-content !important;
+}
+
+  .iconFormat{
+    height: 30px;
+    width: 30px;
+  }
+
+  #uploadBar{
+    display:flex;
+    justify-content:space-between;
+  }

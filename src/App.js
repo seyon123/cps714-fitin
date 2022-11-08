@@ -7,6 +7,8 @@ import NavBar from "./components/NavBar";
 import WorkoutPage from "./pages/WorkoutPage";
 import SocialPage from "./pages/SocialPage";
 import ResetPassword from "./components/ResetPassword";
+import UserProfilePage from "./pages/UserProfilePage";
+import HelpPage from "./pages/HelpPage";
 
 function App() {
 	const { getUser } = useAuth();
@@ -43,9 +45,33 @@ function App() {
 						)
 					}
 				/>
+				<Route
+					path="/help"
+					element={
+						user ? (
+							<>
+								<NavBar />
+								<HelpPage />
+							</>
+						) : (
+							<Navigate to="/signup" replace />
+						)
+					}
+				/>
+				<Route
+					path="/users/:userid"
+					element={
+						user ? (
+							<>
+								<NavBar />
+								<UserProfilePage />
+							</>
+						) : (
+							<Navigate to="/signup" replace />
+						)
+					}
+				/>
 				<Route path="/forgot-password" element={!user ? <LandingPage authComponent={<ResetPassword />} /> : <Navigate to="/signup" replace />} />
-				<Route path="/" element={user ? <WorkoutPage /> : <Navigate to="/signup" replace />} />
-				<Route path="/social" element={user ? <SocialPage /> : <Navigate to="/signup" replace />} />
 				<Route path="*" element={<Navigate to="/" replace />} />
 			</Routes>
 		</BrowserRouter>

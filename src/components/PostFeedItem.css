@@ -1,0 +1,38 @@
+.postFeedItem {
+    width: 100%;
+    height: 30vh;
+    margin-top: 1rem;
+}
+
+.postItemProfileImg {
+    max-width: 3rem;
+    max-height: 3rem;
+}
+
+.postImage {
+    min-width: 100%;
+    max-width: 100%;
+    background-color: white;
+    height: fit-content;
+}
+
+.postTagLink{
+    text-decoration: none !important;
+    color: #347aeb;
+}
+
+.postTime {
+    font-size: 0.8rem;
+    color: #8e8e8e;
+}
+
+.postComments {
+    background-color: #141414 !important;
+}
+
+
+@media screen and (max-width: 767px) {
+    .postFeedItem {
+        height: 40vh;
+    }
+}
