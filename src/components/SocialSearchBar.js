@@ -29,11 +29,14 @@ function SocialSearchBar(){
         }}/>   
         
         {dummyData.filter((val)=>{
+            
             if(searchTerm===""){
                 return ""
             }else if(val.id.toLowerCase().includes(searchTerm.toLowerCase())){
                 return val
             }
+            return null
+
         }).map((val,key)=>{
             return(
                 <div className="ResultsItem">
