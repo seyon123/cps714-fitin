@@ -135,7 +135,7 @@ function CreatePost() {
 					<label htmlFor="tagsInput" className="labelStyle2">
 						Add Tags
 					</label>
-					<TagsInput id="tagsInput" className="form-control" value={tags} onChange={setTags} />
+					<TagsInput id="tagsInput w-100" className="form-control" value={tags} onChange={setTags} />
 				</div>
 			</div>
 			<div className=" mx-4 my-2" id="uploadBar">

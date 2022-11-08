@@ -112,7 +112,7 @@ export default function PostFeedItem({ id, userRef, timestamp, tags, image, desc
 							{user?.name}
 						</Card.Title>
 						{tags?.length > 0 && (
-							<Card.Subtitle className="mb-2 text-muted d-flex align-items-center justify-content-start">
+							<Card.Subtitle className="mb-2 text-muted d-flex align-items-center justify-content-start flex-wrap">
 								{tags.map((tag, id) => (
 									<div className="me-2" key={id}>
 										<FaTag />
@@ -131,7 +131,7 @@ export default function PostFeedItem({ id, userRef, timestamp, tags, image, desc
 						<Card.Text>{description}</Card.Text>
 					</div>
 					<div className="mt-2 postTime">
-						{checkDateBeforeYesterday(timestamp.toDate()) ? <Moment format="LL">{timestamp.toDate()}</Moment> : <Moment fromNow>{timestamp.toDate()}</Moment>}
+						{checkDateBeforeYesterday(timestamp?.toDate()) ? <Moment format="LL">{timestamp?.toDate()}</Moment> : <Moment fromNow>{timestamp?.toDate()}</Moment>}
 					</div>
 				</div>
 				<div className="mt-2">
