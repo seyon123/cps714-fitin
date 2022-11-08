@@ -16,7 +16,14 @@
 .labelStyle{
     font-size: 24px;
     font-weight: 600;
-    padding-left: 10px;
+    margin: 10px 0;
+    color: white;
+}
+
+.labelStyle2{
+    font-size: 18px;
+    font-weight: 600;
+    margin: 5px 0;
     color: white;
 }
 

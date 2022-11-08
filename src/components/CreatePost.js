@@ -125,15 +125,15 @@ function CreatePost() {
 			<div className="formStyle">
 				<div className="form-group inputArea">
 					<label htmlFor="postTextArea" className="labelStyle">
-						Post
+						Create Post
 					</label>
 					{file && <img className="rounded postImage my-2" src={URL.createObjectURL(file)} alt={fileName} />}
 					{progress > 0 && <Line percent={progress} strokeWidth={2} trailWidth={2} trailColor="#141414" strokeColor="#0088ff" />}
-					<textarea className="form-control" rows="6" id="postTextArea" value={postText} onChange={(e) => setPostText(e.target.value)}></textarea>
+					<textarea className="form-control" rows="6" placeholder="Write about your workout..." id="postTextArea" value={postText} onChange={(e) => setPostText(e.target.value)}></textarea>
 				</div>
 				<div className="inputArea">
-					<label htmlFor="tagsInput" className="labelStyle">
-						Tags
+					<label htmlFor="tagsInput" className="labelStyle2">
+						Add Tags
 					</label>
 					<TagsInput id="tagsInput" className="form-control" value={tags} onChange={setTags} />
 				</div>

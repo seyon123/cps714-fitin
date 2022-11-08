@@ -28,10 +28,13 @@ function Comment({ comment }) {
 
 	return (
 		<div>
-			<Link style={{ textDecorationLine: "none" }} className="text-light" to={`users/${user?.id}`}>
+			<Link style={{ textDecorationLine: "none" }} className="text-light" to={`/users/${user?.id}`}>
 				<strong>{user?.name}</strong>
 			</Link>
 			: {comment?.comment}
+			<Moment fromNow className="postTime ms-2">
+				{comment?.timestamp?.toDate()}
+			</Moment>
 		</div>
 	);
 }
@@ -111,7 +114,7 @@ export default function PostFeedItem({ id, userRef, timestamp, tags, image, desc
 						{tags?.length > 0 && (
 							<Card.Subtitle className="mb-2 text-muted d-flex align-items-center justify-content-start">
 								{tags.map((tag, id) => (
-									<div className="ms-1" key={id}>
+									<div className="me-2" key={id}>
 										<FaTag />
 										<Card.Link className="postTagLink ms-1" href={tag}>
 											{tag}
@@ -138,18 +141,17 @@ export default function PostFeedItem({ id, userRef, timestamp, tags, image, desc
 				<div className="mt-2">
 					<Form onSubmit={handleComment}>
 						<Form.Group className="mt-3" controlId="commentPost">
-							<Form.Label>Comment</Form.Label>
 							<div className="d-flex">
 								<Form.Control
 									type="text"
 									value={comment}
 									onChange={(e) => setComment(e.target.value)}
 									required
-									placeholder="Post comment"
+									placeholder="Add a comment..."
 									style={{ borderTopRightRadius: "0", borderBottomRightRadius: "0" }}
 								/>
 								<Button className="d-inline-flex" variant="primary" type="submit" style={{ borderTopLeftRadius: "0", borderBottomLeftRadius: "0" }}>
-									Post
+									Reply
 								</Button>
 							</div>
 							<Form.Text className="text-muted">This comment will be visible to anyone who sees this post.</Form.Text>
