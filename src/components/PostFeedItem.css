@@ -21,6 +21,15 @@
     color: #347aeb;
 }
 
+.postTime {
+    font-size: 0.8rem;
+    color: #8e8e8e;
+}
+
+.postComments {
+    background-color: #141414 !important;
+}
+
 
 @media screen and (max-width: 767px) {
     .postFeedItem {

@@ -3,6 +3,10 @@
     border-radius: 12px;
     height: 100%;
     width: 100%;
+    -webkit-border-radius: 12px;
+    -moz-border-radius: 12px;
+    -ms-border-radius: 12px;
+    -o-border-radius: 12px;
 }
 
 .inputArea{
@@ -12,7 +16,14 @@
 .labelStyle{
     font-size: 24px;
     font-weight: 600;
-    padding-left: 10px;
+    margin: 10px 0;
+    color: white;
+}
+
+.labelStyle2{
+    font-size: 18px;
+    font-weight: 600;
+    margin: 5px 0;
     color: white;
 }
 
@@ -24,9 +35,12 @@
 .form-control{
     background-color: #141414 !important;
     border: none !important;
-    border-radius: 12px !important;
+    border-radius: 12px ;
     color: white !important;
-    
+    -webkit-border-radius: 12px ;
+    -moz-border-radius: 12px ;
+    -ms-border-radius: 12px ;
+    -o-border-radius: 12px ;
 }
 
 .uploadBar{
