@@ -126,7 +126,16 @@ export default function PostFeedItem({ id, userRef, timestamp, tags, image, desc
 					</div>
 				</div>
 				<div>
-					{image && <img src={image} className="postImage rounded mt-1" alt={description} />}
+					{image && (
+						<img
+							src={image}
+							className="postImage rounded mt-1 pointer-event"
+							alt={description}
+							onClick={() => {
+								navigate(`/posts/${id}`);
+							}}
+						/>
+					)}
 					<div className="postItemMarginRightSmall mt-1">
 						<Card.Text>{description}</Card.Text>
 					</div>
