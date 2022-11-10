@@ -23,6 +23,7 @@ export default function SinglePostPage() {
 
 	return (
 		<Container fluid className="mainPage">
+			{console.log(postid, post)}
 			<div className="row">
 				<FriendsList />
 				<div className="p-0 m-0 col-md-3"></div>
