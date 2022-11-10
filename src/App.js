@@ -9,6 +9,7 @@ import SocialPage from "./pages/SocialPage";
 import ResetPassword from "./components/ResetPassword";
 import UserProfilePage from "./pages/UserProfilePage";
 import HelpPage from "./pages/HelpPage";
+import SinglePostPage from "./pages/SinglePostPage";
 
 function App() {
 	const { getUser } = useAuth();
@@ -65,6 +66,19 @@ function App() {
 							<>
 								<NavBar />
 								<UserProfilePage />
+							</>
+						) : (
+							<Navigate to="/signup" replace />
+						)
+					}
+				/>
+				<Route
+					path="/posts/:postid"
+					element={
+						user ? (
+							<>
+								<NavBar />
+								<SinglePostPage />
 							</>
 						) : (
 							<Navigate to="/signup" replace />

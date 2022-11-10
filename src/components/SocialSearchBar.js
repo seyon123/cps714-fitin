@@ -3,8 +3,11 @@ import "./SocialSearchBar.css";
 import { useState } from "react";
 import { FaSearch } from "react-icons/fa";
 import { AiFillCloseCircle } from "react-icons/ai";
+import { useNavigate } from "react-router-dom";
+
 function SocialSearchBar({ posts }) {
 	const [searchTerm, setSearchTerm] = useState("");
+	let navigate = useNavigate();
 
 	return (
 		<div className="w-100 mt-3 searchBar position-relative">
@@ -24,19 +27,25 @@ function SocialSearchBar({ posts }) {
 			)}
 			<div className="resultsContainer mt-2 rounded">
 				{posts
-					.filter((val) => {
+					.filter((post) => {
 						if (searchTerm === "") {
 							return "";
-						} else if (val.description.toLowerCase().includes(searchTerm.toLowerCase()) || val.tags.toString().toLowerCase().includes(searchTerm.toLowerCase())) {
-							return val;
+						} else if (post.description.toLowerCase().includes(searchTerm.toLowerCase()) || post.tags.toString().toLowerCase().includes(searchTerm.toLowerCase())) {
+							return post;
 						}
 						return null;
 					})
-					.map((val, key) => {
+					.map((post, key) => {
 						return (
-							<div key={key} className="resultItem d-flex align-content-center align-items-center">
-								<img width="40px" className="resultImage m-1 rounded-1" src={val?.image} alt={val?.description} />
-								<p>{val?.description}</p>
+							<div
+								key={key}
+								className="resultItem d-flex align-content-center align-items-center"
+								onClick={() => {
+									navigate(`/posts/${post?.id}`);
+								}}
+							>
+								<img width="40px" className="resultImage m-1 rounded-1" src={post?.image} alt={post?.description} />
+								<p>{post?.description}</p>
 							</div>
 						);
 					})}
