@@ -1,4 +1,4 @@
-import { doc, getDoc } from "firebase/firestore";
+import { doc, onSnapshot } from "firebase/firestore";
 import React, { useEffect, useState } from "react";
 import { Col, Container } from "react-bootstrap";
 import { useParams } from "react-router-dom";
@@ -11,20 +11,18 @@ export default function SinglePostPage() {
 	const { postid } = useParams();
 
 	useEffect(() => {
-		async function getPost() {
-			const docRef = doc(db, `posts`, postid);
-			const docPostSnap = await getDoc(docRef);
-
-			if (docPostSnap.exists()) {
-				setPost({ ...docPostSnap.data(), id: docPostSnap.id });
+		const unsubscribe = onSnapshot(doc(db, `posts`, postid), (doc) => {
+			if (doc.exists()) {
+				setPost({ ...doc.data(), id: doc.id });
 			}
-		}
-		getPost();
+		});
+		return () => {
+			unsubscribe();
+		};
 	}, [postid]);
 
 	return (
 		<Container fluid className="mainPage">
-			{console.log(postid, post)}
 			<div className="row">
 				<FriendsList />
 				<div className="p-0 m-0 col-md-3"></div>
