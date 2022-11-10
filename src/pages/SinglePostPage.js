@@ -11,14 +11,15 @@ export default function SinglePostPage() {
 	const { postid } = useParams();
 
 	useEffect(() => {
-		return async () => {
+		async function getPost() {
 			const docRef = doc(db, `posts`, postid);
 			const docPostSnap = await getDoc(docRef);
 
 			if (docPostSnap.exists()) {
 				setPost({ ...docPostSnap.data(), id: docPostSnap.id });
 			}
-		};
+		}
+		getPost();
 	}, [postid]);
 
 	return (
