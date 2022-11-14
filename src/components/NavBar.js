@@ -60,7 +60,7 @@ function NavBar() {
 							</span>{" "}
 							Edit Profile
 						</Link>
-						<Link to="#" className="dropdown-item">
+						<Link to="/settings" className="dropdown-item">
 							<span className="spanIcon">
 								<FaCog />
 							</span>{" "}
