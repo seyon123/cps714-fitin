@@ -91,29 +91,30 @@ function UserProfilePage() {
 						<Col className="m-4 col-md-2"> 
 							<Image roundedCircle height="200px" src={user?.photoURL} />
 						</Col>
-						<Col className="m-4 mt-9 col-md-5">
-							<br />
+						<Col className="m-4 col-md-4">
+							<br /><br />
 							<h2><Row className="noMargin fs-2 fw-bold">{user?.name}</Row></h2>
 							
-							<p><Row className="noMargin">Email: {user?.email}  ID: {user?.uid}</Row></p>
+							<p className="text-white-50"><Row className="noMargin">Email: {user?.email}  ID: {user?.uid}</Row></p>
 							
 						</Col>
-						<Col>
-							<Row>
-							{currentUser?.uid !== userid && (isFollowing ? <Button onClick={() => unfollowUser()}>Unfollow</Button> : <Button onClick={() => followUser()}>Follow</Button>)}
-							<Button onClick={() => unfollowUser()}>Unfollow</Button>
+						<Col className="m-4 text-center">
+							<br /><br />
+							<Row className="d-flex align-items-center justify-content-center">
+								{currentUser?.uid !== userid ? (isFollowing ? <Button className="w-50" onClick={() => unfollowUser()}>Unfollow</Button> : <Button className="w-50" onClick={() => followUser()}>Follow</Button>) : (<Button className="w-50">Settings</Button>)} 
+								
+								{/* <Button onClick={() => unfollowUser()}>Unfollow</Button> */}
 							</Row>
+							<br />
 							<Row className="d-flex align-items-center justify-content-between">
-								<Col className="col-md-4">
-									<div>
-										<h4>Followers:</h4>
-										{followersCount}
-									</div>
+								<Col className="">
+									<h4>Followers</h4>
+									<h4>{followersCount}</h4>
 								</Col>
-								<Col className="col-md-4">
+								<Col className="">
 									<div>
-										<h4>Following:</h4>
-										{followingCount}
+										<h4>Following</h4>
+										<h4>{followingCount}</h4>
 									</div>
 								</Col>
 							</Row>
