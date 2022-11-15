@@ -4,13 +4,25 @@ import Row from "react-bootstrap/Row";
 import Col from "react-bootstrap/Col";
 import "./SettingsPage.css";
 import { Button, Form, Alert } from "react-bootstrap";
+import ConfirmDeleteModal from "../components/Modals/ConfirmModal";
 
 function SettingsPage({ authComponent }) {
     const [showPasswordChangeAlert, setPasswordChangeAlert] = useState(false);
 
     const [showProfileChangeAlert, setProfileChangeAlert] = useState(false);
+    const [showModal, setModal] = useState(false);
+
+    function setModalShow(bool){
+        setModal(bool);
+    }
 	return (
         <div className="settingsPage px-5">
+            <ConfirmDeleteModal
+            show={showModal}
+            onHide={setModal}
+            setShow={setModalShow}
+            >
+            </ConfirmDeleteModal>
             <Container fluid >
                 <Row md={12}>
                     <Col md={12}>
@@ -167,7 +179,7 @@ function SettingsPage({ authComponent }) {
                                 <Col md={1}></Col>
                                 <Col className="mb-4" md={4} lg={2}>
                                     <Row>
-                                        <Button className="centerButton" variant="danger">Delete Account</Button>{' '}
+                                        <Button onClick={() => setModal(true)} className="centerButton" variant="danger">Delete Account</Button>{' '}
                                     </Row>
                                 </Col>
                                 <Col md={1}></Col>
