@@ -1,70 +1,76 @@
-# Getting Started with Create React App
+<br />
+<div align="center">
+  <a href="https://github.com/seyon123/cps714-g6" style="color:white; font-size:1.5rem;">
+    <img src="public/fitin_banner_2.png" alt="Logo" width="auto" height="80">
+    <hr/>
+  </a>
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+  <p align="center">
+    <h4>All in one fitness and social app</h4>
+    <br />
+    <img src="public/built-with-react.svg" width = "auto" height="20">
+    <img src="public/built-with-firebase.svg" width = "auto" height="20">
+    <br />
+    <a href="https://fitin.web.app/">Live Demo</a>
+    •
+    <a href="https://github.com/seyon123/cps714-g6/issues">Report Bug</a>
+    •
+    <a href="#getting-started">Local Setup</a>
+  </p>
+</div>
 
-## Available Scripts
+## Key Features
 
-In the project directory, you can run:
+---
 
-### `npm start`
+- Plan and keep track of exercises for your workouts
+- Create personalized workout routines
+- Collection of over 50 exercises to view and add to your routines
+- User authetication - access your information from any device with browser support
+- Social Media
+  - Create media content to post
+  - View and comment on posts from other users
+  - Add friends and view their fitness progress
 
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in your browser.
+## Getting Started
 
-The page will reload when you make changes.\
-You may also see any lint errors in the console.
+---
 
-### `npm test`
+### Dependencies
 
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+- Git
+- npm
 
-### `npm run build`
+### Installing
 
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
+In command line:
 
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
+```
+# Clone repository
+$ git clone https://github.com/seyon123/cps714-g6
 
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
+# Go into repository
+$ cd cps714-g6
 
-### `npm run eject`
+# Install dependencies
+$ npm install
 
-**Note: this is a one-way operation. Once you `eject`, you can't go back!**
+# Run application
+$ npm start
+```
 
-If you aren't satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
+> **Note** Add a `.env` file to the root. Make sure to configure the file with the right values in order to connect to the Firestore database.
 
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you're on your own.
+<br />
 
-You don't have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn't feel obligated to use this feature. However we understand that this tool wouldn't be useful if you couldn't customize it when you are ready for it.
+## Contributors
 
-## Learn More
-
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
-
-To learn React, check out the [React documentation](https://reactjs.org/).
-
-### Code Splitting
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/code-splitting](https://facebook.github.io/create-react-app/docs/code-splitting)
-
-### Analyzing the Bundle Size
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size](https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size)
-
-### Making a Progressive Web App
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app](https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app)
-
-### Advanced Configuration
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/advanced-configuration](https://facebook.github.io/create-react-app/docs/advanced-configuration)
-
-### Deployment
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/deployment](https://facebook.github.io/create-react-app/docs/deployment)
-
-### `npm run build` fails to minify
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify](https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify)
+[Seyon](https://github.com/seyon123),
+[Hamdan](https://github.com/hbskhan),
+[Jacky](https://github.com/lyjacky11),
+[Jawwad](https://github.com/JawwadK),
+[Noah](https://github.com/NoahColacoRyerson),
+[Raj](https://github.com/raj-mistry),
+[Leslie](https://github.com/LeslieWen),
+[Tiago](https://github.com/tiago-a-ribeiro),
+[William](https://github.com/https://github.com/wsimmalavong)
