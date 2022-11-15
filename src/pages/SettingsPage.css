@@ -1,0 +1,42 @@
+
+.settingsPage{
+    margin-top:5%;
+    min-height: 100vh;
+    color: white !important;
+    
+}
+
+.profileSection {
+    
+    background-color: rgba(34,37,45,1);
+    height: 100%;
+    width: 100%;
+    border-radius: 12px;
+
+}
+
+@media only screen and (min-width: 0px){
+    .profileSection {
+        width: 600px;
+    }
+}
+
+@media only screen and (min-width: 600px){
+    .profileSection {
+        width: 800px;
+    }
+}
+
+@media only screen and (min-width: 800px){
+    .profileSection {
+        width: 1200px;
+    }
+}
+
+.changeProfilePicture{
+    width: 95%;
+    margin: 0 auto;
+    display: block;
+    margin-bottom: 15px;
+
+}
