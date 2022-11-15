@@ -1,11 +1,14 @@
-import React from "react";
+import React, {useState} from "react";
 import Container from "react-bootstrap/Container";
 import Row from "react-bootstrap/Row";
 import Col from "react-bootstrap/Col";
 import "./SettingsPage.css";
-import { Button, Form } from "react-bootstrap";
+import { Button, Form, Alert } from "react-bootstrap";
 
 function SettingsPage({ authComponent }) {
+    const [showPasswordChangeAlert, setPasswordChangeAlert] = useState(false);
+
+    const [showProfileChangeAlert, setProfileChangeAlert] = useState(false);
 	return (
         <div className="settingsPage px-5">
             <Container fluid >
@@ -19,7 +22,24 @@ function SettingsPage({ authComponent }) {
             </Container>
 
             <div className="profileSection my-5 py-3 px-3">
+                <Alert style={{display: "block"}} show={showProfileChangeAlert} key="primary" variant="primary">
+                    <Row>
+                        <Col>
+                            <h5>
+                            Profile updated
+                            </h5>
+                        </Col>
+                        <Col>
+                            <div className="d-flex justify-content-end">
+                                <Button onClick={() => setProfileChangeAlert(false)} variant="outline-primary">
+                                    Close
+                                </Button>
+                            </div>
+                        </Col>
+                    </Row>
+                </Alert>
                 <Container fluid >
+                    
                     <Row className="py-3">
                         <Col md={6} lg={5} xl={3}>
                             <Row md={12}>
@@ -73,7 +93,7 @@ function SettingsPage({ authComponent }) {
                         <Col md={9} ></Col>
                         <Col md={3} >
                             <Row className="p-3">
-                                <Button className="ml-3 centerButton" variant="primary">Save</Button>{' '}
+                                <Button onClick={() => setProfileChangeAlert(true)} className="ml-3 centerButton" variant="primary">Save</Button>{' '}
                             </Row>
                         </Col>
                     </Row>
@@ -92,6 +112,24 @@ function SettingsPage({ authComponent }) {
             </Container>
 
             <div className="profileSection my-5 py-3 px-3">
+                
+                <Alert style={{display: "block"}} show={showPasswordChangeAlert} key="primary" variant="primary">
+                    <Row>
+                        <Col>
+                            <h5>
+                            Password changed
+                            </h5>
+                        </Col>
+                        <Col>
+                            <div className="d-flex justify-content-end">
+                                <Button onClick={() => setPasswordChangeAlert(false)} variant="outline-primary">
+                                    Close
+                                </Button>
+                            </div>
+                        </Col>
+                    </Row>
+                </Alert>
+                
                 <Container fluid >
                     <Row className="py-3">
                         <Col>
@@ -118,7 +156,7 @@ function SettingsPage({ authComponent }) {
                                 <Col md={9} ></Col>
                                 <Col md={3} >
                                     <Row className="p-3">
-                                        <Button className="ml-3 centerButton" variant="primary">Change Password</Button>{' '}
+                                        <Button onClick={() => setPasswordChangeAlert(true)} className="ml-3 centerButton" variant="primary">Change Password</Button>{' '}
                                     </Row>
                                 </Col>
                             </Row>
