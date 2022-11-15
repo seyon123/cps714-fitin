@@ -1,11 +1,21 @@
 
 .settingsPage{
-    margin-top:5%;
-    min-height: 100vh;
+    margin-top:70px;
+    min-height: 140vh;
     color: white !important;
     
 }
 
+body{
+    background-color: #141414 !important;
+}
+
+
+.centerButton{
+    width: 80%;
+    width: 200px;
+    margin: auto;
+}
 .profileSection {
     
     background-color: rgba(34,37,45,1);
@@ -17,19 +27,19 @@
 
 @media only screen and (min-width: 0px){
     .profileSection {
-        width: 600px;
+        width: 100%;
     }
 }
 
-@media only screen and (min-width: 600px){
+@media only screen and (min-width: 900px){
     .profileSection {
-        width: 800px;
+        width: 850px;
     }
 }
 
-@media only screen and (min-width: 800px){
+@media only screen and (min-width: 1200px){
     .profileSection {
-        width: 1200px;
+        width: 1250px;
     }
 }
 
