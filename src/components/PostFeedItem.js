@@ -53,6 +53,11 @@ export default function PostFeedItem({ id, userRef, timestamp, tags, image, desc
 			const docUserSnap = await getDoc(userRef);
 			if (docUserSnap.exists()) {
 				setUser({ ...docUserSnap.data(), id: docUserSnap.id });
+			} else {
+				setUser({
+					name: "Deleted User",
+					photoURL: "/fitin_logo.png",
+				});
 			}
 		}
 		userRef && findUser();
@@ -116,7 +121,7 @@ export default function PostFeedItem({ id, userRef, timestamp, tags, image, desc
 						onClick={() => navigateToUser()}
 					/>
 					<div>
-						<Card.Title style={{ cursor: "pointer" }} onClick={() => navigateToUser()}>
+						<Card.Title style={{ cursor: "pointer" }} onClick={() => user.uid && navigateToUser()}>
 							{user?.name}
 						</Card.Title>
 						{tags?.length > 0 && (

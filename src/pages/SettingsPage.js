@@ -5,7 +5,7 @@ import Col from "react-bootstrap/Col";
 import "./SettingsPage.css";
 import { useAuth } from "../contexts/AuthContext";
 import { Button, Form, InputGroup, Image } from "react-bootstrap";
-import ConfirmDeleteModal from "../components/Modals/ConfirmModal";
+import ConfirmDeleteModal from "../components/Modals/ConfirmDeleteModal";
 import { AiFillEye, AiFillEyeInvisible } from "react-icons/ai";
 import imageCompression from "browser-image-compression";
 import { getDownloadURL, ref, uploadBytesResumable } from "firebase/storage";
