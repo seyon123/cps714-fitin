@@ -140,12 +140,19 @@ export function AuthProvider({ children }) {
 
 		if (docSnap.exists()) {
 			await deleteDoc(docRef);
-			deleteUser(auth.currentUser);
-			alert("Account deleted successfully");
 		} else {
 			// User does not exist
 			console.log("User does not exist or is already deleted.");
 		}
+		deleteUser(auth.currentUser)
+			.then(() => {
+				console.log("User account deleted");
+				logOut();
+			})
+			.catch((error) => {
+				console.error(error).alert("Error deleting account");
+			});
+		alert("Account deleted successfully");
 	}
 
 	async function updateUserInfo(name, email, photoURL, bio, website) {

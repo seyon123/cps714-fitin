@@ -146,7 +146,7 @@ function SettingsPage({ authComponent }) {
 
 	return (
 		<div className="settingsPage px-5 mw- 80">
-			<ConfirmDeleteModal show={showModal} handleClose={handleModalClose} showModal={handleModalShow}></ConfirmDeleteModal>
+			<ConfirmDeleteModal show={showModal} handleClose={handleModalClose} showModal={handleModalShow} />
 			<Container fluid>
 				<Row md={12}>
 					<Col md={12}>

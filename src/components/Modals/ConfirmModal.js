@@ -1,8 +1,12 @@
 import { Button, Modal, Row } from "react-bootstrap";
+import { useAuth } from "../../contexts/AuthContext";
 import "./ChangeRoutineModal.css";
 
 function ConfirmDeleteModal({ show, handleClose }) {
-	function handleDelete() {
+	const { deleteCurrentUser } = useAuth();
+
+	async function handleDelete() {
+		await deleteCurrentUser();
 		handleClose();
 	}
 
@@ -20,7 +24,7 @@ function ConfirmDeleteModal({ show, handleClose }) {
 				<Button variant="secondary" onClick={handleClose}>
 					Cancel
 				</Button>
-				<Button variant="danger" onClick={handleDelete}>
+				<Button variant="danger" onClick={() => handleDelete()}>
 					Delete Account
 				</Button>
 			</Modal.Footer>
