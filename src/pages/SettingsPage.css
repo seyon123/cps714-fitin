@@ -10,7 +10,15 @@ body{
     background-color: #141414 !important;
 }
 
+.hideIconAppend {
+    background: #141414;
+    border: none;
 
+}
+
+.centerAlert {
+    margin-top:5px;
+  }
 .centerButton{
     width: 80%;
     width: 200px;

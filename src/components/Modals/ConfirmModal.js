@@ -5,9 +5,9 @@ import "./ChangeRoutineModal.css";
 import { doc, getDoc, updateDoc, deleteField, setDoc } from "firebase/firestore";
 import { useAuth } from "../../contexts/AuthContext";
 
-function ConfirmDeleteModal({ show, onHide, setShow}) {
+function ConfirmDeleteModal({ show, handleClose, showModal}) {
 	return (
-		<Modal className="create-routine" show={show} onHide={onHide} centered>
+		<Modal className="create-routine" show={show} onHide={handleClose} centered>
 			<Modal.Header closeButton closeVariant="white">
 				<Modal.Title>Are you sure you want to delete your account?</Modal.Title>
 			</Modal.Header>
@@ -15,13 +15,13 @@ function ConfirmDeleteModal({ show, onHide, setShow}) {
             <Row>
                 <Col className="mb-4" md={5}>
                     <Row>
-                        <Button onClick={() => setShow(true)} className="centerButton" variant="danger">Delete Account</Button>{' '}
+                        <Button onClick={() => handleClose()} className="centerButton" variant="danger">Delete Account</Button>{' '}
                     </Row>
                 </Col>
                 <Col md={1}></Col>
                 <Col md={5}>
                     <Row>
-                        <Button className="centerButton" variant="secondary">Cancel</Button>{' '}
+                        <Button onClick={() => handleClose()} className="centerButton" variant="secondary">Cancel</Button>{' '}
                     </Row>
                 </Col>
             </Row>
