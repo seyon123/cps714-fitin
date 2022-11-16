@@ -266,9 +266,9 @@ function SettingsPage({ authComponent }) {
 													autoComplete="new-password"
 													onChange={(e) => setPassword(e.target.value)}
 												/>
-												{showPassword1 ? (
-													<InputGroup.Text>
-														<AiFillEye
+												<InputGroup.Text style={{ background: "#141414", border: "none" }}>
+													{showPassword1 ? (
+														<AiFillEyeInvisible
 															onClick={() => {
 																setShowPassword1(false);
 															}}
@@ -276,10 +276,8 @@ function SettingsPage({ authComponent }) {
 															color="white"
 															size="30px"
 														/>
-													</InputGroup.Text>
-												) : (
-													<InputGroup.Text style={{ background: "#141414", border: "none" }}>
-														<AiFillEyeInvisible
+													) : (
+														<AiFillEye
 															onClick={() => {
 																setShowPassword1(true);
 															}}
@@ -287,8 +285,8 @@ function SettingsPage({ authComponent }) {
 															color="white"
 															size="30px"
 														/>
-													</InputGroup.Text>
-												)}
+													)}
+												</InputGroup.Text>
 											</InputGroup>
 										</Form.Group>
 									</Col>
@@ -309,7 +307,7 @@ function SettingsPage({ authComponent }) {
 
 												<InputGroup.Text style={{ background: "#141414", border: "none" }}>
 													{showPassword2 ? (
-														<AiFillEye
+														<AiFillEyeInvisible
 															onClick={() => {
 																setShowPassword2(false);
 															}}
@@ -318,7 +316,7 @@ function SettingsPage({ authComponent }) {
 															size="30px"
 														/>
 													) : (
-														<AiFillEyeInvisible
+														<AiFillEye
 															onClick={() => {
 																setShowPassword2(true);
 															}}
