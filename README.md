@@ -2,7 +2,6 @@
 <div align="center">
   <a href="https://github.com/seyon123/cps714-g6" style="color:white; font-size:1.5rem;">
     <img src="public/fitin_banner_2.png" alt="Logo" width="auto" height="80">
-    <hr/>
   </a>
 
   <p align="center">
@@ -21,8 +20,6 @@
 
 ## Key Features
 
----
-
 - Plan and keep track of exercises for your workouts
 - Create personalized workout routines
 - Collection of over 50 exercises to view and add to your routines
@@ -33,8 +30,6 @@
   - Add friends and view their fitness progress
 
 ## Getting Started
-
----
 
 ### Dependencies
 
