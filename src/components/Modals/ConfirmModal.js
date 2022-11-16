@@ -1,11 +1,7 @@
-import { Button, Card, Modal, Row, Col } from "react-bootstrap";
-import moment from "moment";
-import { db } from "../../firebase";
+import { Button, Modal, Row, Col } from "react-bootstrap";
 import "./ChangeRoutineModal.css";
-import { doc, getDoc, updateDoc, deleteField, setDoc } from "firebase/firestore";
-import { useAuth } from "../../contexts/AuthContext";
 
-function ConfirmDeleteModal({ show, handleClose, showModal}) {
+function ConfirmDeleteModal({ show, handleClose}) {
 	return (
 		<Modal className="create-routine" show={show} onHide={handleClose} centered>
 			<Modal.Header closeButton closeVariant="white">

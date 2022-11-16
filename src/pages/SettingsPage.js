@@ -199,7 +199,7 @@ function SettingsPage({ authComponent }) {
                             <Row  >
                                 <Col md={9} >
                                     {
-                                        password != confirmPassword ?
+                                        password !== confirmPassword ?
                                         <h6 className="px-3" style={{color: "#DC3545", fontWeight: "600px"}}>Passwords must match</h6> :
                                         null
                                     }
