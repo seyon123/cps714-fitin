@@ -10,6 +10,7 @@ import ResetPassword from "./components/ResetPassword";
 import UserProfilePage from "./pages/UserProfilePage";
 import HelpPage from "./pages/HelpPage";
 import SinglePostPage from "./pages/SinglePostPage";
+import SettingsPage from "./pages/SettingsPage";
 
 function App() {
 	const { getUser } = useAuth();
@@ -40,6 +41,19 @@ function App() {
 							<>
 								<NavBar />
 								<SocialPage />
+							</>
+						) : (
+							<Navigate to="/signup" replace />
+						)
+					}
+				/>
+				<Route
+					path="/settings"
+					element={
+						user ? (
+							<>
+								<NavBar />
+								<SettingsPage />
 							</>
 						) : (
 							<Navigate to="/signup" replace />
