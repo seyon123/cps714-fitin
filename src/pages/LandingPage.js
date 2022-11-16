@@ -4,13 +4,14 @@ import Row from "react-bootstrap/Row";
 import Col from "react-bootstrap/Col";
 import { NavLink } from "react-router-dom";
 import "./LandingPage.css";
+import { Image } from "react-bootstrap";
 
 function LandingPage({ authComponent }) {
 	return (
 		<Container fluid className="landingPage">
 			<Row md={6}>
 				<Col md={6} className="landingImageContainer">
-					<img className="landingImage" alt="FitIn cover" src={"./landing-page.png"} />
+					<Image className="landingImage" alt="FitIn cover" src={"./landing-page.png"} />
 				</Col>
 				<Col md={6} className="appForm">
 					<div className="pageSwitcher">

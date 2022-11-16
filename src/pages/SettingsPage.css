@@ -17,18 +17,7 @@
   }
 
 .profileSection {
-    
     background-color: rgba(34,37,45,1);
     height: 100%;
     border-radius: 12px;
-
-}
-
-
-.changeProfilePicture{
-    width: 95%;
-    margin: 0 auto;
-    display: block;
-    margin-bottom: 15px;
-
 }

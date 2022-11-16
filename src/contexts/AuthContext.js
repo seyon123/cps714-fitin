@@ -1,7 +1,19 @@
 import { createContext, useContext, useEffect, useState } from "react";
-import { createUserWithEmailAndPassword, sendPasswordResetEmail, signInWithEmailAndPassword, onAuthStateChanged, GoogleAuthProvider, signInWithPopup, updateProfile, signOut } from "firebase/auth";
+import {
+	createUserWithEmailAndPassword,
+	sendPasswordResetEmail,
+	signInWithEmailAndPassword,
+	onAuthStateChanged,
+	GoogleAuthProvider,
+	signInWithPopup,
+	updateProfile,
+	signOut,
+	updatePassword,
+	deleteUser,
+	updateEmail,
+} from "firebase/auth";
 import { auth, provider, db } from "../firebase";
-import { doc, getDoc, setDoc } from "firebase/firestore";
+import { deleteDoc, doc, getDoc, setDoc, updateDoc } from "firebase/firestore";
 
 const AuthContext = createContext();
 
@@ -126,9 +138,98 @@ export function AuthProvider({ children }) {
 				}
 			});
 	}
+	async function deleteCurrentUser() {
+		const docRef = doc(db, "users", currentUser.uid);
+		const docSnap = await getDoc(docRef);
 
-	function getUser() {
-		return currentUser;
+		if (docSnap.exists()) {
+			await deleteDoc(docRef);
+			deleteUser(auth.currentUser);
+			alert("Account deleted successfully");
+		} else {
+			// User does not exist
+			console.log("User does not exist or is already deleted.");
+		}
+	}
+
+	async function updateUserInfo(name, email, photoURL, bio, website) {
+		const docRef = doc(db, "users", currentUser?.uid);
+		const docSnap = await getDoc(docRef);
+
+		if (docSnap.exists()) {
+			await updateDoc(docRef, {
+				name: name,
+				email: email,
+				photoURL: photoURL,
+				bio: bio,
+				website: website,
+			});
+			console.log(currentUser);
+			if (name !== currentUser?.displayName) {
+				updateProfile(auth.currentUser, {
+					displayName: name,
+				})
+					.then(() => {
+						console.log("User name updated successfully");
+					})
+					.catch((error) => {
+						console.error(error).alert("Error updating name");
+					});
+			}
+			if (photoURL !== currentUser?.photoURL) {
+				updateProfile(auth.currentUser, {
+					photoURL: photoURL,
+				})
+					.then(() => {
+						console.log("User profile picture updated successfully");
+					})
+					.catch((error) => {
+						console.error(error).alert("Error updating profile picture");
+					});
+			}
+			if (email !== currentUser?.email) {
+				updateEmail(auth.currentUser, email)
+					.then(() => {
+						console.log("Email Updated successfully");
+					})
+					.catch((error) => {
+						console.error(error).alert("Error updating email");
+					});
+			}
+			alert("Account information updated successfully");
+		} else {
+			// User does not exist
+			console.log("User does not exist. Cant update user information.");
+		}
+	}
+
+	async function updateUserPassword(password) {
+		updatePassword(auth.currentUser, password)
+			.then(() => {
+				logOut();
+				alert("Password updated successfully! Please login again");
+			})
+			.catch((error) => {
+				console.error(error);
+				var errorCode = error.code;
+				if (errorCode === "auth/weak-password") {
+					alert("The password is too weak. Try a password greater than 6 characters");
+				} else {
+					alert("Error updating password. You may need to logout and login again to change your password");
+				}
+			});
+	}
+
+	async function getUser() {
+		const docRef = doc(db, "users", currentUser?.uid);
+		const docSnap = await getDoc(docRef);
+
+		if (docSnap.exists()) {
+			return { ...docSnap.data(), id: docSnap.id };
+		} else {
+			// User does not exist
+			console.log("User does not exist or is already deleted.");
+		}
 	}
 
 	useEffect(() => {
@@ -143,6 +244,9 @@ export function AuthProvider({ children }) {
 	const value = {
 		currentUser,
 		signInGoogle,
+		deleteCurrentUser,
+		updateUserInfo,
+		updateUserPassword,
 		getUser,
 		login,
 		logOut,

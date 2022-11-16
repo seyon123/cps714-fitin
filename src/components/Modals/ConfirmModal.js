@@ -1,4 +1,4 @@
-import { Button, Modal, Row, Col } from "react-bootstrap";
+import { Button, Modal, Row } from "react-bootstrap";
 import "./ChangeRoutineModal.css";
 
 function ConfirmDeleteModal({ show, handleClose }) {

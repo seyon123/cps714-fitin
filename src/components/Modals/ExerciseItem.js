@@ -1,5 +1,5 @@
 import { useState, useEffect } from "react";
-import { Card } from "react-bootstrap";
+import { Card, Image } from "react-bootstrap";
 import { MdDelete } from "react-icons/md";
 import { getDoc } from "firebase/firestore";
 import { FaChevronUp, FaChevronDown } from "react-icons/fa";
@@ -54,7 +54,7 @@ function ExerciseItem({ docRef, exercises, setExercises, removeFromRoutine }) {
 			<Card key={workout.id} className="exercise-row">
 				<Card.Body className="d-flex align-items-center justify-content-between">
 					<div>
-						<img src={workout.data().imageURL} alt="Exercise Thumbnail" className="workoutItemImg float-start" />
+						<Image src={workout.data().imageURL} alt="Exercise Thumbnail" className="workoutItemImg float-start" />
 						<h4 className="float-end">{workout.data().name}</h4>
 					</div>
 					<div className="d-flex align-items-center justify-content-between w-30">

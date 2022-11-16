@@ -1,5 +1,5 @@
 import "./ExerciseInfoModal.css";
-import { Modal, Carousel } from "react-bootstrap";
+import { Modal, Carousel, Image } from "react-bootstrap";
 
 function ExerciseInfoModal({ show, onClose, workoutName, workoutImage, workoutDescription }) {
 	return (
@@ -13,7 +13,7 @@ function ExerciseInfoModal({ show, onClose, workoutName, workoutImage, workoutDe
 						return (
 							<Carousel.Item key={i}>
 								<div className="text-center">
-									<img className="d-block" height="300px" src={image} alt="First slide" style={{ marginRight: "auto", marginLeft: "auto" }} />
+									<Image className="d-block" height="300px" src={image} alt="First slide" style={{ marginRight: "auto", marginLeft: "auto" }} />
 								</div>
 							</Carousel.Item>
 						);

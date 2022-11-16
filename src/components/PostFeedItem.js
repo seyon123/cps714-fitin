@@ -1,6 +1,6 @@
 import "./PostFeedItem.css";
 import { useEffect, useState } from "react";
-import { Button, Card, Form } from "react-bootstrap";
+import { Button, Card, Form, Image } from "react-bootstrap";
 import { FaTag } from "react-icons/fa";
 import { db } from "../firebase";
 import { arrayUnion, arrayRemove, doc, getDoc, updateDoc, collection, addDoc, serverTimestamp, onSnapshot, orderBy, query } from "firebase/firestore";
@@ -106,7 +106,15 @@ export default function PostFeedItem({ id, userRef, timestamp, tags, image, desc
 		<Card bg="dark" text="white" className="postFeedItem">
 			<Card.Body>
 				<div className="d-flex align-items-center justify-content-start">
-					<img style={{ cursor: "pointer" }} src={user?.photoURL} className="postItemProfileImg pe-auto rounded-circle me-1" alt={user?.name} onClick={() => navigateToUser()} />
+					<Image
+						width="50px"
+						height="50px"
+						style={{ objectFit: "cover", cursor: "pointer" }}
+						src={user?.photoURL}
+						className="postItemProfileImg pe-auto rounded-circle me-1"
+						alt={user?.name}
+						onClick={() => navigateToUser()}
+					/>
 					<div>
 						<Card.Title style={{ cursor: "pointer" }} onClick={() => navigateToUser()}>
 							{user?.name}
@@ -127,7 +135,7 @@ export default function PostFeedItem({ id, userRef, timestamp, tags, image, desc
 				</div>
 				<div>
 					{image && (
-						<img
+						<Image
 							src={image}
 							className="postImage rounded mt-1 pointer-event"
 							alt={description}
