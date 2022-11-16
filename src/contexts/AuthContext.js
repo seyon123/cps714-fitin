@@ -97,13 +97,9 @@ export function AuthProvider({ children }) {
 	}
 
 	async function logOut() {
-		return signOut(auth)
-			.then(() => {
-				alert("Signed Out Successfully");
-			})
-			.catch((error) => {
-				console.error(error);
-			});
+		return signOut(auth).catch((error) => {
+			console.error(error);
+		});
 	}
 
 	async function signUp(email, password, name) {
