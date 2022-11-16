@@ -28,7 +28,8 @@ body{
     
     background-color: rgba(34,37,45,1);
     height: 100%;
-    width: 100%;
+    width: 50%;
+    margin: auto;
     border-radius: 12px;
 
 }
