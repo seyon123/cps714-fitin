@@ -206,7 +206,7 @@ function SettingsPage({ authComponent }) {
 							<Col md={12} lg={12} xl={12}>
 								<Form.Group className="mb-3" controlId="biography">
 									<Form.Label>Biography</Form.Label>
-									<Form.Control as="textarea" rows={3} placeholder="live laugh love" value={biography} onChange={(e) => setBiography(e.target.value)} />
+									<Form.Control maxlength="200" as="textarea" rows={3} placeholder="live laugh love" value={biography} onChange={(e) => setBiography(e.target.value)} />
 								</Form.Group>
 							</Col>
 						</Row>

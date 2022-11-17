@@ -113,86 +113,115 @@ export default function PostFeedItem({ id, userRef, timestamp, tags, image, desc
 	}
 
 	return (
-		<Card bg="dark" text="white" className="postFeedItem">
-			<Card.Body>
-				<div className="d-flex align-items-center justify-content-start">
-					<Image
-						width="50px"
-						height="50px"
-						style={{ objectFit: "cover", cursor: "pointer" }}
-						src={user?.photoURL}
-						className="postItemProfileImg pe-auto rounded-circle me-1"
-						alt={user?.name}
-						onClick={() => navigateToUser()}
-					/>
-					<div>
-						<Card.Title style={{ cursor: "pointer" }} onClick={() => user.uid && navigateToUser()}>
-							{user?.name}
-						</Card.Title>
-						{tags?.length > 0 && (
-							<Card.Subtitle className="mb-2 text-muted d-flex align-items-center justify-content-start flex-wrap">
-								{tags.map((tag, id) => (
-									<div className="me-2" key={id}>
-										<FaTag />
-										<Card.Link className="postTagLink ms-1" href={tag}>
-											{tag}
-										</Card.Link>
-									</div>
-								))}
-							</Card.Subtitle>
-						)}
-					</div>
-				</div>
-				<div>
-					{image && (
-						<Image
-							src={image}
-							className="postImage rounded mt-1 pointer-event"
-							alt={description}
-							onClick={() => {
-								navigate(`/posts/${id}`);
-							}}
-						/>
-					)}
-					<div className="postItemMarginRightSmall mt-1">
-						<Card.Text>{description}</Card.Text>
-					</div>
-					<div className="mt-2 postTime">
-						{checkDateBeforeYesterday(timestamp?.toDate()) ? <Moment format="LL">{timestamp?.toDate()}</Moment> : <Moment fromNow>{timestamp?.toDate()}</Moment>}
-					</div>
-				</div>
-				<div className="mt-2">
-					{like ? <FaHeart color="red" size="20px" role="button" onClick={() => unlikePost()} /> : <FaRegHeart size="20px" role="button" onClick={() => likePost()} />}{" "}
-					{likes?.length > 0 && likes.length}
-				</div>
-				<div className="mt-2">
-					<Form onSubmit={handleComment}>
-						<Form.Group className="mt-3" controlId="commentPost">
-							<div className="d-flex">
-								<Form.Control
-									type="text"
-									value={comment}
-									onChange={(e) => setComment(e.target.value)}
-									required
-									placeholder="Add a comment..."
-									style={{ borderTopRightRadius: "0", borderBottomRightRadius: "0" }}
-								/>
-								<Button className="d-inline-flex" variant="primary" type="submit" style={{ borderTopLeftRadius: "0", borderBottomLeftRadius: "0" }}>
-									Reply
-								</Button>
-							</div>
-							<Form.Text className="text-muted">This comment will be visible to anyone who sees this post.</Form.Text>
-						</Form.Group>
-					</Form>
-				</div>
-				{comments.length > 0 && (
-					<div className="mt-2 postComments p-3 rounded">
-						{comments.map((comment, id) => (
-							<Comment comment={comment} key={id} />
-						))}
-					</div>
-				)}
-			</Card.Body>
-		</Card>
-	);
+    <Card bg="dark" text="white" className="postFeedItem">
+      <Card.Body>
+        <div className="d-flex align-items-center justify-content-start">
+          <Image
+            width="50px"
+            height="50px"
+            style={{ objectFit: "cover", cursor: "pointer" }}
+            src={user?.photoURL}
+            className="postItemProfileImg pe-auto rounded-circle me-1"
+            alt={user?.name}
+            onClick={() => user.uid && navigateToUser()}
+          />
+          <div>
+            <Card.Title
+              style={{ cursor: "pointer" }}
+              onClick={() => user.uid && navigateToUser()}
+            >
+              {user?.name}
+            </Card.Title>
+            {tags?.length > 0 && (
+              <Card.Subtitle className="mb-2 text-muted d-flex align-items-center justify-content-start flex-wrap">
+                {tags.map((tag, id) => (
+                  <div className="me-2" key={id}>
+                    <FaTag />
+                    <Card.Link className="postTagLink ms-1" href={tag}>
+                      {tag}
+                    </Card.Link>
+                  </div>
+                ))}
+              </Card.Subtitle>
+            )}
+          </div>
+        </div>
+        <div>
+          {image && (
+            <Image
+              src={image}
+              className="postImage rounded mt-1 pointer-event"
+              alt={description}
+              onClick={() => {
+                navigate(`/posts/${id}`);
+              }}
+            />
+          )}
+          <div className="postItemMarginRightSmall mt-1">
+            <Card.Text>{description}</Card.Text>
+          </div>
+          <div className="mt-2 postTime">
+            {checkDateBeforeYesterday(timestamp?.toDate()) ? (
+              <Moment format="LL">{timestamp?.toDate()}</Moment>
+            ) : (
+              <Moment fromNow>{timestamp?.toDate()}</Moment>
+            )}
+          </div>
+        </div>
+        <div className="mt-2">
+          {like ? (
+            <FaHeart
+              color="red"
+              size="20px"
+              role="button"
+              onClick={() => unlikePost()}
+            />
+          ) : (
+            <FaRegHeart size="20px" role="button" onClick={() => likePost()} />
+          )}{" "}
+          {likes?.length > 0 && likes.length}
+        </div>
+        <div className="mt-2">
+          <Form onSubmit={handleComment}>
+            <Form.Group className="mt-3" controlId="commentPost">
+              <div className="d-flex">
+                <Form.Control
+                  type="text"
+                  value={comment}
+                  onChange={(e) => setComment(e.target.value)}
+                  required
+                  placeholder="Add a comment..."
+                  style={{
+                    borderTopRightRadius: "0",
+                    borderBottomRightRadius: "0",
+                  }}
+                />
+                <Button
+                  className="d-inline-flex"
+                  variant="primary"
+                  type="submit"
+                  style={{
+                    borderTopLeftRadius: "0",
+                    borderBottomLeftRadius: "0",
+                  }}
+                >
+                  Reply
+                </Button>
+              </div>
+              <Form.Text className="text-muted">
+                This comment will be visible to anyone who sees this post.
+              </Form.Text>
+            </Form.Group>
+          </Form>
+        </div>
+        {comments.length > 0 && (
+          <div className="mt-2 postComments p-3 rounded">
+            {comments.map((comment, id) => (
+              <Comment comment={comment} key={id} />
+            ))}
+          </div>
+        )}
+      </Card.Body>
+    </Card>
+  );
 }
