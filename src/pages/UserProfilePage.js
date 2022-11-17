@@ -1,9 +1,7 @@
 import React, { useEffect, useState } from "react";
 import { Image, Container, Row, Button, Col } from "react-bootstrap";
 import { Link, useParams } from "react-router-dom";
-import { doc, collection, getDoc, setDoc, getDocs, deleteDoc, onSnapshot, query, orderBy, limit, where } from "firebase/firestore";
-// Add where up here leaving out temporarily so we don't get a warning
-// Make relevant edits to line 65
+import { doc, collection, getDoc, setDoc, getDocs, deleteDoc, onSnapshot, query, where } from "firebase/firestore";
 import { useAuth } from "../contexts/AuthContext";
 import PostFeedItem from "../components/PostFeedItem";
 import { db } from "../firebase";
@@ -61,11 +59,10 @@ function UserProfilePage() {
 	}, [currentUser.uid, userid]);
 
 	useEffect(() => {
-		// where('userid', '==', userid),  < add this line into the query
 		onSnapshot(query(collection(db, `posts`), where("userRef", "==", doc(db, "users", userid))), (snapshot) => {
 			setPosts(snapshot.docs.sort((a, b) => (a.timestamp < b.timestamp ? 1 : -1)).map((doc) => ({ ...doc.data(), id: doc.id })));
 		});
-	}, [userid]); // < Throw in parameter we need here
+	}, [userid]);
 
 	async function followUser() {
 		await setDoc(doc(db, `users/${currentUser.uid}/following`, user.id), {});
