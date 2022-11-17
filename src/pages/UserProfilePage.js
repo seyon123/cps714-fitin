@@ -89,16 +89,17 @@ function UserProfilePage() {
         onSnapshot(
             query(
                 collection(db, `posts`),
-                orderBy("timestamp", "desc"),
-                limit(5)
+                where("userRef", "==", doc(db, "users", userid))
             ),
             (snapshot) => {
                 setPosts(
-                    snapshot.docs.map((doc) => ({ ...doc.data(), id: doc.id }))
+                    snapshot.docs
+                        .sort((a, b) => (a.timestamp < b.timestamp ? 1 : -1))
+                        .map((doc) => ({ ...doc.data(), id: doc.id }))
                 );
             }
         );
-    }, [currentUser]);
+    }, [userid]);
 
     async function followUser() {
         await setDoc(
