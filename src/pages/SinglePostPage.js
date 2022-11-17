@@ -9,7 +9,7 @@ import { db } from "../firebase";
 
 export default function SinglePostPage() {
     const [post, setPost] = useState(null);
-    const [isLoading, setIsLoading] = useState(false);
+    const [isLoading, setIsLoading] = useState(true);
     const { postid } = useParams();
 
     useEffect(() => {

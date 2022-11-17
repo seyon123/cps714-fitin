@@ -1,11 +1,11 @@
 import { useEffect, useState } from "react";
 import Spinner from "react-bootstrap/Spinner";
 
-const delayMs = 500;
+const delayMs = 350;
 let setTimeoutInstance;
 
 export default function LoadingSpinner({ isLoading, children }) {
-    const [isDelayed, setIsDelayed] = useState(true);
+    const [isDelayed, setIsDelayed] = useState(false);
 
     useEffect(() => {
         if (isLoading) {
