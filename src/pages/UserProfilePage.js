@@ -62,8 +62,8 @@ function UserProfilePage() {
 
 	useEffect(() => {
 		// where('userid', '==', userid),  < add this line into the query
-		onSnapshot(query(collection(db, `posts`), orderBy("timestamp", "desc"), where("userRef", "==", doc(db, "users", userid)), limit(5)), (snapshot) => {
-			setPosts(snapshot.docs.map((doc) => ({ ...doc.data(), id: doc.id })));
+		onSnapshot(query(collection(db, `posts`), where("userRef", "==", doc(db, "users", userid))), (snapshot) => {
+			setPosts(snapshot.docs.sort((a, b) => (a.timestamp < b.timestamp ? 1 : -1)).map((doc) => ({ ...doc.data(), id: doc.id })));
 		});
 	}, [userid]); // < Throw in parameter we need here
 
