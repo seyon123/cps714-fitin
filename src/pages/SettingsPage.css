@@ -1,0 +1,23 @@
+
+.settingsPage{
+    margin-top:70px;
+    min-height: 140vh;
+    color: white !important;
+    
+}
+
+.hideIconAppend {
+    background: #141414;
+    border: none;
+
+}
+
+.centerAlert {
+    margin-top:5px;
+  }
+
+.profileSection {
+    background-color: rgba(34,37,45,1);
+    height: 100%;
+    border-radius: 12px;
+}

@@ -9,7 +9,6 @@ import { db } from "../firebase";
 import FriendsList from "../components/FriendsList";
 import SocialSearchBar from "../components/SocialSearchBar";
 
-
 function SocialPage() {
 	const [posts, setPosts] = useState([]);
 
@@ -26,12 +25,11 @@ function SocialPage() {
 	return (
 		<Container fluid className="mainPage">
 			<div className="row">
-			<FriendsList />
-				<div className="p-0 m-0 col-md-3">
-				</div>
+				<FriendsList />
+				<div className="p-0 m-0 col-md-3"></div>
 				<div className="p-0 m-0 col-md-2"></div>
 				<div className="m-0 col-md-5">
-				<SocialSearchBar/>
+					<SocialSearchBar posts={posts} />
 					<Col>
 						<CreatePost></CreatePost>
 						{posts?.length > 0 ? (

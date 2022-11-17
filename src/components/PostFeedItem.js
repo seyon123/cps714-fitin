@@ -1,6 +1,6 @@
 import "./PostFeedItem.css";
 import { useEffect, useState } from "react";
-import { Button, Card, Form } from "react-bootstrap";
+import { Button, Card, Form, Image } from "react-bootstrap";
 import { FaTag } from "react-icons/fa";
 import { db } from "../firebase";
 import { arrayUnion, arrayRemove, doc, getDoc, updateDoc, collection, addDoc, serverTimestamp, onSnapshot, orderBy, query } from "firebase/firestore";
@@ -21,6 +21,11 @@ function Comment({ comment }) {
 			const docUserSnap = await getDoc(comment?.userRef);
 			if (docUserSnap.exists()) {
 				setUser({ ...docUserSnap.data(), id: docUserSnap.id });
+			} else {
+				setUser({
+					name: "Deleted User",
+					photoURL: "/fitin_logo.png",
+				});
 			}
 		}
 		comment?.userRef && findUser();
@@ -28,7 +33,7 @@ function Comment({ comment }) {
 
 	return (
 		<div>
-			<Link style={{ textDecorationLine: "none" }} className="text-light" to={`/users/${user?.id}`}>
+			<Link style={{ textDecorationLine: "none" }} className="text-light" to={user?.uid && `/users/${user?.id}`}>
 				<strong>{user?.name}</strong>
 			</Link>
 			: {comment?.comment}
@@ -53,6 +58,11 @@ export default function PostFeedItem({ id, userRef, timestamp, tags, image, desc
 			const docUserSnap = await getDoc(userRef);
 			if (docUserSnap.exists()) {
 				setUser({ ...docUserSnap.data(), id: docUserSnap.id });
+			} else {
+				setUser({
+					name: "Deleted User",
+					photoURL: "/fitin_logo.png",
+				});
 			}
 		}
 		userRef && findUser();
@@ -106,9 +116,17 @@ export default function PostFeedItem({ id, userRef, timestamp, tags, image, desc
 		<Card bg="dark" text="white" className="postFeedItem">
 			<Card.Body>
 				<div className="d-flex align-items-center justify-content-start">
-					<img style={{ cursor: "pointer" }} src={user?.photoURL} className="postItemProfileImg pe-auto rounded-circle me-1" alt={user?.name} onClick={() => navigateToUser()} />
+					<Image
+						width="50px"
+						height="50px"
+						style={{ objectFit: "cover", cursor: "pointer" }}
+						src={user?.photoURL}
+						className="postItemProfileImg pe-auto rounded-circle me-1"
+						alt={user?.name}
+						onClick={() => navigateToUser()}
+					/>
 					<div>
-						<Card.Title style={{ cursor: "pointer" }} onClick={() => navigateToUser()}>
+						<Card.Title style={{ cursor: "pointer" }} onClick={() => user.uid && navigateToUser()}>
 							{user?.name}
 						</Card.Title>
 						{tags?.length > 0 && (
@@ -126,7 +144,16 @@ export default function PostFeedItem({ id, userRef, timestamp, tags, image, desc
 					</div>
 				</div>
 				<div>
-					{image && <img src={image} className="postImage rounded mt-1" alt={description} />}
+					{image && (
+						<Image
+							src={image}
+							className="postImage rounded mt-1 pointer-event"
+							alt={description}
+							onClick={() => {
+								navigate(`/posts/${id}`);
+							}}
+						/>
+					)}
 					<div className="postItemMarginRightSmall mt-1">
 						<Card.Text>{description}</Card.Text>
 					</div>

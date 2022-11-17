@@ -6,10 +6,11 @@ import { useAuth } from "../contexts/AuthContext";
 import { FaUserEdit, FaCog, FaSignOutAlt, FaQuestionCircle } from "react-icons/fa";
 import { Link, useLocation } from "react-router-dom";
 import "./NavBar.css";
+import { Image } from "react-bootstrap";
 
 function NavBar() {
-	const { getUser, logOut } = useAuth();
-	const user = getUser();
+	const { currentUser, logOut } = useAuth();
+	const user = currentUser;
 	let location = useLocation();
 
 	function handleSignOut(e) {
@@ -21,33 +22,54 @@ function NavBar() {
 		<Navbar collapseOnSelect bg="dark" variant="dark" className="fixed-top">
 			<Container fluid>
 				<Navbar.Brand href="/">
-					<img alt="logo" className="logo" src={"/fitin_logo.png"} />{" "}
+					<Image alt="logo" className="logo" src={"/fitin_logo.png"} />{" "}
 				</Navbar.Brand>
 				<Navbar.Toggle aria-controls="navbarScroll" />
 				<Navbar.Collapse id="navbarScroll">
 					<Nav className="text-end my-2 my-lg-0" style={{ maxHeight: "100px" }} navbarScroll>
-						{location.pathname === '/' 
-							? <Link className="nav-link" to="/" style={{ textDecoration: 'underline #0d6efd' }}>Workout</Link>
-							: <Link className="nav-link" to="/">Workout</Link>
-						}
-					
-						{location.pathname === '/social' 
-							? <Link className="nav-link" to="/social" style={{ textDecoration: 'underline #0d6efd' }}>Social</Link>
-							: <Link className="nav-link" to="/social">Social</Link>
-						}
+						{location.pathname === "/" ? (
+							<Link className="nav-link" to="/" style={{ textDecoration: "underline #0d6efd" }}>
+								Workout
+							</Link>
+						) : (
+							<Link className="nav-link" to="/">
+								Workout
+							</Link>
+						)}
+
+						{location.pathname === "/social" ? (
+							<Link className="nav-link" to="/social" style={{ textDecoration: "underline #0d6efd" }}>
+								Social
+							</Link>
+						) : (
+							<Link className="nav-link" to="/social">
+								Social
+							</Link>
+						)}
 					</Nav>
 				</Navbar.Collapse>
 
-				<div className = "FitInHeader">
+				<div className="FitInHeader">
 					<Navbar.Brand>
-						<h2 style= {{fontWeight: "bold"}}>Fit<span style = {{color: "#0d6efd"}}>In</span></h2>
+						<h2 style={{ fontWeight: "bold" }}>
+							Fit<span style={{ color: "#0d6efd" }}>In</span>
+						</h2>
 					</Navbar.Brand>
 				</div>
 
 				<NavDropdown
 					menuVariant="dark"
 					align="end"
-					title={<img alt="logo" className="logo" src={user?.photoURL ? user.photoURL : `https://avatars.dicebear.com/api/initials/${user?.displayName?.trim()}.svg`} />}
+					title={
+						<Image
+							width="50px"
+							height="50px"
+							style={{ objectFit: "cover" }}
+							alt="logo"
+							className="logo"
+							src={user?.photoURL ? user.photoURL : `https://avatars.dicebear.com/api/initials/${user?.displayName?.trim()}.svg`}
+						/>
+					}
 					id="basic-nav-dropdown"
 				>
 					<div className="profile-name">
@@ -60,7 +82,7 @@ function NavBar() {
 							</span>{" "}
 							Edit Profile
 						</Link>
-						<Link to="#" className="dropdown-item">
+						<Link to="/settings" className="dropdown-item">
 							<span className="spanIcon">
 								<FaCog />
 							</span>{" "}
