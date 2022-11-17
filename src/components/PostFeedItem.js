@@ -21,6 +21,11 @@ function Comment({ comment }) {
 			const docUserSnap = await getDoc(comment?.userRef);
 			if (docUserSnap.exists()) {
 				setUser({ ...docUserSnap.data(), id: docUserSnap.id });
+			} else {
+				setUser({
+					name: "Deleted User",
+					photoURL: "/fitin_logo.png",
+				});
 			}
 		}
 		comment?.userRef && findUser();
@@ -28,7 +33,7 @@ function Comment({ comment }) {
 
 	return (
 		<div>
-			<Link style={{ textDecorationLine: "none" }} className="text-light" to={`/users/${user?.id}`}>
+			<Link style={{ textDecorationLine: "none" }} className="text-light" to={user?.uid && `/users/${user?.id}`}>
 				<strong>{user?.name}</strong>
 			</Link>
 			: {comment?.comment}

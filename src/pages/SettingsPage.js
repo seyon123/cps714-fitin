@@ -27,10 +27,7 @@ function SettingsPage({ authComponent }) {
 	const [showPassword1, setShowPassword1] = useState(false);
 	const [showPassword2, setShowPassword2] = useState(false);
 
-	const [showModal, setModal] = useState(false);
-	const handleModalClose = () => setModal(false);
-	const handleModalShow = () => setModal(true);
-
+	const [showDeleteModal, setShowDeleteModal] = useState(false);
 	const { currentUser, updateUserInfo, getUser, updateUserPassword, logOut } = useAuth();
 
 	const handleFileChange = async (e) => {
@@ -146,7 +143,7 @@ function SettingsPage({ authComponent }) {
 
 	return (
 		<div className="settingsPage px-5 mw- 80">
-			<ConfirmDeleteModal show={showModal} handleClose={handleModalClose} showModal={handleModalShow} />
+			<ConfirmDeleteModal show={showDeleteModal} handleClose={() => setShowDeleteModal(false)} showModal={() => setShowDeleteModal(true)} />
 			<Container fluid>
 				<Row md={12}>
 					<Col md={12}>
@@ -352,7 +349,7 @@ function SettingsPage({ authComponent }) {
 								<Row className=" ps-3">
 									<Col className="mb-4 me-3" md={4} lg={2}>
 										<Row>
-											<Button onClick={() => setModal(true)} variant="danger">
+											<Button onClick={() => setShowDeleteModal(true)} variant="danger">
 												Delete Account
 											</Button>{" "}
 										</Row>
