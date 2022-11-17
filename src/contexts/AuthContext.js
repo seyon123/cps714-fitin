@@ -138,21 +138,26 @@ export function AuthProvider({ children }) {
 		const docRef = doc(db, "users", currentUser.uid);
 		const docSnap = await getDoc(docRef);
 
-		if (docSnap.exists()) {
-			await deleteDoc(docRef);
-		} else {
-			// User does not exist
-			console.log("User does not exist or is already deleted.");
-		}
 		deleteUser(auth.currentUser)
-			.then(() => {
+			.then(async () => {
 				console.log("User account deleted");
+				if (docSnap.exists()) {
+					await deleteDoc(docRef).then(() => {});
+				} else {
+					console.log("User does not exist or is already deleted.");
+				}
+				alert("Account deleted successfully");
 				logOut();
 			})
 			.catch((error) => {
-				console.error(error).alert("Error deleting account");
+				var errorCode = error.code;
+				if (errorCode === "auth/requires-recent-login") {
+					alert("Please logout and login again to delete account");
+				} else {
+					console.error(error);
+					alert("Error deleting account", errorCode);
+				}
 			});
-		alert("Account deleted successfully");
 	}
 
 	async function updateUserInfo(name, email, photoURL, bio, website) {
@@ -196,7 +201,13 @@ export function AuthProvider({ children }) {
 						console.log("Email Updated successfully");
 					})
 					.catch((error) => {
-						console.error(error).alert("Error updating email");
+						var errorCode = error.code;
+						if (errorCode === "auth/requires-recent-login") {
+							alert("Please logout and login again to edit your email");
+						} else {
+							console.error(error);
+							alert("Error editing email", errorCode);
+						}
 					});
 			}
 			alert("Account information updated successfully");
@@ -217,8 +228,10 @@ export function AuthProvider({ children }) {
 				var errorCode = error.code;
 				if (errorCode === "auth/weak-password") {
 					alert("The password is too weak. Try a password greater than 6 characters");
+				} else if (errorCode === "auth/requires-recent-login") {
+					alert("Please logout and login again to change your password");
 				} else {
-					alert("Error updating password. You may need to logout and login again to change your password");
+					alert("Error updating password.", errorCode);
 				}
 			});
 	}
