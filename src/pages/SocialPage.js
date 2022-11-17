@@ -6,8 +6,19 @@ import CreatePost from "../components/CreatePost";
 import FriendsList from "../components/FriendsList";
 import SocialSearchBar from "../components/SocialSearchBar";
 import LoadingSpinner from "../components/LoadingSpinner";
-import { fetchFirstBatchPosts, fetchNextBatchPosts } from "../utils/FetchPosts";
+import { fetchNextBatchPosts } from "../utils/FetchPosts";
 import "./SocialPage.css";
+
+import { db } from "../firebase";
+import {
+    onSnapshot,
+    query,
+    collection,
+    orderBy,
+    limit,
+} from "firebase/firestore";
+
+const docLimit = 5;
 
 function SocialPage() {
     const [posts, setPosts] = useState([]);
@@ -20,15 +31,33 @@ function SocialPage() {
 
     useEffect(() => {
         setIsLoading(true);
-        fetchFirstBatchPosts()
-            .then((res) => {
-                setPosts(res.posts);
-                setLastDoc(res.lastDoc);
-            })
-            .catch((err) => {
-                console.log(err);
-            });
+        // SNAPSHOT CODE
+        onSnapshot(
+            query(
+                collection(db, `posts`),
+                orderBy("timestamp", "desc"),
+                limit(docLimit)
+            ),
+            (snapshot) => {
+                setPosts(
+                    snapshot.docs.map((doc) => ({ ...doc.data(), id: doc.id }))
+                );
+                setLastDoc(snapshot.docs[snapshot.docs.length - 1]);
+            }
+        );
         setIsLoading(false);
+
+        /*
+         * FUNCTION NOT BEING USED -- REPLACED BY SNAPSHOT CODE
+         */
+        // fetchFirstBatchPosts()
+        //     .then((res) => {
+        //         setPosts(res.posts);
+        //         setLastDoc(res.lastDoc);
+        //     })
+        //     .catch((err) => {
+        //         console.log(err);
+        //     });
     }, []);
 
     const fetchMorePosts = () => {
@@ -53,29 +82,29 @@ function SocialPage() {
                         <SocialSearchBar posts={posts} />
                         <Col>
                             <CreatePost></CreatePost>
-                            <InfiniteScroll
-                                className="scroller"
-                                loadMore={fetchMorePosts}
-                                hasMore={lastDoc !== undefined}
-                                loader={
-                                    <div
-                                        key={0}
-                                        className="d-flex align-items-center justify-content-center my-3"
-                                    >
-                                        <Spinner
-                                            animation="border"
-                                            variant="light"
-                                            role="status"
+                            {posts?.length > 0 ? (
+                                <InfiniteScroll
+                                    className="scroller"
+                                    loadMore={fetchMorePosts}
+                                    hasMore={lastDoc !== undefined}
+                                    loader={
+                                        <div
+                                            key={0}
+                                            className="d-flex align-items-center justify-content-center my-3"
                                         >
-                                            <span className="visually-hidden">
-                                                Loading...
-                                            </span>
-                                        </Spinner>
-                                    </div>
-                                }
-                            >
-                                {posts?.length > 0 ? (
-                                    posts.map(
+                                            <Spinner
+                                                animation="border"
+                                                variant="light"
+                                                role="status"
+                                            >
+                                                <span className="visually-hidden">
+                                                    Loading...
+                                                </span>
+                                            </Spinner>
+                                        </div>
+                                    }
+                                >
+                                    {posts.map(
                                         ({
                                             id,
                                             userRef,
@@ -96,13 +125,13 @@ function SocialPage() {
                                                 key={id}
                                             />
                                         )
-                                    )
-                                ) : (
-                                    <h1 className="text-center mt-3">
-                                        No posts yet
-                                    </h1>
-                                )}
-                            </InfiniteScroll>
+                                    )}
+                                </InfiniteScroll>
+                            ) : (
+                                <h1 className="text-center mt-3">
+                                    No posts yet
+                                </h1>
+                            )}
                             {!lastDoc && (
                                 <h3 className="text-center my-3">
                                     No more posts

@@ -1,6 +1,6 @@
-import { getDocs } from "firebase/firestore";
 import { db } from "../firebase";
 import {
+    getDocs,
     query,
     collection,
     orderBy,
@@ -10,6 +10,9 @@ import {
 
 const docLimit = 5;
 
+/*
+ * FUNCTION NOT BEING USED -- REPLACED BY SNAPSHOT CODE in SocialPage.js
+ */
 export const fetchFirstBatchPosts = async function () {
     try {
         const data = await getDocs(
@@ -19,8 +22,8 @@ export const fetchFirstBatchPosts = async function () {
                 limit(docLimit)
             )
         );
-        let posts = [];
         let lastDoc;
+        let posts = [];
         data.forEach((doc) => {
             posts.push({
                 ...doc.data(),
