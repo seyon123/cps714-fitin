@@ -1,4 +1,5 @@
 import React, { useEffect, useState } from "react";
+import { Image } from "react-bootstrap";
 import Card from "react-bootstrap/Card";
 import "./SelectWorkoutItem.css";
 
@@ -18,7 +19,7 @@ function SelectWorkoutItem({ id, name, imageURL, exercises, addToRoutine, remove
 		<Card className="newRoutine workoutItemCard hover-overlay shadow-1-strong" role="button" onClick={() => handleWorkoutSelected(!document.getElementById(`selectWorkout-${id}`).checked)}>
 			<Card.Body className="d-flex align-items-center justify-content-between">
 				<span className="d-flex align-items-center">
-					<img className="workoutItemImg float-start" src={imageURL} alt={name}></img>
+					<Image className="workoutItemImg float-start" src={imageURL} alt={name}></Image>
 					<h3 className="float-start">{name}</h3>
 				</span>
 				<span>

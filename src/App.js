@@ -13,8 +13,8 @@ import SinglePostPage from "./pages/SinglePostPage";
 import SettingsPage from "./pages/SettingsPage";
 
 function App() {
-	const { getUser } = useAuth();
-	const user = getUser();
+	const { currentUser } = useAuth();
+	const user = currentUser;
 
 	return (
 		<BrowserRouter>

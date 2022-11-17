@@ -5,6 +5,7 @@ import Card from "react-bootstrap/Card";
 import { useAuth } from "../contexts/AuthContext";
 import { db } from "../firebase";
 import "./RoutineWorkoutItem.css";
+import { Image } from "react-bootstrap";
 
 function RoutineWorkoutItem({ id, docRef, sets, reps, date, dayData, updateCompletedWorkouts }) {
 	const { currentUser } = useAuth();
@@ -51,7 +52,7 @@ function RoutineWorkoutItem({ id, docRef, sets, reps, date, dayData, updateCompl
 			onClick={() => handleWorkoutCompleted(!document.getElementById(`checkbox-${id}`).checked)}
 		>
 			<Card.Body role="button">
-				<img className="workoutItemImg float-start" src={workout?.imageURL} alt={workout?.name}></img>
+				<Image className="workoutItemImg float-start" src={workout?.imageURL} alt={workout?.name}></Image>
 				<Card.Title className="text-light">
 					{workout?.name}
 					<span className="float-end">

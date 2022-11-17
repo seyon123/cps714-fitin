@@ -4,6 +4,7 @@ import { useState } from "react";
 import { FaSearch } from "react-icons/fa";
 import { AiFillCloseCircle } from "react-icons/ai";
 import { useNavigate } from "react-router-dom";
+import { Image } from "react-bootstrap";
 
 function SocialSearchBar({ posts }) {
 	const [searchTerm, setSearchTerm] = useState("");
@@ -44,7 +45,7 @@ function SocialSearchBar({ posts }) {
 									navigate(`/posts/${post?.id}`);
 								}}
 							>
-								<img width="40px" className="resultImage m-1 rounded-1" src={post?.image} alt={post?.description} />
+								<Image width="40px" className="resultImage m-1 rounded-1" src={post?.image} alt={post?.description} />
 								<p>{post?.description}</p>
 							</div>
 						);

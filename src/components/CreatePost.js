@@ -9,6 +9,7 @@ import { ref, uploadBytesResumable, getDownloadURL } from "firebase/storage";
 import { AiFillCamera, AiFillPicture, AiFillCloseCircle } from "react-icons/ai";
 import { BsFillArrowRightCircleFill } from "react-icons/bs";
 import imageCompression from "browser-image-compression";
+import { Image } from "react-bootstrap";
 
 function CreatePost() {
 	const { currentUser } = useAuth();
@@ -127,7 +128,7 @@ function CreatePost() {
 					<label htmlFor="postTextArea" className="labelStyle">
 						Create Post
 					</label>
-					{file && <img className="rounded postImage my-2" src={URL.createObjectURL(file)} alt={fileName} />}
+					{file && <Image className="rounded postImage my-2" src={URL.createObjectURL(file)} alt={fileName} />}
 					{progress > 0 && <Line percent={progress} strokeWidth={2} trailWidth={2} trailColor="#141414" strokeColor="#0088ff" />}
 					<textarea className="form-control" rows="6" placeholder="Write about your workout..." id="postTextArea" value={postText} onChange={(e) => setPostText(e.target.value)}></textarea>
 				</div>

@@ -15,43 +15,9 @@
 .centerAlert {
     margin-top:5px;
   }
-.centerButton{
-    width: 80%;
-    width: 200px;
-    margin: auto;
-}
+
 .profileSection {
-    
     background-color: rgba(34,37,45,1);
     height: 100%;
-    width: 50%;
-    margin: auto;
     border-radius: 12px;
-
-}
-
-@media only screen and (min-width: 0px){
-    .profileSection {
-        width: 100%;
-    }
-}
-
-@media only screen and (min-width: 900px){
-    .profileSection {
-        width: 850px;
-    }
-}
-
-@media only screen and (min-width: 1200px){
-    .profileSection {
-        width: 1250px;
-    }
-}
-
-.changeProfilePicture{
-    width: 95%;
-    margin: 0 auto;
-    display: block;
-    margin-bottom: 15px;
-
 }

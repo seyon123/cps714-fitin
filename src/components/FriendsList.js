@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react";
 import { collection, onSnapshot } from "firebase/firestore";
-import { Container, Card } from "react-bootstrap";
+import { Container, Card, Image } from "react-bootstrap";
 import { useNavigate } from "react-router-dom";
 
 import { db } from "../firebase";
@@ -15,8 +15,6 @@ function FriendsList() {
 			setUsers(snapshot.docs.map((doc) => ({ ...doc.data(), id: doc.id })));
 		});
 	}, []);
-
-	//const [friends] = useState(dummyFriends);
 
 	return (
 		<Container fluid className="friends-list-wrap position-fixed p-0">
@@ -35,7 +33,7 @@ function FriendsList() {
 						}}
 					>
 						<Card.Body className="d-flex align-items-center justify-content-start p-0">
-							<img src={photoURL} height="50px" className="rounded-circle me-3" alt={name} />
+							<Image roundedCircle src={photoURL} className="me-3" alt={name} width="50px" height="50px" style={{ objectFit: "cover" }} />
 							<Card.Title className="text-light m-0">{name}</Card.Title>
 						</Card.Body>
 					</Card>
