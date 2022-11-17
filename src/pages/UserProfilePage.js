@@ -16,8 +16,7 @@ import {
     deleteDoc,
     onSnapshot,
     query,
-    orderBy,
-    limit,
+    where,
 } from "firebase/firestore";
 
 function UserProfilePage() {
