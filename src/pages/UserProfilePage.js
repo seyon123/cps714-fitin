@@ -7,6 +7,7 @@ import { doc, collection, getDoc, setDoc, getDocs, deleteDoc, onSnapshot, query,
 import { useAuth } from "../contexts/AuthContext";
 import PostFeedItem from "../components/PostFeedItem";
 import { db } from "../firebase";
+import CreatePost from "../components/CreatePost";
 
 import "./UserProfilePage.css";
 
@@ -88,8 +89,8 @@ function UserProfilePage() {
 			<Container>
 				<Row>
 						{/* This column holds the profile image */}
-						<Col className="m-4 col-md-2"> 
-							<Image roundedCircle height="200px" src={user?.photoURL} />
+						<Col className="d-flex align-items-center justify-content-center m-4 col-md-2"> 
+							<Image roundedCircle width="80%" src={user?.photoURL} />
 						</Col>
 						<Col className="m-4 col-md-4">
 							<br /><br />
@@ -101,19 +102,17 @@ function UserProfilePage() {
 						<Col className="m-4 text-center">
 							<br /><br />
 							<Row className="d-flex align-items-center justify-content-center">
-								{currentUser?.uid !== userid ? (isFollowing ? <Button className="w-50" onClick={() => unfollowUser()}>Unfollow</Button> : <Button className="w-50" onClick={() => followUser()}>Follow</Button>) : (<Button className="w-50">Settings</Button>)} 
-								
-								{/* <Button onClick={() => unfollowUser()}>Unfollow</Button> */}
+								{currentUser?.uid !== userid ? (isFollowing ? <Button className="w-50" onClick={() => unfollowUser()}>Unfollow</Button> : <Button className="w-50" onClick={() => followUser()}>Follow</Button>) : (<Button className="w-50">Settings</Button>)} 	
 							</Row>
 							<br />
 							<Row className="d-flex align-items-center justify-content-between">
 								<Col className="">
-									<h4>Followers</h4>
+									<Button variant="link" to="/" style={{ color: 'inherit', textDecoration: 'none' }}><h4>Followers</h4></Button>
 									<h4>{followersCount}</h4>
 								</Col>
 								<Col className="">
 									<div>
-										<h4>Following</h4>
+										<Button variant="link" to="/" style={{ color: 'inherit', textDecoration: 'none' }}><h4>Following</h4></Button>
 										<h4>{followingCount}</h4>
 									</div>
 								</Col>
@@ -131,7 +130,7 @@ function UserProfilePage() {
 							))
 						) : (
 							<h1 className="text-center mt-3">No posts yet</h1>
-						)}
+						)} 
 					</Col>
 				</Container>
 		</Container>
