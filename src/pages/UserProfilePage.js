@@ -1,13 +1,12 @@
 import React, { useEffect, useState } from "react";
 import { Image, Container, Row, Button, Col } from "react-bootstrap";
-import { useParams } from "react-router-dom";
+import { Link, useParams } from "react-router-dom";
 import { doc, collection, getDoc, setDoc, getDocs, deleteDoc, onSnapshot, query, orderBy, limit } from "firebase/firestore";
 // Add where up here leaving out temporarily so we don't get a warning
 // Make relevant edits to line 65
 import { useAuth } from "../contexts/AuthContext";
 import PostFeedItem from "../components/PostFeedItem";
 import { db } from "../firebase";
-import CreatePost from "../components/CreatePost";
 
 import "./UserProfilePage.css";
 
@@ -90,19 +89,20 @@ function UserProfilePage() {
 				<Row>
 						{/* This column holds the profile image */}
 						<Col className="d-flex align-items-center justify-content-center m-4 col-md-2"> 
-							<Image roundedCircle width="80%" src={user?.photoURL} />
+							<Image roundedCircle width="150px" height="150px" style={{ objectFit: "cover" }} src={user?.photoURL} />
 						</Col>
-						<Col className="m-4 col-md-4">
+						<Col className="my-4 col-md-5 col-sm-12">
 							<br /><br />
 							<h2><Row className="noMargin fs-2 fw-bold">{user?.name}</Row></h2>
 							
-							<p className="text-white-50"><Row className="noMargin">Email: {user?.email}  ID: {user?.uid}</Row></p>
+							<p className="text-white-50"><Row className="noMargin">{user?.bio}</Row></p>
+							<p><Row className="noMargin"><a className="p-0" href={user?.website} target="_blank" rel="noreferrer"><b>{user?.website}</b></a></Row></p>
 							
 						</Col>
-						<Col className="m-4 text-center">
+						<Col className="my-4 text-center">
 							<br /><br />
 							<Row className="d-flex align-items-center justify-content-center">
-								{currentUser?.uid !== userid ? (isFollowing ? <Button className="w-50" onClick={() => unfollowUser()}>Unfollow</Button> : <Button className="w-50" onClick={() => followUser()}>Follow</Button>) : (<Button className="w-50">Settings</Button>)} 	
+								{currentUser?.uid !== userid ? (isFollowing ? <Button className="w-50" onClick={() => unfollowUser()}>Unfollow</Button> : <Button className="w-50" onClick={() => followUser()}>Follow</Button>) : (<Button as={Link} className="w-50" to="/settings">Settings</Button>)} 	
 							</Row>
 							<br />
 							<Row className="d-flex align-items-center justify-content-between">

@@ -3,7 +3,7 @@ import Nav from "react-bootstrap/Nav";
 import Navbar from "react-bootstrap/Navbar";
 import NavDropdown from "react-bootstrap/NavDropdown";
 import { useAuth } from "../contexts/AuthContext";
-import { FaUserEdit, FaCog, FaSignOutAlt, FaQuestionCircle } from "react-icons/fa";
+import { FaCog, FaSignOutAlt, FaQuestionCircle, FaUser } from "react-icons/fa";
 import { Link, useLocation } from "react-router-dom";
 import "./NavBar.css";
 import { Image } from "react-bootstrap";
@@ -78,9 +78,9 @@ function NavBar() {
 					<div className="dropdownlinks">
 						<Link to={`/users/${user?.uid}`} className="dropdown-item">
 							<span className="spanIcon">
-								<FaUserEdit />
+								<FaUser />
 							</span>{" "}
-							Edit Profile
+							My Profile
 						</Link>
 						<Link to="/settings" className="dropdown-item">
 							<span className="spanIcon">
