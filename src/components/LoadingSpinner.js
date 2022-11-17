@@ -27,7 +27,7 @@ export default function LoadingSpinner({ isLoading, children }) {
                 animation="border"
                 variant="light"
                 role="status"
-                style={{ width: "75px", height: "75px" }}
+                style={{ width: "6rem", height: "6rem" }}
             >
                 <span className="visually-hidden">Loading...</span>
             </Spinner>
