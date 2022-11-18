@@ -3,7 +3,19 @@ import { useEffect, useState } from "react";
 import { Button, Card, Form, Image } from "react-bootstrap";
 import { FaTag } from "react-icons/fa";
 import { db } from "../firebase";
-import { arrayUnion, arrayRemove, doc, getDoc, updateDoc, collection, addDoc, serverTimestamp, onSnapshot, orderBy, query } from "firebase/firestore";
+import {
+  arrayUnion,
+  arrayRemove,
+  doc,
+  getDoc,
+  updateDoc,
+  collection,
+  addDoc,
+  serverTimestamp,
+  onSnapshot,
+  orderBy,
+  query,
+} from "firebase/firestore";
 import { useAuth } from "../contexts/AuthContext";
 import { FaHeart, FaRegHeart } from "react-icons/fa";
 
@@ -13,106 +25,126 @@ import "moment-timezone";
 import { Link, useNavigate } from "react-router-dom";
 
 function Comment({ comment }) {
-	const [user, setUser] = useState();
+  const [user, setUser] = useState();
 
-	useEffect(() => {
-		//Get User from database
-		async function findUser() {
-			const docUserSnap = await getDoc(comment?.userRef);
-			if (docUserSnap.exists()) {
-				setUser({ ...docUserSnap.data(), id: docUserSnap.id });
-			} else {
-				setUser({
-					name: "Deleted User",
-					photoURL: "/fitin_logo.png",
-				});
-			}
-		}
-		comment?.userRef && findUser();
-	}, [comment?.userRef]);
+  useEffect(() => {
+    //Get User from database
+    async function findUser() {
+      const docUserSnap = await getDoc(comment?.userRef);
+      if (docUserSnap.exists()) {
+        setUser({ ...docUserSnap.data(), id: docUserSnap.id });
+      } else {
+        setUser({
+          name: "Deleted User",
+          photoURL: "/fitin_logo.png",
+        });
+      }
+    }
+    comment?.userRef && findUser();
+  }, [comment?.userRef]);
 
-	return (
-		<div>
-			<Link style={{ textDecorationLine: "none" }} className="text-light" to={user?.uid && `/users/${user?.id}`}>
-				<strong>{user?.name}</strong>
-			</Link>
-			: {comment?.comment}
-			<Moment fromNow className="postTime ms-2">
-				{comment?.timestamp?.toDate()}
-			</Moment>
-		</div>
-	);
+  return (
+    <div>
+      <Link
+        style={{ textDecorationLine: "none" }}
+        className="text-light"
+        to={user?.uid && `/users/${user?.id}`}
+      >
+        <strong>{user?.name}</strong>
+      </Link>
+      : {comment?.comment}
+      <Moment fromNow className="postTime ms-2">
+        {comment?.timestamp?.toDate()}
+      </Moment>
+    </div>
+  );
 }
 
-export default function PostFeedItem({ id, userRef, timestamp, tags, image, description, likes }) {
-	const { currentUser } = useAuth();
-	const [user, setUser] = useState(null);
-	const [like, setLike] = useState(false);
-	const [comment, setComment] = useState("");
-	const [comments, setComments] = useState([]);
-	let navigate = useNavigate();
+export default function PostFeedItem({
+  id,
+  userRef,
+  timestamp,
+  tags,
+  image,
+  description,
+  likes,
+}) {
+  const { currentUser } = useAuth();
+  const [user, setUser] = useState(null);
+  const [like, setLike] = useState(false);
+  const [comment, setComment] = useState("");
+  const [comments, setComments] = useState([]);
+  let navigate = useNavigate();
 
-	useEffect(() => {
-		//Get User from database
-		async function findUser() {
-			const docUserSnap = await getDoc(userRef);
-			if (docUserSnap.exists()) {
-				setUser({ ...docUserSnap.data(), id: docUserSnap.id });
-			} else {
-				setUser({
-					name: "Deleted User",
-					photoURL: "/fitin_logo.png",
-				});
-			}
-		}
-		userRef && findUser();
-	}, [userRef]);
+  useEffect(() => {
+    //Get User from database
+    async function findUser() {
+      const docUserSnap = await getDoc(userRef);
+      if (docUserSnap.exists()) {
+        setUser({ ...docUserSnap.data(), id: docUserSnap.id });
+      } else {
+        setUser({
+          name: "Deleted User",
+          photoURL: "/fitin_logo.png",
+        });
+      }
+    }
+    userRef && findUser();
+  }, [userRef]);
 
-	useEffect(() => {
-		onSnapshot(query(collection(db, `posts/${id}/comments`), orderBy("timestamp", "desc")), (snapshot) => {
-			setComments(snapshot.docs.map((doc) => ({ ...doc.data(), id: doc.id })));
-		});
-	}, [id]);
+  useEffect(() => {
+    onSnapshot(
+      query(
+        collection(db, `posts/${id}/comments`),
+        orderBy("timestamp", "desc")
+      ),
+      (snapshot) => {
+        setComments(
+          snapshot.docs.map((doc) => ({ ...doc.data(), id: doc.id }))
+        );
+      }
+    );
+  }, [id]);
 
-	useEffect(() => {
-		//set like to true if in likes
-		if (likes) {
-			setLike(likes.includes(currentUser.uid));
-		}
-	}, [likes, currentUser.uid]);
+  useEffect(() => {
+    //set like to true if in likes
+    if (likes) {
+      setLike(likes.includes(currentUser.uid));
+    }
+  }, [likes, currentUser.uid]);
 
-	async function likePost() {
-		const postRef = doc(db, "posts", id);
-		await updateDoc(postRef, { likes: arrayUnion(currentUser.uid) });
-		setLike(true);
-	}
-	async function unlikePost() {
-		const postRef = doc(db, "posts", id);
-		await updateDoc(postRef, { likes: arrayRemove(currentUser.uid) });
-		setLike(false);
-	}
+  async function likePost() {
+    const postRef = doc(db, "posts", id);
+    await updateDoc(postRef, { likes: arrayUnion(currentUser.uid) });
+    setLike(true);
+  }
+  async function unlikePost() {
+    const postRef = doc(db, "posts", id);
+    await updateDoc(postRef, { likes: arrayRemove(currentUser.uid) });
+    setLike(false);
+  }
 
-	function checkDateBeforeYesterday(date) {
-		const yesterday = new Date();
-		yesterday.setDate(yesterday.getDate() - 2);
-		return date < yesterday;
-	}
+  function checkDateBeforeYesterday(date) {
+    const yesterday = new Date();
+    yesterday.setDate(yesterday.getDate() - 2);
+    return date < yesterday;
+  }
 
-	function navigateToUser() {
-		navigate(`/users/${user?.id}`);
-	}
+  function navigateToUser() {
+    navigate(`/users/${user?.id}`);
+  }
 
-	async function handleComment(e) {
-		e.preventDefault();
-		await addDoc(collection(db, `posts/${id}/comments`), {
-			userRef: doc(db, `users`, currentUser.uid),
-			comment: comment,
-			timestamp: serverTimestamp(),
-		});
-		setComment("");
-	}
+  async function handleComment(e) {
+    e.preventDefault();
+    await addDoc(collection(db, `posts/${id}/comments`), {
+      userRef: doc(db, `users`, currentUser.uid),
+      comment: comment,
+      timestamp: serverTimestamp(),
+    });
+    setComment("");
+  }
 
-	return (
+  return (
     <Card bg="dark" text="white" className="postFeedItem">
       <Card.Body>
         <div className="d-flex align-items-center justify-content-start">
@@ -158,7 +190,14 @@ export default function PostFeedItem({ id, userRef, timestamp, tags, image, desc
             />
           )}
           <div className="postItemMarginRightSmall mt-1">
-            <Card.Text>{description}</Card.Text>
+            <Card.Text
+              style={{ cursor: "pointer" }}
+              onClick={() => {
+                navigate(`/posts/${id}`);
+              }}
+            >
+              {description}
+            </Card.Text>
           </div>
           <div className="mt-2 postTime">
             {checkDateBeforeYesterday(timestamp?.toDate()) ? (
