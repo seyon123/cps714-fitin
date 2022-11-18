@@ -148,7 +148,7 @@ function HelpPage() {
               </Accordion>
             </Tab>
           </Tabs>
-          <div className="d-flex flex-column text-center align-items-center">
+          <div className="d-flex flex-column text-center align-items-center pb-4">
             <h1 className="my-5"> Didn't find what you need?</h1>
             <Button
               as={Link}
