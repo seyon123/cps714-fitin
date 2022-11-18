@@ -16,3 +16,9 @@
 .accordion-item{
     color:white !important;
 }
+.nav-tabs .nav-link.active,.nav-tabs .nav-item.show .nav-link{
+    background-color: unset !important;
+}
+.helpPageFooter div{
+    bottom: 0 !important;
+}
