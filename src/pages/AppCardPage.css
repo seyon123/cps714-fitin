@@ -14,8 +14,7 @@
 }
 
 .appCardWidth {
-    max-width: 40%;
-    min-width: 40%;
+    width: 80%;
 }
 
 .appCardRow {
@@ -32,8 +31,8 @@
 }
 
 .appCardImage {
-    max-height: 200px; 
-    width: 100%; 
+    height: 400px;
+    width: 100%;
     object-fit: Cover;
 }
 
@@ -42,11 +41,9 @@
         margin-bottom: 10vh;
     }
     .appCardRow {
-        display: inline;  
+        display: inline;
     }
-
-    .appCardWidth {
-        max-width: 80%;
-        min-width: 80%;
+    .appCardImage {
+        height: 200px;
     }
 }
