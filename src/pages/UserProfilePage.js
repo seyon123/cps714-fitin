@@ -6,6 +6,7 @@ import { db } from "../firebase";
 import PostFeedItem from "../components/PostFeedItem";
 import LoadingSpinner from "../components/LoadingSpinner";
 import "./UserProfilePage.css";
+import FollowingListModal from "../components/Modals/FollowingListModal";
 
 import {
     doc,
@@ -29,6 +30,7 @@ function UserProfilePage() {
     const [followingCount, setFollowingCount] = useState(0);
     const [isFollowing, setIsFollowing] = useState(null);
     const [isLoading, setIsLoading] = useState(true);
+		const [changeFollowingShow, setChangeFollowingShow] = useState(false);
 
     useEffect(() => {
         document.title = `${user ? user.name : "User Not Found"} | FitIn`;
@@ -222,7 +224,7 @@ function UserProfilePage() {
                                             </Col>
                                             <Col className="">
                                                 <div>
-                                                    <Button
+                                                    <Button onClick={() =>setChangeFollowingShow(true)}
                                                         variant="link"
                                                         to="/"
                                                         style={{
@@ -284,7 +286,15 @@ function UserProfilePage() {
                         <h1 className="text-center mt-3">User Not Found</h1>
                     </>
                 )}
+							{/* Change Routine Modal */}
+							<FollowingListModal
+								show={changeFollowingShow}
+								onHide={() => setChangeFollowingShow(false)}
+								setModalShow={setChangeFollowingShow}
+							/>
             </Container>
+				
+
         </LoadingSpinner>
     );
 }
