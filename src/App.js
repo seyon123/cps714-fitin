@@ -11,6 +11,7 @@ import UserProfilePage from "./pages/UserProfilePage";
 import HelpPage from "./pages/HelpPage";
 import SinglePostPage from "./pages/SinglePostPage";
 import SettingsPage from "./pages/SettingsPage";
+import AppCardPage from "./pages/AppCardPage";
 
 function App() {
     const { currentUser } = useAuth();
@@ -25,7 +26,7 @@ function App() {
                         !user ? (
                             <LandingPage authComponent={<SignUp />} />
                         ) : (
-                            <Navigate to="/" replace />
+                            <Navigate to="/app" replace />
                         )
                     }
                 />
@@ -35,12 +36,34 @@ function App() {
                         !user ? (
                             <LandingPage authComponent={<Login />} />
                         ) : (
-                            <Navigate to="/" replace />
+                            <Navigate to="/app" replace />
                         )
                     }
                 />
                 <Route
                     path="/"
+                    element={
+                        user ? (
+                            <Navigate to="/app" replace />
+                        ) : (
+                            <Navigate to="/signup" replace />
+                        )
+                    }
+                />
+                <Route
+                    path="/app"
+                    element={
+                        user ? (
+                            <>
+                                <AppCardPage />
+                            </>
+                        ) : (
+                            <Navigate to="/signup" replace />
+                        )
+                    }
+                />
+                <Route
+                    path="/workout"
                     element={
                         user ? (
                             <>

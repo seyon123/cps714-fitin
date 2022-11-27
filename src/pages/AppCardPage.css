@@ -1,0 +1,49 @@
+.appCardPage {
+    color: white;
+    background: #12130f;
+    max-width: 1700px;
+    padding-top: 74px;
+    margin-left: 5px;
+    margin-right: 5px;
+    min-height: 100vh;
+}
+
+.appHeaderLogo {
+    display: flex;
+    margin-bottom: 18vh;
+}
+
+.appCardWidth {
+    width: 80%;
+}
+
+.appCardRow {
+    display: flex;
+    min-height: 56vh;
+}
+
+.appCard {
+    transition: 0.3s;
+}
+
+.appCard:hover {
+    background-color: #363d47 !important;
+}
+
+.appCardImage {
+    height: 400px;
+    width: 100%;
+    object-fit: Cover;
+}
+
+@media screen and (max-width: 810px) {
+    .appHeaderLogo {
+        margin-bottom: 10vh;
+    }
+    .appCardRow {
+        display: inline;
+    }
+    .appCardImage {
+        height: 200px;
+    }
+}
