@@ -45,7 +45,7 @@ function SocialSearchBar({ posts }) {
 									navigate(`/posts/${post?.id}`);
 								}}
 							>
-								<Image width="40px" className="resultImage m-1 rounded-1" src={post?.image} alt={post?.description} />
+								{post?.image ? <Image width="40px" className="resultImage m-1 rounded-1" src={post?.image} alt={post?.description} /> : <Image width="40px" className="resultImage m-1 rounded-1" src={"noImage.jpg"} alt={post?.description} /> }
 								<p>{post?.description}</p>
 							</div>
 						);
