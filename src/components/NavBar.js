@@ -23,7 +23,7 @@ function NavBar() {
             <Container fluid>
                 <Navbar.Brand
                     className="d-flex gap-1 justify-content-center"
-                    href="/"
+                    href="/app"
                 >
                     <Image
                         alt="logo"
@@ -37,16 +37,16 @@ function NavBar() {
                 <Navbar.Toggle aria-controls="navbarScroll" />
                 <Navbar.Collapse id="navbarScroll">
                     <Nav style={{ maxHeight: "100px" }} navbarScroll>
-                        {location.pathname === "/" ? (
+                        {location.pathname === "/workout" ? (
                             <Link
                                 className="nav-link"
-                                to="/"
+                                to="/workout"
                                 style={{ textDecoration: "underline #0d6efd" }}
                             >
                                 Workout
                             </Link>
                         ) : (
-                            <Link className="nav-link" to="/">
+                            <Link className="nav-link" to="/workout">
                                 Workout
                             </Link>
                         )}
