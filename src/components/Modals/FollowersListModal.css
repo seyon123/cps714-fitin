@@ -1,0 +1,6 @@
+.follow-list-body{
+  /* background-color: rgb(34, 37, 45); */
+  position: inherit;
+  max-height: calc(100vh - 140px);
+  overflow: auto;
+}
