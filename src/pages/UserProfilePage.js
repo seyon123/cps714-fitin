@@ -151,6 +151,8 @@ function UserProfilePage() {
                                         <h2>
                                             <Row className="noMargin fs-2 fw-bold">
                                                 {user?.name}
+                                                
+                                                <img alt="verificationBadge" style={{marginLeft: "-25px",marginTop: "-7px", height: "60px", width: "auto", mixBlendMode: "lighten", filter: "hue-rotate(40deg) "}}src="/verification.gif"/>
                                             </Row>
                                         </h2>
                                         <p className="text-white-50">
