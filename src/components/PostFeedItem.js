@@ -142,9 +142,7 @@ export default function PostFeedItem({ id, userRef, timestamp, tags, image, desc
 									{tags.map((tag, id) => (
 										<div className="me-2" key={id}>
 											<FaTag />
-											<Card.Link className="postTagLink ms-1" href={tag}>
-												{tag}
-											</Card.Link>
+											<span className="postTagLink ms-1">{tag}</span>
 										</div>
 									))}
 								</Card.Subtitle>
