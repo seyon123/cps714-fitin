@@ -38,3 +38,11 @@
     margin-right: 10%;
 }
 
+@media screen and (max-width: 767px) {
+    #logoText{
+        display: none;
+    }
+    .nav-link{
+        font-size: 1.2rem !important;
+    }
+}
