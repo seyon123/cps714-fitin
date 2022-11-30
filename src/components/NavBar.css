@@ -18,6 +18,9 @@
 .dropdownlinks{
     font-size: 1.1rem !important;
 }
+.dropdown-menu{
+    background-color: #22252f !important;
+}
 .link-col{
     padding-left: 0;
 }

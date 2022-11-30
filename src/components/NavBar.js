@@ -19,7 +19,7 @@ function NavBar() {
   }
 
   return (
-    <Navbar collapseOnSelect bg="dark" variant="dark" className="fixed-top">
+    <Navbar collapseOnSelect variant="dark" className="fixed-top bgdarkgrey">
       <Container fluid>
         <Navbar.Brand
           as={Link}
@@ -83,12 +83,12 @@ function NavBar() {
           }
           id="basic-nav-dropdown"
         >
-          <div className="profile-name">
+          <div className="profile-name bgdarkgrey">
             <NavDropdown.Header className="profile-name">
               {user.displayName}
             </NavDropdown.Header>
           </div>
-          <div className="dropdownlinks">
+          <div className="dropdownlinks bgdarkgrey">
             <Link to={`/users/${user?.uid}`} className="dropdown-item">
               <span className="spanIcon">
                 <FaUser />
