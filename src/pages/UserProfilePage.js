@@ -7,6 +7,7 @@ import PostFeedItem from "../components/PostFeedItem";
 import LoadingSpinner from "../components/LoadingSpinner";
 import "./UserProfilePage.css";
 import FollowingListModal from "../components/Modals/FollowingListModal";
+import FollowersListModal from "../components/Modals/FollowersListModal";
 
 import {
     doc,
@@ -30,7 +31,8 @@ function UserProfilePage() {
     const [followingCount, setFollowingCount] = useState(0);
     const [isFollowing, setIsFollowing] = useState(null);
     const [isLoading, setIsLoading] = useState(true);
-		const [changeFollowingShow, setChangeFollowingShow] = useState(false);
+    const [changeFollowingShow, setChangeFollowingShow] = useState(false);
+    const [changeFollowersShow, setChangeFollowersShow] = useState(false);
 
     useEffect(() => {
         document.title = `${user ? user.name : "User Not Found"} | FitIn`;
@@ -117,7 +119,7 @@ function UserProfilePage() {
 
     async function unfollowUser() {
         await deleteDoc(
-            doc(db, `users/${currentUser.uid}/following`, user.uid),
+            doc(db, `users/${currentUser.uid}/following`, user.id),
             {}
         );
         await deleteDoc(
@@ -210,7 +212,7 @@ function UserProfilePage() {
                                         <br />
                                         <Row className="d-flex align-items-center justify-content-between">
                                             <Col className="">
-                                                <Button
+                                                <Button onClick={() =>setChangeFollowersShow(true)}
                                                     variant="link"
                                                     to="/"
                                                     style={{
@@ -286,12 +288,21 @@ function UserProfilePage() {
                         <h1 className="text-center mt-3">User Not Found</h1>
                     </>
                 )}
-							{/* Change Routine Modal */}
-							<FollowingListModal
-								show={changeFollowingShow}
-								onHide={() => setChangeFollowingShow(false)}
-								setModalShow={setChangeFollowingShow}
-							/>
+                {/* Change Routine Modal */}
+                <FollowingListModal
+                    show={changeFollowingShow}
+                    onHide={() => setChangeFollowingShow(false)}
+                    setModalShow={setChangeFollowingShow}
+                    userOfPage={user}
+                />
+                {/* Change Routine Modal */}
+                <FollowersListModal
+                    show={changeFollowersShow}
+                    onHide={() => setChangeFollowersShow(false)}
+                    setModalShow={setChangeFollowersShow}
+                    userOfPage={user}
+                />
+
             </Container>
 				
 

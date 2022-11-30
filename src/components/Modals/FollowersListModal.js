@@ -1,70 +1,52 @@
-import { Button, Card, Modal } from "react-bootstrap";
-import moment from "moment";
-import { db } from "../../firebase";
-import "./ChangeRoutineModal.css";
-import { doc, getDoc, updateDoc, deleteField, setDoc } from "firebase/firestore";
+import { useState, useEffect } from "react";
+import { Modal, Container } from "react-bootstrap";
+import { collection, onSnapshot } from "firebase/firestore";
 import { useAuth } from "../../contexts/AuthContext";
+// import { useNavigate } from "react-router-dom";
+import { db } from "../../firebase";
+import "./FollowersListModal";
+import FollowUser from "../FollowUser";
 
-function ChangeRoutineModal({ show, onHide, setModalShow, routines, dayData, date }) {
+// import { useAuth } from "../../contexts/AuthContext";
+
+// import "./CreateRoutineModal.css";
+
+function FollowingListModal({ show, onHide, setModalShow, userOfPage }) {
 	const { currentUser } = useAuth();
+	const [users, setUsers] = useState();
+	// const [isFollowing, setIsFollowing] = useState(null);
+	// let navigate = useNavigate();
 
-	// Cnange the routine for the current day to the selected routine
-	async function setTodaysRoutine(id) {
-		const dateString = moment(date).format("YYYY-MM-DD");
-		const docRef = doc(db, `users/${currentUser.uid}/schedule`, dateString);
-		const todaysRoutineRef = doc(db, `users/${currentUser.uid}/routines`, id);
-		const docSnap = await getDoc(todaysRoutineRef);
-		if (dayData) {
-			await updateDoc(docRef, { name: docSnap.data().name, exercises: docSnap.data().exercises, completed: [] });
-		} else {
-			await setDoc(docRef, { ...docSnap.data() });
-		}
-
-		setModalShow(false);
-	}
-	// Delete the current routine for the current day
-	async function removeRoutine() {
-		const dateString = moment(date).format("YYYY-MM-DD");
-		const removeConfirm = window.confirm("Are you sure you want to remove the routine for " + dateString + "?");
-		if (removeConfirm) {
-			updateDoc(doc(db, `users/${currentUser.uid}/schedule`, dateString), {
-				exercises: deleteField(),
-				completed: deleteField(),
-				name: deleteField(),
+	useEffect(() => {
+			onSnapshot(collection(db, `users/${userOfPage.uid}/followers`), (snapshot) => {
+					setUsers(
+							snapshot.docs.map((doc) => ({ ...doc.data(), id: doc.id }))
+					);
 			});
-			setModalShow(false);
-		}
-	}
+	}, [userOfPage]);
 
-	// Select Routine Modal for Change Routine Button
 	return (
-		<Modal className="create-routine" show={show} onHide={onHide} setModalShow={setModalShow} centered>
+		<Modal className="create-routine" show={show} onHide={onHide} setModalShow={setModalShow} size="lg" aria-labelledby="contained-modal-title-vcenter" centered>
 			<Modal.Header closeButton closeVariant="white">
-				<Modal.Title>Select Routine</Modal.Title>
+				{(userOfPage.uid === currentUser.uid) ? (
+					<Modal.Title>Your Followers:</Modal.Title>
+				) : (
+					<Modal.Title>{userOfPage.name}'s Followers:</Modal.Title>
+				)}
 			</Modal.Header>
+
 			<Modal.Body>
-				{/* Show the workouts in the routine */}
-				{routines.map(({ id, name, exercises }) => (
-					<Card key={id} className="workoutItemCard hover-overlay shadow-1-strong" role="button" onClick={() => setTodaysRoutine(id)}>
-						<Card.Body className="d-flex align-items-center justify-content-between">
-							<div>
-								<Card.Title className="text-light">{name}</Card.Title>
-								<Card.Subtitle className="text-light">{exercises.length} workouts</Card.Subtitle>
-							</div>
-						</Card.Body>
-					</Card>
-				))}
+				<Container fluid className="">
+					<div className="follow-list-body">
+						{users?.map(({ id }) => (
+							<FollowUser id={id} />
+						))}
+					</div>
+				</Container>
 			</Modal.Body>
-			{/* Show remove button if there is a routine selected */}
-			{dayData?.name && (
-				<Modal.Footer style={{ justifyContent: "space-between" }}>
-					<Button variant="danger" size="lg" onClick={() => removeRoutine()}>
-						Remove
-					</Button>
-				</Modal.Footer>
-			)}
+
 		</Modal>
 	);
 }
 
-export default ChangeRoutineModal;
+export default FollowingListModal;
