@@ -23,6 +23,7 @@ function FollowingListModal({ show, onHide, setModalShow, userOfPage }) {
 							snapshot.docs.map((doc) => ({ ...doc.data(), id: doc.id }))
 					);
 			});
+			console.log("TESTING INFINITE");
 	}, [userOfPage]);
 
 	return (

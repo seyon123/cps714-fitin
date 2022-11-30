@@ -86,24 +86,21 @@ function FollowUser({ id }) {
             style={{ objectFit: "cover" }}
           />
           <Card.Title className="text-light m-0">
-            <Link to={`/users/${id}`}>{user?.name}</Link>
+            {user?.name}
           </Card.Title>
         </div>
           {/* </Col>
           <Col> */}
-            {currentUser.uid != id ? (
             <div className="me-5">
-              {isFollowing ? (
+              {/* {isFollowing ? ( */}
                 <Button
-                    variant="danger"
+                    as={Link}
                     className="w-100"
-                    onClick={() =>
-                        unfollowUser()
-                    }
+                    to={`/users/${id}`}
                 >
-                    Unfollow
+                    View Profile
                 </Button>
-              ) : (
+              {/* ) : (
                 <Button
                     className="w-100"
                     onClick={() =>
@@ -113,8 +110,8 @@ function FollowUser({ id }) {
                     Follow
                 </Button>
               )}
+             */}
             </div>
-            ) : (null)}
           {/* </Col>
         </Row> */}
       </Card.Body>
