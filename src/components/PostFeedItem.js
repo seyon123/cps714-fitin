@@ -120,7 +120,7 @@ export default function PostFeedItem({ id, userRef, timestamp, tags, image, desc
 	}
 
 	return (
-		<Card bg="dark" text="white" className="postFeedItem">
+		<Card text="white" className="postFeedItem bgdarkgrey">
 			<Card.Body>
 				<div className="d-flex align-items-center justify-content-between">
 					<div className="d-flex align-items-center justify-content-start">
