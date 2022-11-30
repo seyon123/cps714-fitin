@@ -7,11 +7,8 @@ import { db } from "../../firebase";
 import "./FollowersListModal";
 import FollowUser from "../FollowUser";
 
-// import { useAuth } from "../../contexts/AuthContext";
 
-// import "./CreateRoutineModal.css";
-
-function FollowingListModal({ show, onHide, setModalShow, userOfPage }) {
+function FollowersListModal({ show, onHide, setModalShow, userOfPage }) {
 	const { currentUser } = useAuth();
 	const [users, setUsers] = useState();
 	// const [isFollowing, setIsFollowing] = useState(null);
@@ -28,7 +25,7 @@ function FollowingListModal({ show, onHide, setModalShow, userOfPage }) {
 	return (
 		<Modal className="create-routine" show={show} onHide={onHide} setModalShow={setModalShow} size="lg" aria-labelledby="contained-modal-title-vcenter" centered>
 			<Modal.Header closeButton closeVariant="white">
-				{(userOfPage.uid === currentUser.uid) ? (
+				{(userOfPage.uid === currentUser?.uid) ? (
 					<Modal.Title>Your Followers:</Modal.Title>
 				) : (
 					<Modal.Title>{userOfPage.name}'s Followers:</Modal.Title>
@@ -38,9 +35,12 @@ function FollowingListModal({ show, onHide, setModalShow, userOfPage }) {
 			<Modal.Body>
 				<Container fluid className="">
 					<div className="follow-list-body">
-						{users?.map(({ id }) => (
-							<FollowUser id={id} />
-						))}
+						{users?.length > 0 ? 
+							users?.map(({ id }) => (
+								<FollowUser onHide={onHide} id={id} key={id} />
+							)) : 
+								`${userOfPage.name} doesn't have any followers (you should follow them :D)`
+						}
 					</div>
 				</Container>
 			</Modal.Body>
@@ -49,4 +49,4 @@ function FollowingListModal({ show, onHide, setModalShow, userOfPage }) {
 	);
 }
 
-export default FollowingListModal;
+export default FollowersListModal;

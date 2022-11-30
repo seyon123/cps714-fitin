@@ -5,7 +5,7 @@ import { useAuth } from "../contexts/AuthContext";
 import { db } from "../firebase";
 import { Link } from "react-router-dom";
 
-function FollowUser({ id }) {
+function FollowUser({ id, onHide }) {
 	const { currentUser } = useAuth();
   const [user, setUser] = useState();
   const [isFollowing, setIsFollowing] = useState(false);
@@ -30,7 +30,7 @@ function FollowUser({ id }) {
       const docUserSnap = await getDoc(docRef);
 
       if (docUserSnap.exists()) {
-          setUser({ ...docUserSnap.data(), id: docUserSnap.id });
+        setUser({ ...docUserSnap.data(), id: docUserSnap.id });
       }
     }
     findUser();
@@ -68,15 +68,11 @@ function FollowUser({ id }) {
         className="workoutItemCard hover-overlay shadow-1-strong p-2"
         key={id}
         role="button"
-        // onClick={() => {
-        //     navigate(`/users/${id}`);
-        // }}
     >
+
       <Card.Body className="d-flex align-items-center justify-content-between p-0">
-        {/* <Row>
-          <Col> */}
         <div className="d-flex align-items-center">
-          <Image
+          {user ? <Image
             roundedCircle
             src={user?.photoURL}
             className="me-3"
@@ -84,36 +80,47 @@ function FollowUser({ id }) {
             width="50px"
             height="50px"
             style={{ objectFit: "cover" }}
-          />
+          /> : <Image
+            roundedCircle
+            src={"/fitin_logo.png"}
+            className="me-3"
+            alt="Fitin Logo"
+            width="50px"
+            height="50px"
+            style={{ objectFit: "cover" }}
+          />}
           <Card.Title className="text-light m-0">
-            {user?.name}
+            {user ?
+              user.name
+            : "Deleted User"}
           </Card.Title>
         </div>
-          {/* </Col>
-          <Col> */}
-            <div className="me-5">
-              {/* {isFollowing ? ( */}
-                <Button
-                    as={Link}
-                    className="w-100"
-                    to={`/users/${id}`}
-                >
-                    View Profile
-                </Button>
-              {/* ) : (
-                <Button
-                    className="w-100"
-                    onClick={() =>
-                        followUser()
-                    }
-                >
-                    Follow
-                </Button>
-              )}
-             */}
-            </div>
-          {/* </Col>
-        </Row> */}
+        {console.log(user)}
+        {user ? (
+          <div className="me-5">
+            {/* {isFollowing ? ( */}
+              <Button
+                  as={Link}
+                  className="w-100"
+                  onClick={(onHide)}
+                  to={`/users/${id}`}
+              >
+                  View Profile
+              </Button>
+            {/* ) : (
+              <Button
+                  className="w-100"
+                  onClick={() =>
+                      followUser()
+                  }
+              >
+                  Follow
+              </Button>
+            )}
+          */}
+          </div>
+        ) : (null)}
+        
       </Card.Body>
     </Card>
 	);
