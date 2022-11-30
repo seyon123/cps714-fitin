@@ -105,7 +105,7 @@ function WorkoutPage() {
 
         <div className="row">
           {/* Calendar Widget */}
-          <div className="col-md-3 mb-4">
+          <div className="col-lg-3 mb-4">
             <div className="calendarStyle">
               <DayPicker
                 required
@@ -121,7 +121,7 @@ function WorkoutPage() {
           </div>
 
           {/* Today's Workouts */}
-          <div className="col-md-6 mb-4">
+          <div className="col-lg-6 mb-4">
             <Card
               className="currentRoutine"
               bg="dark"
@@ -180,7 +180,7 @@ function WorkoutPage() {
           </div>
 
           {/* My Routines */}
-          <div className="col-md-3 mb-4">
+          <div className="col-lg-3 mb-4">
             <Card bg="dark" style={{ maxHeight: "70vh" }}>
               <Card.Header className="myRoutines">My Routines</Card.Header>
               <Card.Body className="pb-2" style={{ overflowY: "auto" }}>

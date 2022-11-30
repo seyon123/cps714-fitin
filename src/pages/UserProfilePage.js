@@ -136,7 +136,7 @@ function UserProfilePage() {
                 {user ? (
                     <>
                         <br />
-                        <div className="card bg-dark text-white">
+                        <div className="card bgdarkgrey text-white">
                             <Container>
                                 <Row>
                                     {/* This column holds the profile image */}

@@ -13,7 +13,9 @@ body {
   background-color: #12130f;
   min-height: 100vh;
 }
-
+.bgdarkgrey{
+  background-color: #22252f !important
+}
 .w-30 {
   width: 30%;
 }

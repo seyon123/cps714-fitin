@@ -4,7 +4,7 @@ import "./Footer.css";
 function Footer(){
 
     return(
-        <Container className="footer text-center align-items-center p-3" fluid>
+        <Container className="footer text-center align-items-center p-3 bgdarkgrey" fluid>
             <p className="m-0 mb-2" >Copyright © 2022 FitIn.</p>
             <p className="m-0">Created with ❤ by: <a className = "link" href="https://github.com/seyon123">Seyon</a>, 
             <a className = "link" href="https://github.com/lyjacky11"> Jacky</a>, 
