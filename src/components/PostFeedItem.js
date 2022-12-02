@@ -174,9 +174,8 @@ export default function PostFeedItem({ id, userRef, timestamp, tags, image, desc
 							onClick={() => {
 								navigate(`/posts/${id}`);
 							}}
-						>
-							{description}
-						</Card.Text>
+							dangerouslySetInnerHTML={{ __html: description?.replace(/\n/g, "<br />") }}
+						></Card.Text>
 					</div>
 					<div className="mt-2 postTime">
 						{checkDateBeforeYesterday(timestamp?.toDate()) ? <Moment format="LL">{timestamp?.toDate()}</Moment> : <Moment fromNow>{timestamp?.toDate()}</Moment>}
