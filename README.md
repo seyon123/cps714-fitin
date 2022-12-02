@@ -20,21 +20,21 @@
 
 ## Key Features
 
-- Plan and keep track of exercises for your workouts
-- Create personalized workout routines
-- Collection of over 50 exercises to view and add to your routines
-- User authetication - access your information from any device with browser support
-- Social Media
-  - Create media content to post
-  - View and comment on posts from other users
-  - Add friends and view their fitness progress
+-   Plan and keep track of exercises for your workouts
+-   Create personalized workout routines
+-   Collection of over 50 exercises to view and add to your routines
+-   User authentication - access your information from any device with browser support
+-   Social Media
+    -   Create media content to post
+    -   View and comment on posts from other users
+    -   Follow users and view their fitness progress
 
 ## Getting Started
 
 ### Dependencies
 
-- Git
-- npm
+-   `Git`
+-   `npm`
 
 ### Installing
 
@@ -54,7 +54,7 @@ $ npm install
 $ npm start
 ```
 
-> **Note** Add a `.env` file to the root. Make sure to configure the file with the right values in order to connect to the Firestore database.
+> **Note** Add a `.env` file to the root directory. Make sure to configure the file with the right values in order to connect to the Firestore database.
 
 <br />
 
